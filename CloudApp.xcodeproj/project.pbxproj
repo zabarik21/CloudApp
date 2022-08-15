@@ -10,45 +10,73 @@
 		7BFCB26128AAAB8D00747CC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB26028AAAB8D00747CC1 /* AppDelegate.swift */; };
 		7BFCB26328AAAB8D00747CC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB26228AAAB8D00747CC1 /* SceneDelegate.swift */; };
 		7BFCB26528AAAB8D00747CC1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB26428AAAB8D00747CC1 /* ViewController.swift */; };
-		7BFCB26828AAAB8D00747CC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BFCB26628AAAB8D00747CC1 /* Main.storyboard */; };
 		7BFCB26A28AAAB8E00747CC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BFCB26928AAAB8E00747CC1 /* Assets.xcassets */; };
 		7BFCB26D28AAAB8E00747CC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BFCB26B28AAAB8E00747CC1 /* LaunchScreen.storyboard */; };
-		7BFCB27828AAAB8E00747CC1 /* CloudAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB27728AAAB8E00747CC1 /* CloudAppTests.swift */; };
-		7BFCB28228AAAB8E00747CC1 /* CloudAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB28128AAAB8E00747CC1 /* CloudAppUITests.swift */; };
-		7BFCB28428AAAB8E00747CC1 /* CloudAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB28328AAAB8E00747CC1 /* CloudAppUITestsLaunchTests.swift */; };
+		7BFCB29228AAABF200747CC1 /* FilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB29128AAABF200747CC1 /* FilesViewModel.swift */; };
+		7BFCB29428AAAC1500747CC1 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB29328AAAC1500747CC1 /* ViewModelProtocol.swift */; };
+		7BFCB29628AAAC2400747CC1 /* FileCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB29528AAAC2400747CC1 /* FileCellViewModel.swift */; };
+		7BFCB29A28AAAC4A00747CC1 /* LayoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB29928AAAC4A00747CC1 /* LayoutType.swift */; };
+		7BFCB29D28AAACB100747CC1 /* LayoutSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB29C28AAACB100747CC1 /* LayoutSwitcherView.swift */; };
+		7BFCB2A028AAACE900747CC1 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 7BFCB29F28AAACE900747CC1 /* RxRelay */; };
+		7BFCB2A228AAACE900747CC1 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7BFCB2A128AAACE900747CC1 /* RxSwift */; };
+		7BFCB2A528AAACFD00747CC1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7BFCB2A428AAACFD00747CC1 /* SnapKit */; };
+		7BFCB2AC28AAAD3500747CC1 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2A728AAAD3500747CC1 /* StorageService.swift */; };
+		7BFCB2AD28AAAD3500747CC1 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2A828AAAD3500747CC1 /* UserDefaultsService.swift */; };
+		7BFCB2AE28AAAD3500747CC1 /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2A928AAAD3500747CC1 /* AlertFactory.swift */; };
+		7BFCB2AF28AAAD3500747CC1 /* LayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2AB28AAAD3500747CC1 /* LayoutFactory.swift */; };
+		7BFCB2B128AAAD4C00747CC1 /* FolderCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2B028AAAD4C00747CC1 /* FolderCellViewModel.swift */; };
+		7BFCB2B628AAAD6600747CC1 /* UILabel + Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2B328AAAD6600747CC1 /* UILabel + Init.swift */; };
+		7BFCB2B728AAAD6600747CC1 /* UIColor + Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2B428AAAD6600747CC1 /* UIColor + Constants.swift */; };
+		7BFCB2B828AAAD6600747CC1 /* UIStackView + Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2B528AAAD6600747CC1 /* UIStackView + Init.swift */; };
+		7BFCB2BA28AAAD9200747CC1 /* FolderFileActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2B928AAAD9200747CC1 /* FolderFileActionView.swift */; };
+		7BFCB2C028AAADB000747CC1 /* FileColumnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2BC28AAADB000747CC1 /* FileColumnCell.swift */; };
+		7BFCB2C128AAADB000747CC1 /* FileListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2BD28AAADB000747CC1 /* FileListCell.swift */; };
+		7BFCB2C228AAADB000747CC1 /* FolderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2BE28AAADB000747CC1 /* FolderListCell.swift */; };
+		7BFCB2C328AAADB000747CC1 /* FolderColumnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2BF28AAADB000747CC1 /* FolderColumnCell.swift */; };
+		7BFCB2C728AAADF900747CC1 /* FoldersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2C628AAADF900747CC1 /* FoldersCollectionView.swift */; };
+		7BFCB2C928AAAE5B00747CC1 /* FilesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2C828AAAE5B00747CC1 /* FilesCollectionView.swift */; };
+		7BFCB2CB28AAAE8600747CC1 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2CA28AAAE8600747CC1 /* NavigationController.swift */; };
+		7BFCB2CD28AAAE9600747CC1 /* RootFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2CC28AAAE9600747CC1 /* RootFolderViewController.swift */; };
+		7BFCB2CF28AAAED000747CC1 /* FoldersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2CE28AAAED000747CC1 /* FoldersViewModel.swift */; };
+		7BFCB2D328AAAFFB00747CC1 /* FilesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2D228AAAFFB00747CC1 /* FilesCollectionViewController.swift */; };
+		7BFCB2D528AAB02E00747CC1 /* FilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2D428AAB02E00747CC1 /* FilesViewController.swift */; };
+		7BFCB2D728AAB0F800747CC1 /* FoldersCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2D628AAB0F800747CC1 /* FoldersCollectionViewController.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		7BFCB27428AAAB8E00747CC1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7BFCB25528AAAB8D00747CC1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7BFCB25C28AAAB8D00747CC1;
-			remoteInfo = CloudApp;
-		};
-		7BFCB27E28AAAB8E00747CC1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7BFCB25528AAAB8D00747CC1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7BFCB25C28AAAB8D00747CC1;
-			remoteInfo = CloudApp;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7BFCB25D28AAAB8D00747CC1 /* CloudApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BFCB26028AAAB8D00747CC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BFCB26228AAAB8D00747CC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7BFCB26428AAAB8D00747CC1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7BFCB26728AAAB8D00747CC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7BFCB26928AAAB8E00747CC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7BFCB26C28AAAB8E00747CC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7BFCB26E28AAAB8E00747CC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7BFCB27328AAAB8E00747CC1 /* CloudAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloudAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BFCB27728AAAB8E00747CC1 /* CloudAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudAppTests.swift; sourceTree = "<group>"; };
-		7BFCB27D28AAAB8E00747CC1 /* CloudAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloudAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BFCB28128AAAB8E00747CC1 /* CloudAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudAppUITests.swift; sourceTree = "<group>"; };
-		7BFCB28328AAAB8E00747CC1 /* CloudAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7BFCB29128AAABF200747CC1 /* FilesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesViewModel.swift; sourceTree = "<group>"; };
+		7BFCB29328AAAC1500747CC1 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
+		7BFCB29528AAAC2400747CC1 /* FileCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCellViewModel.swift; sourceTree = "<group>"; };
+		7BFCB29928AAAC4A00747CC1 /* LayoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutType.swift; sourceTree = "<group>"; };
+		7BFCB29C28AAACB100747CC1 /* LayoutSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSwitcherView.swift; sourceTree = "<group>"; };
+		7BFCB2A728AAAD3500747CC1 /* StorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		7BFCB2A828AAAD3500747CC1 /* UserDefaultsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
+		7BFCB2A928AAAD3500747CC1 /* AlertFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
+		7BFCB2AB28AAAD3500747CC1 /* LayoutFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutFactory.swift; sourceTree = "<group>"; };
+		7BFCB2B028AAAD4C00747CC1 /* FolderCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCellViewModel.swift; sourceTree = "<group>"; };
+		7BFCB2B328AAAD6600747CC1 /* UILabel + Init.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel + Init.swift"; sourceTree = "<group>"; };
+		7BFCB2B428AAAD6600747CC1 /* UIColor + Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor + Constants.swift"; sourceTree = "<group>"; };
+		7BFCB2B528AAAD6600747CC1 /* UIStackView + Init.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView + Init.swift"; sourceTree = "<group>"; };
+		7BFCB2B928AAAD9200747CC1 /* FolderFileActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderFileActionView.swift; sourceTree = "<group>"; };
+		7BFCB2BC28AAADB000747CC1 /* FileColumnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileColumnCell.swift; sourceTree = "<group>"; };
+		7BFCB2BD28AAADB000747CC1 /* FileListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileListCell.swift; sourceTree = "<group>"; };
+		7BFCB2BE28AAADB000747CC1 /* FolderListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderListCell.swift; sourceTree = "<group>"; };
+		7BFCB2BF28AAADB000747CC1 /* FolderColumnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderColumnCell.swift; sourceTree = "<group>"; };
+		7BFCB2C628AAADF900747CC1 /* FoldersCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldersCollectionView.swift; sourceTree = "<group>"; };
+		7BFCB2C828AAAE5B00747CC1 /* FilesCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesCollectionView.swift; sourceTree = "<group>"; };
+		7BFCB2CA28AAAE8600747CC1 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		7BFCB2CC28AAAE9600747CC1 /* RootFolderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootFolderViewController.swift; sourceTree = "<group>"; };
+		7BFCB2CE28AAAED000747CC1 /* FoldersViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldersViewModel.swift; sourceTree = "<group>"; };
+		7BFCB2D228AAAFFB00747CC1 /* FilesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesCollectionViewController.swift; sourceTree = "<group>"; };
+		7BFCB2D428AAB02E00747CC1 /* FilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesViewController.swift; sourceTree = "<group>"; };
+		7BFCB2D628AAB0F800747CC1 /* FoldersCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,20 +84,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7BFCB27028AAAB8E00747CC1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7BFCB27A28AAAB8E00747CC1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				7BFCB2A528AAACFD00747CC1 /* SnapKit in Frameworks */,
+				7BFCB2A228AAACE900747CC1 /* RxSwift in Frameworks */,
+				7BFCB2A028AAACE900747CC1 /* RxRelay in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,8 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				7BFCB25F28AAAB8D00747CC1 /* CloudApp */,
-				7BFCB27628AAAB8E00747CC1 /* CloudAppTests */,
-				7BFCB28028AAAB8E00747CC1 /* CloudAppUITests */,
 				7BFCB25E28AAAB8D00747CC1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,8 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				7BFCB25D28AAAB8D00747CC1 /* CloudApp.app */,
-				7BFCB27328AAAB8E00747CC1 /* CloudAppTests.xctest */,
-				7BFCB27D28AAAB8E00747CC1 /* CloudAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,10 +112,15 @@
 		7BFCB25F28AAAB8D00747CC1 /* CloudApp */ = {
 			isa = PBXGroup;
 			children = (
+				7BFCB2C428AAADE800747CC1 /* Controller */,
+				7BFCB2B228AAAD6600747CC1 /* Extension */,
+				7BFCB2A628AAAD3500747CC1 /* Service */,
+				7BFCB29B28AAACA400747CC1 /* View */,
+				7BFCB29828AAAC4300747CC1 /* Model */,
+				7BFCB29028AAABE800747CC1 /* ViewModel */,
 				7BFCB26028AAAB8D00747CC1 /* AppDelegate.swift */,
 				7BFCB26228AAAB8D00747CC1 /* SceneDelegate.swift */,
 				7BFCB26428AAAB8D00747CC1 /* ViewController.swift */,
-				7BFCB26628AAAB8D00747CC1 /* Main.storyboard */,
 				7BFCB26928AAAB8E00747CC1 /* Assets.xcassets */,
 				7BFCB26B28AAAB8E00747CC1 /* LaunchScreen.storyboard */,
 				7BFCB26E28AAAB8E00747CC1 /* Info.plist */,
@@ -110,21 +128,96 @@
 			path = CloudApp;
 			sourceTree = "<group>";
 		};
-		7BFCB27628AAAB8E00747CC1 /* CloudAppTests */ = {
+		7BFCB29028AAABE800747CC1 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				7BFCB27728AAAB8E00747CC1 /* CloudAppTests.swift */,
+				7BFCB2D828AAB20B00747CC1 /* Just ui fill */,
+				7BFCB2CE28AAAED000747CC1 /* FoldersViewModel.swift */,
+				7BFCB29128AAABF200747CC1 /* FilesViewModel.swift */,
+				7BFCB29328AAAC1500747CC1 /* ViewModelProtocol.swift */,
 			);
-			path = CloudAppTests;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		7BFCB28028AAAB8E00747CC1 /* CloudAppUITests */ = {
+		7BFCB29828AAAC4300747CC1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7BFCB28128AAAB8E00747CC1 /* CloudAppUITests.swift */,
-				7BFCB28328AAAB8E00747CC1 /* CloudAppUITestsLaunchTests.swift */,
+				7BFCB29928AAAC4A00747CC1 /* LayoutType.swift */,
 			);
-			path = CloudAppUITests;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7BFCB29B28AAACA400747CC1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB2C528AAADEF00747CC1 /* CollectionView */,
+				7BFCB2BB28AAADA400747CC1 /* Cells */,
+				7BFCB29C28AAACB100747CC1 /* LayoutSwitcherView.swift */,
+				7BFCB2B928AAAD9200747CC1 /* FolderFileActionView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7BFCB2A628AAAD3500747CC1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB2A728AAAD3500747CC1 /* StorageService.swift */,
+				7BFCB2A828AAAD3500747CC1 /* UserDefaultsService.swift */,
+				7BFCB2A928AAAD3500747CC1 /* AlertFactory.swift */,
+				7BFCB2AB28AAAD3500747CC1 /* LayoutFactory.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		7BFCB2B228AAAD6600747CC1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB2B328AAAD6600747CC1 /* UILabel + Init.swift */,
+				7BFCB2B428AAAD6600747CC1 /* UIColor + Constants.swift */,
+				7BFCB2B528AAAD6600747CC1 /* UIStackView + Init.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		7BFCB2BB28AAADA400747CC1 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB2BC28AAADB000747CC1 /* FileColumnCell.swift */,
+				7BFCB2BD28AAADB000747CC1 /* FileListCell.swift */,
+				7BFCB2BF28AAADB000747CC1 /* FolderColumnCell.swift */,
+				7BFCB2BE28AAADB000747CC1 /* FolderListCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		7BFCB2C428AAADE800747CC1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB2CC28AAAE9600747CC1 /* RootFolderViewController.swift */,
+				7BFCB2CA28AAAE8600747CC1 /* NavigationController.swift */,
+				7BFCB2D228AAAFFB00747CC1 /* FilesCollectionViewController.swift */,
+				7BFCB2D428AAB02E00747CC1 /* FilesViewController.swift */,
+				7BFCB2D628AAB0F800747CC1 /* FoldersCollectionViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7BFCB2C528AAADEF00747CC1 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB2C828AAAE5B00747CC1 /* FilesCollectionView.swift */,
+				7BFCB2C628AAADF900747CC1 /* FoldersCollectionView.swift */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		7BFCB2D828AAB20B00747CC1 /* Just ui fill */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB2B028AAAD4C00747CC1 /* FolderCellViewModel.swift */,
+				7BFCB29528AAAC2400747CC1 /* FileCellViewModel.swift */,
+			);
+			path = "Just ui fill";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,45 +236,14 @@
 			dependencies = (
 			);
 			name = CloudApp;
+			packageProductDependencies = (
+				7BFCB29F28AAACE900747CC1 /* RxRelay */,
+				7BFCB2A128AAACE900747CC1 /* RxSwift */,
+				7BFCB2A428AAACFD00747CC1 /* SnapKit */,
+			);
 			productName = CloudApp;
 			productReference = 7BFCB25D28AAAB8D00747CC1 /* CloudApp.app */;
 			productType = "com.apple.product-type.application";
-		};
-		7BFCB27228AAAB8E00747CC1 /* CloudAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7BFCB28A28AAAB8E00747CC1 /* Build configuration list for PBXNativeTarget "CloudAppTests" */;
-			buildPhases = (
-				7BFCB26F28AAAB8E00747CC1 /* Sources */,
-				7BFCB27028AAAB8E00747CC1 /* Frameworks */,
-				7BFCB27128AAAB8E00747CC1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7BFCB27528AAAB8E00747CC1 /* PBXTargetDependency */,
-			);
-			name = CloudAppTests;
-			productName = CloudAppTests;
-			productReference = 7BFCB27328AAAB8E00747CC1 /* CloudAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		7BFCB27C28AAAB8E00747CC1 /* CloudAppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7BFCB28D28AAAB8E00747CC1 /* Build configuration list for PBXNativeTarget "CloudAppUITests" */;
-			buildPhases = (
-				7BFCB27928AAAB8E00747CC1 /* Sources */,
-				7BFCB27A28AAAB8E00747CC1 /* Frameworks */,
-				7BFCB27B28AAAB8E00747CC1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7BFCB27F28AAAB8E00747CC1 /* PBXTargetDependency */,
-			);
-			name = CloudAppUITests;
-			productName = CloudAppUITests;
-			productReference = 7BFCB27D28AAAB8E00747CC1 /* CloudAppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -196,14 +258,6 @@
 					7BFCB25C28AAAB8D00747CC1 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
-					7BFCB27228AAAB8E00747CC1 = {
-						CreatedOnToolsVersion = 13.2.1;
-						TestTargetID = 7BFCB25C28AAAB8D00747CC1;
-					};
-					7BFCB27C28AAAB8E00747CC1 = {
-						CreatedOnToolsVersion = 13.2.1;
-						TestTargetID = 7BFCB25C28AAAB8D00747CC1;
-					};
 				};
 			};
 			buildConfigurationList = 7BFCB25828AAAB8D00747CC1 /* Build configuration list for PBXProject "CloudApp" */;
@@ -215,13 +269,15 @@
 				Base,
 			);
 			mainGroup = 7BFCB25428AAAB8D00747CC1;
+			packageReferences = (
+				7BFCB29E28AAACE900747CC1 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				7BFCB2A328AAACFD00747CC1 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 7BFCB25E28AAAB8D00747CC1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				7BFCB25C28AAAB8D00747CC1 /* CloudApp */,
-				7BFCB27228AAAB8E00747CC1 /* CloudAppTests */,
-				7BFCB27C28AAAB8E00747CC1 /* CloudAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -233,21 +289,6 @@
 			files = (
 				7BFCB26D28AAAB8E00747CC1 /* LaunchScreen.storyboard in Resources */,
 				7BFCB26A28AAAB8E00747CC1 /* Assets.xcassets in Resources */,
-				7BFCB26828AAAB8D00747CC1 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7BFCB27128AAAB8E00747CC1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7BFCB27B28AAAB8E00747CC1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,53 +299,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BFCB2CF28AAAED000747CC1 /* FoldersViewModel.swift in Sources */,
+				7BFCB2AF28AAAD3500747CC1 /* LayoutFactory.swift in Sources */,
+				7BFCB2D528AAB02E00747CC1 /* FilesViewController.swift in Sources */,
+				7BFCB2CB28AAAE8600747CC1 /* NavigationController.swift in Sources */,
+				7BFCB2B828AAAD6600747CC1 /* UIStackView + Init.swift in Sources */,
+				7BFCB29A28AAAC4A00747CC1 /* LayoutType.swift in Sources */,
+				7BFCB2C228AAADB000747CC1 /* FolderListCell.swift in Sources */,
+				7BFCB2CD28AAAE9600747CC1 /* RootFolderViewController.swift in Sources */,
+				7BFCB2D728AAB0F800747CC1 /* FoldersCollectionViewController.swift in Sources */,
 				7BFCB26528AAAB8D00747CC1 /* ViewController.swift in Sources */,
+				7BFCB2AD28AAAD3500747CC1 /* UserDefaultsService.swift in Sources */,
+				7BFCB2C128AAADB000747CC1 /* FileListCell.swift in Sources */,
+				7BFCB2C928AAAE5B00747CC1 /* FilesCollectionView.swift in Sources */,
+				7BFCB29428AAAC1500747CC1 /* ViewModelProtocol.swift in Sources */,
+				7BFCB29628AAAC2400747CC1 /* FileCellViewModel.swift in Sources */,
+				7BFCB2D328AAAFFB00747CC1 /* FilesCollectionViewController.swift in Sources */,
 				7BFCB26128AAAB8D00747CC1 /* AppDelegate.swift in Sources */,
+				7BFCB29D28AAACB100747CC1 /* LayoutSwitcherView.swift in Sources */,
+				7BFCB29228AAABF200747CC1 /* FilesViewModel.swift in Sources */,
+				7BFCB2BA28AAAD9200747CC1 /* FolderFileActionView.swift in Sources */,
+				7BFCB2C028AAADB000747CC1 /* FileColumnCell.swift in Sources */,
+				7BFCB2AE28AAAD3500747CC1 /* AlertFactory.swift in Sources */,
+				7BFCB2AC28AAAD3500747CC1 /* StorageService.swift in Sources */,
 				7BFCB26328AAAB8D00747CC1 /* SceneDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7BFCB26F28AAAB8E00747CC1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7BFCB27828AAAB8E00747CC1 /* CloudAppTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7BFCB27928AAAB8E00747CC1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7BFCB28428AAAB8E00747CC1 /* CloudAppUITestsLaunchTests.swift in Sources */,
-				7BFCB28228AAAB8E00747CC1 /* CloudAppUITests.swift in Sources */,
+				7BFCB2C328AAADB000747CC1 /* FolderColumnCell.swift in Sources */,
+				7BFCB2B728AAAD6600747CC1 /* UIColor + Constants.swift in Sources */,
+				7BFCB2B628AAAD6600747CC1 /* UILabel + Init.swift in Sources */,
+				7BFCB2C728AAADF900747CC1 /* FoldersCollectionView.swift in Sources */,
+				7BFCB2B128AAAD4C00747CC1 /* FolderCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		7BFCB27528AAAB8E00747CC1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7BFCB25C28AAAB8D00747CC1 /* CloudApp */;
-			targetProxy = 7BFCB27428AAAB8E00747CC1 /* PBXContainerItemProxy */;
-		};
-		7BFCB27F28AAAB8E00747CC1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7BFCB25C28AAAB8D00747CC1 /* CloudApp */;
-			targetProxy = 7BFCB27E28AAAB8E00747CC1 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		7BFCB26628AAAB8D00747CC1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7BFCB26728AAAB8D00747CC1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7BFCB26B28AAAB8E00747CC1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -367,7 +396,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -422,7 +451,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -444,7 +473,6 @@
 				INFOPLIST_FILE = CloudApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -472,7 +500,6 @@
 				INFOPLIST_FILE = CloudApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -485,82 +512,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		7BFCB28B28AAAB8E00747CC1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KLZTQ9HHAP;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = timrez.CloudAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CloudApp.app/CloudApp";
-			};
-			name = Debug;
-		};
-		7BFCB28C28AAAB8E00747CC1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KLZTQ9HHAP;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = timrez.CloudAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CloudApp.app/CloudApp";
-			};
-			name = Release;
-		};
-		7BFCB28E28AAAB8E00747CC1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KLZTQ9HHAP;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = timrez.CloudAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CloudApp;
-			};
-			name = Debug;
-		};
-		7BFCB28F28AAAB8E00747CC1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KLZTQ9HHAP;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = timrez.CloudAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CloudApp;
 			};
 			name = Release;
 		};
@@ -585,25 +536,44 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7BFCB28A28AAAB8E00747CC1 /* Build configuration list for PBXNativeTarget "CloudAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7BFCB28B28AAAB8E00747CC1 /* Debug */,
-				7BFCB28C28AAAB8E00747CC1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7BFCB28D28AAAB8E00747CC1 /* Build configuration list for PBXNativeTarget "CloudAppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7BFCB28E28AAAB8E00747CC1 /* Debug */,
-				7BFCB28F28AAAB8E00747CC1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7BFCB29E28AAACE900747CC1 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = exactVersion;
+				version = 6.5.0;
+			};
+		};
+		7BFCB2A328AAACFD00747CC1 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = exactVersion;
+				version = 5.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7BFCB29F28AAACE900747CC1 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BFCB29E28AAACE900747CC1 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		7BFCB2A128AAACE900747CC1 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BFCB29E28AAACE900747CC1 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		7BFCB2A428AAACFD00747CC1 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BFCB2A328AAACFD00747CC1 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7BFCB25528AAAB8D00747CC1 /* Project object */;
 }
