@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 
 class StorageService {
@@ -13,47 +14,51 @@ class StorageService {
   var files = [FileCellViewModel]()
   var folders = [FolderCellViewModel]()
   
+  static let shared = StorageService()
+  
+  private let bag = DisposeBag()
+  private var firebaseStorage = FirebaseStorageService.shared
+  
+  private init() {
+    firebaseStorage.snapshotListener
+      .subscribe(onNext: { [weak self] snapshot in
+        self?.snapshot = snapshot
+      })
+      .disposed(by: bag)
+  }
+  
+  private var snapshot: CloudFolder?
+  
   weak var filesDelegate: StorageServiceFilesDelegate?
   weak var foldersDelegate: StorageServiceFoldersDelegate?
   
-  func fetchFiles(foldername: String) {
-    filesDelegate?.filesRecieved([
-      FileCellViewModel(filename: "New file.png", ext: "png"),
-      FileCellViewModel(filename: "New file1.png", ext: "png"),
-      FileCellViewModel(filename: "New file2.png", ext: "png"),
-      FileCellViewModel(filename: "New file3.png", ext: "png"),
-      FileCellViewModel(filename: "New file4.png", ext: "png"),
-      FileCellViewModel(filename: "New file5.png", ext: "png"),
-      FileCellViewModel(filename: "New file6.png", ext: "png"),
-      FileCellViewModel(filename: "New file7.png", ext: "png"),
-      FileCellViewModel(filename: "New file8.png", ext: "png"),
-    ])
+  func fetchFiles(foldername: String?) {
+    
+//    if let name = foldername {
+//      firebaseStorage.fetchFilesFrom(foldername: name) { result in
+//        switch result {
+//        case .success(let items):
+//          let viewModels = items.map { item in
+//            return FileCellViewModel(filename: item.name, ext: item.ext)
+//          }
+//          self.filesDelegate?.filesRecieved(viewModels)
+//        case .failure(let error):
+//          print(error)
+//        }
+//      }
+//    } else {
+//
+//    }
   }
-  
+ 
   func fetchFolders() {
-    foldersDelegate?.foldersRecieved([
-      FolderCellViewModel(name: "New folder1", objectsCount: Int.random(in: 0...6)),
-      FolderCellViewModel(name: "New folder2", objectsCount: Int.random(in: 0...6)),
-      FolderCellViewModel(name: "New folder3", objectsCount: Int.random(in: 0...6)),
-      FolderCellViewModel(name: "New folder4", objectsCount: Int.random(in: 0...6)),
-      FolderCellViewModel(name: "New folder5", objectsCount: Int.random(in: 0...6)),
-      FolderCellViewModel(name: "New folder6", objectsCount: Int.random(in: 0...6)),
-      FolderCellViewModel(name: "New folder7", objectsCount: Int.random(in: 0...6)),
-      FolderCellViewModel(name: "New folder8", objectsCount: Int.random(in: 0...6)),
-      FolderCellViewModel(name: "New folder9", objectsCount: Int.random(in: 0...6)),
-      FolderCellViewModel(name: "New folder10", objectsCount: Int.random(in: 0...6)),
-      FolderCellViewModel(name: "New folder11", objectsCount: Int.random(in: 0...6)),
-      FolderCellViewModel(name: "New folder12", objectsCount: Int.random(in: 0...6)),
-      FolderCellViewModel(name: "New folder13", objectsCount: Int.random(in: 0...6)),
-      FolderCellViewModel(name: "New folder14", objectsCount: Int.random(in: 0...6))
-    ])
   }
   
   func loadFile(filename: String, folderName: String) {
     print("loading file \(filename)")
   }
-  
 }
+
 protocol StorageServiceFoldersDelegate: AnyObject {
   func foldersRecieved(_ folders: [FolderCellViewModel])
 }

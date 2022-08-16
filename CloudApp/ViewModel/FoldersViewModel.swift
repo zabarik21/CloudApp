@@ -11,11 +11,13 @@ import Foundation
 enum FoldersViewModelEvent {
   case updateFoldersViewModels(viewModels: [FolderCellViewModel])
   case openFolder(foldername: String)
+  case showAlert(title: String, message: String)
 }
 
 enum FoldersViewEvent {
   case reloadFolders
   case folderTouched(foldername: String)
+  case createFolder(foldername: String)
   case filterFolders(text: String)
   case viewLoaded
 }
@@ -28,21 +30,50 @@ class FoldersViewModel: ViewModel {
   
   var output: Output<FoldersViewModelEvent> = Output()
   
-  private var storageService = StorageService()
+  private var storageService = FirebaseStorageService.shared
   private var folders: [FolderCellViewModel] = []
   
   init() {}
   
+  func fetchFolders() {
+    storageService.fetchFolders { result in
+      switch result {
+      case .success(let folders):
+        self.folders = folders
+        self.output.send(.updateFoldersViewModels(viewModels: folders))
+      case .failure(let error):
+        print(error)
+      }
+    }
+  }
+  
   func handle(event: ViewEvent) {
     switch event {
     case .reloadFolders:
-      storageService.fetchFolders()
+      fetchFolders()
     case .folderTouched(foldername: let foldername):
       output.send(.openFolder(foldername: foldername))
     case .viewLoaded:
-      storageService.fetchFolders()
+      fetchFolders()
     case .filterFolders(text: let text):
       filterFolders(with: text)
+    case .createFolder(foldername: let foldername):
+      createFolder(with: foldername)
+  }
+  
+
+  
+  }
+  
+  func createFolder(with foldername: String) {
+    storageService.createFolder(foldername: foldername) { result in
+      switch result {
+      case .success:
+        self.folders.append(FolderCellViewModel(name: foldername, objectsCount: 1))
+        self.output.send(.updateFoldersViewModels(viewModels: self.folders))
+      case .failure(let error):
+        self.output.send(.showAlert(title: "Cant create folder", message: error.localizedDescription))
+      }
     }
   }
   
@@ -56,9 +87,9 @@ class FoldersViewModel: ViewModel {
   }
   
   func start() {
-    storageService.foldersDelegate = self
-    storageService.fetchFiles(foldername: "")
-    storageService.fetchFolders()
+//    storageService.foldersDelegate = self
+//    storageService.fetchFiles(foldername: "")
+//    storageService.fetchFolders()
   }
   
 }

@@ -79,6 +79,15 @@ extension FoldersCollectionViewController {
       self.foldersCollecetion.viewModels = viewModels
     case .openFolder(let foldername):
       self.openFolderRelay.accept(foldername)
+    case .showAlert(title: let title, message: let message):
+      self.showAlert(title, message)
+    }
+  }
+  
+  func showAlert(_ title: String, _ message: String) {
+    DispatchQueue.main.async {
+      let alert = AlertFactory.getErrorAlert(title: title, message: message)
+      self.present(alert, animated: true)
     }
   }
   

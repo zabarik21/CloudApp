@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import RxSwift
+import Photos
+import PhotosUI
 
 class MainFolderViewController: UIViewController {
   
@@ -94,6 +96,7 @@ extension MainFolderViewController {
     guard !self.folderOpened else { return }
     DispatchQueue.main.async {
       let alertController = AlertFactory.getCreateFolderAlert(createAction: { folderName in
+        self.createFolder(foldername: folderName)
         print("create folder with name \(folderName)")
       })
       self.present(alertController, animated: true)
@@ -101,19 +104,51 @@ extension MainFolderViewController {
   }
   
   func createFolder(foldername: String) {
-    print(foldername)
+    guard !self.folderOpened else { return }
+    foldersCollectionViewController.output.send(.createFolder(foldername: foldername))
   }
   
   func tryAddFileFromFilesManager() {
     guard !self.folderOpened else { return }
-    print(#function)
+    let types = UTType.allUTITypes()
+    let pickerViewController = UIDocumentPickerViewController(
+      forOpeningContentTypes: types
+    )
+    pickerViewController.delegate = self
+    pickerViewController.allowsMultipleSelection = false
+    present(pickerViewController, animated: true)
   }
   
   func tryAddFileFromGallery() {
     guard !self.folderOpened else { return }
-    print(#function)
+    var config = PHPickerConfiguration(photoLibrary: .shared())
+    config.selectionLimit = 1
+    config.filter = .any(of: [.images, .videos])
+    let picker = PHPickerViewController(configuration: config)
+    picker.delegate = self
+    present(picker, animated: true)
   }
   
+}
+// MARK: - PHPickerViewControllerDelegate
+extension MainFolderViewController: PHPickerViewControllerDelegate {
+  
+  func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+    picker.dismiss(animated: true)
+    for result in results {
+      filesCollectionViewController.output.send(.addFromGallery(result: result))
+    }
+  }
+  
+}
+// MARK: - UIDocumentPickerDelegate
+extension MainFolderViewController: UIDocumentPickerDelegate {
+  
+  func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+    guard let docUrl = urls.first else { return }
+    guard docUrl.startAccessingSecurityScopedResource() else { return }
+    filesCollectionViewController.output.send(.addFromFiles(url: docUrl))
+  }
 }
 // MARK: - Search bar delegate
 extension MainFolderViewController: UISearchBarDelegate {
@@ -138,7 +173,7 @@ extension MainFolderViewController {
   
   fileprivate func setupCollections() {
     foldersCollectionViewController = FoldersCollectionViewController(viewModel: FoldersViewModel(), layoutType: layoutType)
-    filesCollectionViewController = FilesCollectionViewController(viewModel: FilesListViewModel(foldername: ""), layoutType: layoutType)
+    filesCollectionViewController = FilesCollectionViewController(viewModel: FilesListViewModel(), layoutType: layoutType)
   }
   
   fileprivate func setupLayoutView() {

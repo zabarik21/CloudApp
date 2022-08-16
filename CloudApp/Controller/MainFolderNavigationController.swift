@@ -10,14 +10,17 @@ import UIKit
 
 
  
-class NavigationController: UINavigationController {
+class MainFolderNavigationController: UINavigationController {
   
   private var myView: FolderFileActionView = FolderFileActionView()
-//  private var searchBar: UISearchBar!
   private var searchController: UISearchController!
   
-  init(rootViewController: MainFolderViewController) {
-    super.init(rootViewController: rootViewController)
+  init() {
+    super.init(rootViewController: MainFolderViewController())
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     setupUI()
   }
   
@@ -29,7 +32,7 @@ class NavigationController: UINavigationController {
 
 
 // MARK: - Setup UI
-extension NavigationController {
+extension MainFolderNavigationController {
   private func setupUI() {
     setupNavigationBar()
     setupConstraints()

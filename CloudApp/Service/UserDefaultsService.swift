@@ -13,6 +13,7 @@ class UserDefaultsService {
   
   enum Constants {
     static let layoutKey = "layout"
+    static let idKey = "userId"
   }
   
   static let shared = UserDefaultsService()
@@ -32,5 +33,13 @@ class UserDefaultsService {
   
   func setLayout(to type: LayoutType) {
     st.setValue(type.rawValue, forKey: Constants.layoutKey)
+  }
+  
+  func saveUserId(_ id: String) {
+    st.setValue(id, forKey: Constants.idKey)
+  }
+  
+  func getUserId() -> String? {
+    return st.string(forKey: Constants.idKey)
   }
 }

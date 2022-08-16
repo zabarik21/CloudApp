@@ -11,6 +11,24 @@ import UIKit
 
 class AlertFactory {
   
+  static func getMessageAlert(
+    title: String,
+    message: String
+  ) -> UIAlertController {
+    let alertController = UIAlertController(
+      title: title,
+      message: message,
+      preferredStyle: .alert
+    )
+    alertController.addAction(
+      UIAlertAction(
+        title: "Ok",
+        style: .default
+      )
+    )
+    return alertController
+  }
+  
   static func getFilesActionAlert(
     filename: String,
     downloadAction: @escaping () -> (),
@@ -53,7 +71,6 @@ class AlertFactory {
     title: String = "Error",
     message: String
   ) -> UIAlertController {
-    
     let alertController = UIAlertController(
       title: title,
       message: message,

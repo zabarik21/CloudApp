@@ -62,6 +62,8 @@ class FilesViewController: UIViewController {
       self?.filesCollectionController.viewModel.output.send(.changeLayout(type: type))
     })
       .disposed(by: bag)
+    
+    
   }
   
   required init?(coder: NSCoder) {

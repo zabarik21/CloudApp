@@ -62,7 +62,6 @@ extension FilesCollectionViewController {
     filesCollection.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
-    
   }
 }
 // MARK: - Handling ViewModel Events
@@ -86,6 +85,24 @@ extension FilesCollectionViewController {
       self.showRenameFileAlert(filename: filename)
     case .changeLayout(type: let type):
       self.changeLayout(to: type)
+    case .showErrorAlert(message: let message):
+      self.showErrorAlert(message)
+    case .showDefaultAlert(title: let title, message: let message):
+      self.showDefaultAlert(title, message)
+    }
+  }
+  
+  func showDefaultAlert(_ title: String, _ message: String) {
+    DispatchQueue.main.async {
+      let alert = AlertFactory.getMessageAlert(title: title, message: message)
+      self.present(alert, animated: true)
+    }
+  }
+  
+  func showErrorAlert(_ message: String) {
+    DispatchQueue.main.async {
+      let alert = AlertFactory.getErrorAlert(message: message)
+      self.present(alert, animated: true)
     }
   }
   
