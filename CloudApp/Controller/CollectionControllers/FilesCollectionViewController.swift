@@ -13,7 +13,6 @@ class FilesCollectionViewController: UIViewController, ViewModelContainer {
   
   // rx
   private let bag = DisposeBag()
-
   // ViewModel
   typealias ViewModelEvent = FilesViewModelEvent
   typealias ViewEvent = FilesViewEvent
@@ -60,7 +59,8 @@ extension FilesCollectionViewController {
   private func setupUI() {
     filesCollection = FilesCollectionView(layout: layoutType)
     view.addSubview(filesCollection)
-    filesCollection.snp.makeConstraints { make in make.edges.equalToSuperview()
+    filesCollection.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
     }
     
   }

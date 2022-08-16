@@ -10,10 +10,6 @@ import UIKit
 import RxRelay
 import SnapKit
 
-protocol LayoutSwitcherViewDelegate: AnyObject {
-  func sliderSwitched(to type: LayoutType)
-}
-
 
 class LayoutSwitcherView: UIView {
   

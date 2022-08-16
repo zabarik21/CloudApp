@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 
-class RootFolderViewController: UIViewController {
+class MainFolderViewController: UIViewController {
   
   enum Constants {
     static let horizontalMarginMult: CGFloat = 0.05
@@ -53,6 +53,11 @@ class RootFolderViewController: UIViewController {
     foldersCollectionViewController.openFolderRelay.subscribe(onNext: { [weak self] foldername in
       self?.openFolder(foldername: foldername)
     })
+      .disposed(by: bag)
+    layoutSwitchView.switchRelay.subscribe(onNext: { [weak self] type in
+      self?.changeLayout(to: type)
+    })
+      .disposed(by: bag)
   }
   
   private func setupfolderFileActionViewObserver() {
@@ -72,7 +77,10 @@ class RootFolderViewController: UIViewController {
   func openFolder(foldername: String) {
     folderOpened = true
     DispatchQueue.main.async {
-      let filesVC = FilesViewController(foldername: foldername, layoutType: self.layoutType)
+      let filesVC = FilesViewController(
+        foldername: foldername,
+        layoutType: self.layoutType
+      )
       self.navigationController?.pushViewController(filesVC, animated: true)
     }
   }
@@ -80,7 +88,7 @@ class RootFolderViewController: UIViewController {
 }
 
 // MARK: - FolderFileActions
-extension RootFolderViewController {
+extension MainFolderViewController {
   
   func tryCreateFolder() {
     guard !self.folderOpened else { return }
@@ -108,7 +116,7 @@ extension RootFolderViewController {
   
 }
 // MARK: - Search bar delegate
-extension RootFolderViewController: UISearchBarDelegate {
+extension MainFolderViewController: UISearchBarDelegate {
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     foldersCollectionViewController.output.send(.filterFolders(text: searchText))
@@ -118,7 +126,7 @@ extension RootFolderViewController: UISearchBarDelegate {
 }
 
 // MARK: - SetupUI
-extension RootFolderViewController {
+extension MainFolderViewController {
   
   private func setupElements() {
     setupSearchBar()
@@ -135,10 +143,6 @@ extension RootFolderViewController {
   
   fileprivate func setupLayoutView() {
     layoutSwitchView = LayoutSwitcherView(type: layoutType)
-    layoutSwitchView.switchRelay.subscribe(onNext: { [weak self] type in
-      self?.changeLayout(to: type)
-    })
-      .disposed(by: bag)
   }
   
   private func setupLabels() {
@@ -230,16 +234,12 @@ extension RootFolderViewController {
   
 }
 
-// MARK: - LayoutSwitchDelegate
-extension RootFolderViewController: LayoutSwitcherViewDelegate {
+// MARK: - LayoutSwitcherAction
+extension MainFolderViewController {
   
   private func changeLayout(to type: LayoutType) {
-    self.filesCollectionViewController.changeLayout(to: type)
-    self.foldersCollectionViewController.changeLayout(to: type)
-  }
-  
-  func sliderSwitched(to type: LayoutType) {
-    self.layoutType = type
+    filesCollectionViewController.changeLayout(to: type)
+    foldersCollectionViewController.changeLayout(to: type)
   }
   
 }

@@ -16,7 +16,7 @@ class NavigationController: UINavigationController {
 //  private var searchBar: UISearchBar!
   private var searchController: UISearchController!
   
-  init(rootViewController: RootFolderViewController) {
+  init(rootViewController: MainFolderViewController) {
     super.init(rootViewController: rootViewController)
     setupUI()
   }

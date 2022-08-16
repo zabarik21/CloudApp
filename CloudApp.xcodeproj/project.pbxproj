@@ -36,7 +36,7 @@
 		7BFCB2C728AAADF900747CC1 /* FoldersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2C628AAADF900747CC1 /* FoldersCollectionView.swift */; };
 		7BFCB2C928AAAE5B00747CC1 /* FilesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2C828AAAE5B00747CC1 /* FilesCollectionView.swift */; };
 		7BFCB2CB28AAAE8600747CC1 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2CA28AAAE8600747CC1 /* NavigationController.swift */; };
-		7BFCB2CD28AAAE9600747CC1 /* RootFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2CC28AAAE9600747CC1 /* RootFolderViewController.swift */; };
+		7BFCB2CD28AAAE9600747CC1 /* MainFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2CC28AAAE9600747CC1 /* MainFolderViewController.swift */; };
 		7BFCB2CF28AAAED000747CC1 /* FoldersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2CE28AAAED000747CC1 /* FoldersViewModel.swift */; };
 		7BFCB2D328AAAFFB00747CC1 /* FilesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2D228AAAFFB00747CC1 /* FilesCollectionViewController.swift */; };
 		7BFCB2D528AAB02E00747CC1 /* FilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2D428AAB02E00747CC1 /* FilesViewController.swift */; };
@@ -72,7 +72,7 @@
 		7BFCB2C628AAADF900747CC1 /* FoldersCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldersCollectionView.swift; sourceTree = "<group>"; };
 		7BFCB2C828AAAE5B00747CC1 /* FilesCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesCollectionView.swift; sourceTree = "<group>"; };
 		7BFCB2CA28AAAE8600747CC1 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
-		7BFCB2CC28AAAE9600747CC1 /* RootFolderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootFolderViewController.swift; sourceTree = "<group>"; };
+		7BFCB2CC28AAAE9600747CC1 /* MainFolderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFolderViewController.swift; sourceTree = "<group>"; };
 		7BFCB2CE28AAAED000747CC1 /* FoldersViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldersViewModel.swift; sourceTree = "<group>"; };
 		7BFCB2D228AAAFFB00747CC1 /* FilesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesCollectionViewController.swift; sourceTree = "<group>"; };
 		7BFCB2D428AAB02E00747CC1 /* FilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +93,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B36C53228AB57E000671B29 /* CollectionControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB2D228AAAFFB00747CC1 /* FilesCollectionViewController.swift */,
+				7BFCB2D628AAB0F800747CC1 /* FoldersCollectionViewController.swift */,
+			);
+			path = CollectionControllers;
+			sourceTree = "<group>";
+		};
 		7BFCB25428AAAB8D00747CC1 = {
 			isa = PBXGroup;
 			children = (
@@ -193,11 +202,10 @@
 		7BFCB2C428AAADE800747CC1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				7BFCB2CC28AAAE9600747CC1 /* RootFolderViewController.swift */,
+				7B36C53228AB57E000671B29 /* CollectionControllers */,
+				7BFCB2CC28AAAE9600747CC1 /* MainFolderViewController.swift */,
 				7BFCB2CA28AAAE8600747CC1 /* NavigationController.swift */,
-				7BFCB2D228AAAFFB00747CC1 /* FilesCollectionViewController.swift */,
 				7BFCB2D428AAB02E00747CC1 /* FilesViewController.swift */,
-				7BFCB2D628AAB0F800747CC1 /* FoldersCollectionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -306,7 +314,7 @@
 				7BFCB2B828AAAD6600747CC1 /* UIStackView + Init.swift in Sources */,
 				7BFCB29A28AAAC4A00747CC1 /* LayoutType.swift in Sources */,
 				7BFCB2C228AAADB000747CC1 /* FolderListCell.swift in Sources */,
-				7BFCB2CD28AAAE9600747CC1 /* RootFolderViewController.swift in Sources */,
+				7BFCB2CD28AAAE9600747CC1 /* MainFolderViewController.swift in Sources */,
 				7BFCB2D728AAB0F800747CC1 /* FoldersCollectionViewController.swift in Sources */,
 				7BFCB26528AAAB8D00747CC1 /* ViewController.swift in Sources */,
 				7BFCB2AD28AAAD3500747CC1 /* UserDefaultsService.swift in Sources */,
