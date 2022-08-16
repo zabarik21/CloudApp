@@ -104,12 +104,13 @@ extension MainFolderViewController {
   }
   
   func createFolder(foldername: String) {
-    guard !self.folderOpened else { return }
+    guard !self.folderOpened else {
+      return
+    }
     foldersCollectionViewController.output.send(.createFolder(foldername: foldername))
   }
   
   func tryAddFileFromFilesManager() {
-    guard !self.folderOpened else { return }
     let types = UTType.allUTITypes()
     let pickerViewController = UIDocumentPickerViewController(
       forOpeningContentTypes: types
@@ -120,7 +121,6 @@ extension MainFolderViewController {
   }
   
   func tryAddFileFromGallery() {
-    guard !self.folderOpened else { return }
     var config = PHPickerConfiguration(photoLibrary: .shared())
     config.selectionLimit = 1
     config.filter = .any(of: [.images, .videos])
@@ -135,8 +135,14 @@ extension MainFolderViewController: PHPickerViewControllerDelegate {
   
   func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
     picker.dismiss(animated: true)
-    for result in results {
-      filesCollectionViewController.output.send(.addFromGallery(result: result))
+    DispatchQueue.main.async { [weak self] in
+      for result in results {
+        if let topViewController = self?.navigationController?.topViewController as? FilesViewController {
+          topViewController.tryAddPhotoResult(result)
+        } else {
+          self?.filesCollectionViewController.output.send(.addFromGallery(result: result))
+        }
+      }
     }
   }
   
@@ -147,7 +153,13 @@ extension MainFolderViewController: UIDocumentPickerDelegate {
   func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
     guard let docUrl = urls.first else { return }
     guard docUrl.startAccessingSecurityScopedResource() else { return }
-    filesCollectionViewController.output.send(.addFromFiles(url: docUrl))
+    DispatchQueue.main.async { [weak self] in
+      if let topViewController = self?.navigationController?.topViewController as? FilesViewController {
+        topViewController.tryAddFile(docUrl)
+      } else {
+        self?.filesCollectionViewController.output.send(.addFromFiles(url: docUrl))
+      }
+    }
   }
 }
 // MARK: - Search bar delegate

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import RxSwift
+import PhotosUI
 
 
 
@@ -21,7 +22,7 @@ class FilesViewController: UIViewController {
   // UI properties
   private var searchBar: UISearchBar!
   private var filesLabel: UILabel!
-  private var filesCollectionController: FilesCollectionViewController!
+  var filesCollectionController: FilesCollectionViewController!
   private var layoutSlider: LayoutSwitcherView!
   // Datasource properties
   var foldername: String
@@ -46,24 +47,10 @@ class FilesViewController: UIViewController {
   }
   
   private func setupObserver() {
-    FolderFileActionView.eventRelay.subscribe(onNext: { [weak self] eventType in
-      switch eventType {
-      case .createFolder:
-        self?.tryAddFolder()
-      case .addFile:
-        self?.addFile()
-      case .addMedia:
-        self?.addMedia()
-      }
-    })
-      .disposed(by: bag)
-    
     layoutSlider.switchRelay.subscribe(onNext: { [weak self] type in
       self?.filesCollectionController.viewModel.output.send(.changeLayout(type: type))
     })
       .disposed(by: bag)
-    
-    
   }
   
   required init?(coder: NSCoder) {
@@ -73,19 +60,19 @@ class FilesViewController: UIViewController {
 // MARK: - MyView actions
 extension FilesViewController {
   
-  private func addFile() {
-    
-  }
-  
-  private func addMedia() {
-    
-  }
-  
-  private func tryAddFolder() {
+  func showCantCreateFolderAlert() {
     DispatchQueue.main.async {
       let alertController = AlertFactory.getErrorAlert(message: "Cant create folder inside a folder")
       self.present(alertController, animated: true)
     }
+  }
+  
+  func tryAddPhotoResult(_ result: PHPickerResult) {
+    filesCollectionController.output.send(.addFromGallery(result: result))
+  }
+  
+  func tryAddFile(_ url: URL) {
+    filesCollectionController.output.send(.addFromFiles(url: url))
   }
 }
 

@@ -93,12 +93,3 @@ class FoldersViewModel: ViewModel {
   }
   
 }
-
-extension FoldersViewModel: StorageServiceFoldersDelegate {
-  
-  func foldersRecieved(_ folders: [FolderCellViewModel]) {
-    self.folders = folders
-    output.send(.updateFoldersViewModels(viewModels: folders))
-  }
-  
-}

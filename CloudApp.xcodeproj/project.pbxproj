@@ -40,7 +40,6 @@
 		7BFCB29628AAAC2400747CC1 /* FileCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB29528AAAC2400747CC1 /* FileCellViewModel.swift */; };
 		7BFCB29A28AAAC4A00747CC1 /* LayoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB29928AAAC4A00747CC1 /* LayoutType.swift */; };
 		7BFCB29D28AAACB100747CC1 /* LayoutSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB29C28AAACB100747CC1 /* LayoutSwitcherView.swift */; };
-		7BFCB2AC28AAAD3500747CC1 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2A728AAAD3500747CC1 /* StorageService.swift */; };
 		7BFCB2AD28AAAD3500747CC1 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2A828AAAD3500747CC1 /* UserDefaultsService.swift */; };
 		7BFCB2AE28AAAD3500747CC1 /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2A928AAAD3500747CC1 /* AlertFactory.swift */; };
 		7BFCB2AF28AAAD3500747CC1 /* LayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2AB28AAAD3500747CC1 /* LayoutFactory.swift */; };
@@ -99,7 +98,6 @@
 		7BFCB29528AAAC2400747CC1 /* FileCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCellViewModel.swift; sourceTree = "<group>"; };
 		7BFCB29928AAAC4A00747CC1 /* LayoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutType.swift; sourceTree = "<group>"; };
 		7BFCB29C28AAACB100747CC1 /* LayoutSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSwitcherView.swift; sourceTree = "<group>"; };
-		7BFCB2A728AAAD3500747CC1 /* StorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		7BFCB2A828AAAD3500747CC1 /* UserDefaultsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		7BFCB2A928AAAD3500747CC1 /* AlertFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
 		7BFCB2AB28AAAD3500747CC1 /* LayoutFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutFactory.swift; sourceTree = "<group>"; };
@@ -318,7 +316,6 @@
 				7B920C2928AB834500ABFDA6 /* FirebaseStorageService.swift */,
 				7B920C2328AB7A1B00ABFDA6 /* AlertService.swift */,
 				7B920C2128AB782600ABFDA6 /* AuthenticationService.swift */,
-				7BFCB2A728AAAD3500747CC1 /* StorageService.swift */,
 				7BFCB2A828AAAD3500747CC1 /* UserDefaultsService.swift */,
 				7BFCB2A928AAAD3500747CC1 /* AlertFactory.swift */,
 				7BFCB2AB28AAAD3500747CC1 /* LayoutFactory.swift */,
@@ -544,7 +541,6 @@
 				7BFCB2C028AAADB000747CC1 /* FileColumnCell.swift in Sources */,
 				7BFCB2AE28AAAD3500747CC1 /* AlertFactory.swift in Sources */,
 				7B920C1E28AB75C700ABFDA6 /* String + NilOrEmpty.swift in Sources */,
-				7BFCB2AC28AAAD3500747CC1 /* StorageService.swift in Sources */,
 				7BFCB26328AAAB8D00747CC1 /* SceneDelegate.swift in Sources */,
 				7BFCB2C328AAADB000747CC1 /* FolderColumnCell.swift in Sources */,
 				7B920C3228AB83DB00ABFDA6 /* Folder.swift in Sources */,

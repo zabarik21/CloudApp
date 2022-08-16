@@ -183,11 +183,3 @@ class FilesListViewModel: ViewModel {
   
 }
 
-extension FilesListViewModel: StorageServiceFilesDelegate {
-  
-  func filesRecieved(_ files: [FileCellViewModel]) {
-    self.files = files
-    output.send(.updateFilesViewModels(viewModels: files))
-  }
-  
-}
