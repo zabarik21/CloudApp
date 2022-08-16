@@ -17,19 +17,19 @@ enum DataError: Error {
 
 extension DataError: LocalizedError {
   public var errorDescription: String? {
-          switch self {
-          case .nilData:
-            return NSLocalizedString("Data is empty", comment: "Data Errror")
-          case .fileDoesntExists:
-            return NSLocalizedString("File doesnt exists", comment: "Data Errror")
-          case .bigSize:
-            return NSLocalizedString("Maximal allowed size is 20 mb", comment: "Data Errror")
-          case .alreadyExists:
-            return NSLocalizedString("File already exists", comment: "Data Errror")
-          case .invalidDataURL:
-            return NSLocalizedString("Invalud URL", comment: "Data Errror")
-          }
-      }
+    switch self {
+    case .nilData:
+      return NSLocalizedString("Data is empty", comment: "Data Errror")
+    case .fileDoesntExists:
+      return NSLocalizedString("File doesnt exists", comment: "Data Errror")
+    case .bigSize:
+      return NSLocalizedString("Maximal allowed size is 20 mb", comment: "Data Errror")
+    case .alreadyExists:
+      return NSLocalizedString("File already exists", comment: "Data Errror")
+    case .invalidDataURL:
+      return NSLocalizedString("Invalud URL", comment: "Data Errror")
+    }
+  }
 }
 
 extension FileManagerService {
@@ -60,9 +60,9 @@ class FileManagerService {
     from url: URL,
     completion: @escaping (Result<Data, Error>) -> Void
   ) {
+    print(url.path)
     tasksQueue.async {
       var isDir: ObjCBool = false
-      print(url.path)
       // try removing that check and get file from not app directory
       if self.manager.fileExists(atPath: url.path, isDirectory: &isDir) {
         guard let data = self.manager.contents(atPath: url.path) else {
@@ -79,27 +79,41 @@ class FileManagerService {
       }
     }
   }
-    
+  
   func saveToFiles(
     data: Data,
     filename: String,
     foldername: String?,
     completion: @escaping (Result<Void, Error>) -> Void
   ) {
-    tasksQueue.async {
-      let fileDirectory = self.getDirectory(filename: filename, foldername: foldername)
-      guard !self.checkExisting(name: filename, saveDirectory: fileDirectory, isDirectory: false) else {
-        completion(.failure(DataError.alreadyExists))
-        return
-      }
-      do {
-        try data.write(to: fileDirectory, options: self.getWriteOptions())
-        completion(.success(()))
-      } catch(let error) {
-        completion(.failure(error))
-        print(error)
+    //    tasksQueue.async {
+    let fileDirectory = self.getDirectory(filename: filename, foldername: foldername)
+    let folderDirectory = self.getDirectory(filename: nil, foldername: foldername)
+    guard !self.checkExisting(saveDirectory: fileDirectory, isDirectory: false) else {
+      completion(.failure(DataError.alreadyExists))
+      return
+    }
+    
+    if foldername != nil {
+      if !checkExisting(saveDirectory: folderDirectory, isDirectory: true) {
+        do {
+          try manager.createDirectory(at: folderDirectory, withIntermediateDirectories: true)
+        } catch(let error) {
+          completion(.failure(error))
+        }
       }
     }
+    
+    
+    do {
+      try data.write(to: fileDirectory, options: self.getWriteOptions())
+      completion(.success(()))
+    } catch(let error) {
+      print("error from file manager")
+      completion(.failure(error))
+      print(error)
+    }
+    //    }
   }
   
 }
@@ -122,7 +136,7 @@ extension FileManagerService {
     }
   }
   
-  func checkExisting(name: String, saveDirectory: URL, isDirectory: Bool) -> Bool {
+  func checkExisting(saveDirectory: URL, isDirectory: Bool) -> Bool {
     var isDir: ObjCBool = ObjCBool(booleanLiteral: isDirectory)
     return manager.fileExists(atPath: saveDirectory.path, isDirectory: &isDir)
   }
@@ -131,11 +145,19 @@ extension FileManagerService {
     return NSData.WritingOptions.atomic
   }
   
-  private func getDirectory(filename: String, foldername: String?) -> URL {
+  private func getDirectory(filename: String?, foldername: String?) -> URL {
     if let folder = foldername {
-      return rootDirectory.appendingPathComponent(folder, isDirectory: true).appendingPathComponent(filename, isDirectory: false)
+      if let file = filename {
+        return rootDirectory.appendingPathComponent(folder, isDirectory: true).appendingPathComponent(file, isDirectory: false)
+      } else {
+        return rootDirectory.appendingPathComponent(folder, isDirectory: true)
+      }
     } else {
-      return rootDirectory.appendingPathComponent(filename, isDirectory: false)
+      if let name = filename {
+        return rootDirectory.appendingPathComponent(name, isDirectory: false)
+      } else {
+        return rootDirectory
+      }
     }
   }
   

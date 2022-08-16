@@ -26,7 +26,7 @@ class AuthenticationNavigationController: UINavigationController {
   }
   
   private func setupSwitchViewControllerObservable() {
-    UpdateRootVCService.shared.chagneViewControllerObservable
+    UpdateRootVCService.chagneViewControllerObservable
       .subscribe(onNext: { [weak self] _ in
         self?.switchToRootFolderViewController()
       })

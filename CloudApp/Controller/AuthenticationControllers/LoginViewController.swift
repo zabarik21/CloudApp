@@ -49,7 +49,7 @@ class LoginViewController: UIViewController {
       switch result {
       case .success(let user):
         UserDefaultsService.shared.saveUserId(user.uid)
-        UpdateRootVCService.shared.changeViewControllerPublisher.accept(())
+        UpdateRootVCService.changeViewControllerPublisher.onNext(())
       case .failure(let error):
         AlertService.shared.errorAlertPublisher.accept(error.localizedDescription)
       }
@@ -85,6 +85,7 @@ class LoginViewController: UIViewController {
 extension LoginViewController {
   
   private func setupUI() {
+    view.backgroundColor = .mainBg
     setupLabel()
     setupButton()
     setupTextField()

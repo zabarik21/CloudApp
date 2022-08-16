@@ -74,16 +74,7 @@ class FirebaseStorageService {
     }
   }
   
-  private init() {
-    //    fetchFilesFromRoot(completion: { result in
-    //      switch result {
-    //      case .success(let snapshot):
-    //        self.snapShot = snapshot
-    //      case .failure(let error):
-    //        print(error)
-    //      }
-    //    })
-  }
+  private init() {}
   
   private var currentUserID: String {
     return AuthenticationService.shared.getCurrentUserId() ?? "default"

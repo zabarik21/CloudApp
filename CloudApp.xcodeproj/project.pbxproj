@@ -23,7 +23,6 @@
 		7B920C2228AB782600ABFDA6 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C2128AB782600ABFDA6 /* AuthenticationService.swift */; };
 		7B920C2428AB7A1B00ABFDA6 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C2328AB7A1B00ABFDA6 /* AlertService.swift */; };
 		7B920C2628AB7F7100ABFDA6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B920C2528AB7F7100ABFDA6 /* GoogleService-Info.plist */; };
-		7B920C2828AB80EA00ABFDA6 /* UpdateRootVCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C2728AB80EA00ABFDA6 /* UpdateRootVCService.swift */; };
 		7B920C2A28AB834500ABFDA6 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C2928AB834500ABFDA6 /* FirebaseStorageService.swift */; };
 		7B920C2C28AB835200ABFDA6 /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C2B28AB835200ABFDA6 /* FileManagerService.swift */; };
 		7B920C2E28AB83B000ABFDA6 /* CloudItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C2D28AB83B000ABFDA6 /* CloudItem.swift */; };
@@ -31,6 +30,7 @@
 		7B920C3228AB83DB00ABFDA6 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C3128AB83DB00ABFDA6 /* Folder.swift */; };
 		7B920C3528ABB04F00ABFDA6 /* Data + Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C3428ABB04F00ABFDA6 /* Data + Default.swift */; };
 		7B920C3828ABB27400ABFDA6 /* UTType + AllTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C3728ABB27400ABFDA6 /* UTType + AllTypes.swift */; };
+		7BDBAD5B28AC13DE00708344 /* UpdateRootVCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDBAD5A28AC13DE00708344 /* UpdateRootVCService.swift */; };
 		7BFCB26128AAAB8D00747CC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB26028AAAB8D00747CC1 /* AppDelegate.swift */; };
 		7BFCB26328AAAB8D00747CC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB26228AAAB8D00747CC1 /* SceneDelegate.swift */; };
 		7BFCB26A28AAAB8E00747CC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BFCB26928AAAB8E00747CC1 /* Assets.xcassets */; };
@@ -79,7 +79,6 @@
 		7B920C2128AB782600ABFDA6 /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		7B920C2328AB7A1B00ABFDA6 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		7B920C2528AB7F7100ABFDA6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		7B920C2728AB80EA00ABFDA6 /* UpdateRootVCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRootVCService.swift; sourceTree = "<group>"; };
 		7B920C2928AB834500ABFDA6 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
 		7B920C2B28AB835200ABFDA6 /* FileManagerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
 		7B920C2D28AB83B000ABFDA6 /* CloudItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudItem.swift; sourceTree = "<group>"; };
@@ -87,6 +86,7 @@
 		7B920C3128AB83DB00ABFDA6 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		7B920C3428ABB04F00ABFDA6 /* Data + Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + Default.swift"; sourceTree = "<group>"; };
 		7B920C3728ABB27400ABFDA6 /* UTType + AllTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UTType + AllTypes.swift"; sourceTree = "<group>"; };
+		7BDBAD5A28AC13DE00708344 /* UpdateRootVCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRootVCService.swift; sourceTree = "<group>"; };
 		7BFCB25D28AAAB8D00747CC1 /* CloudApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BFCB26028AAAB8D00747CC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BFCB26228AAAB8D00747CC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -319,7 +319,7 @@
 				7BFCB2A828AAAD3500747CC1 /* UserDefaultsService.swift */,
 				7BFCB2A928AAAD3500747CC1 /* AlertFactory.swift */,
 				7BFCB2AB28AAAD3500747CC1 /* LayoutFactory.swift */,
-				7B920C2728AB80EA00ABFDA6 /* UpdateRootVCService.swift */,
+				7BDBAD5A28AC13DE00708344 /* UpdateRootVCService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -508,6 +508,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BDBAD5B28AC13DE00708344 /* UpdateRootVCService.swift in Sources */,
 				7B920C3828ABB27400ABFDA6 /* UTType + AllTypes.swift in Sources */,
 				7BFCB2CF28AAAED000747CC1 /* FoldersViewModel.swift in Sources */,
 				7B920C0B28AB6FBC00ABFDA6 /* PaddingTextField.swift in Sources */,
@@ -553,7 +554,6 @@
 				7B920C1628AB73C400ABFDA6 /* UIView + twitch.swift in Sources */,
 				7B920C2028AB768E00ABFDA6 /* SignUpController.swift in Sources */,
 				7B920C0728AB659A00ABFDA6 /* AuthenticationNavigationController.swift in Sources */,
-				7B920C2828AB80EA00ABFDA6 /* UpdateRootVCService.swift in Sources */,
 				7BFCB2C728AAADF900747CC1 /* FoldersCollectionView.swift in Sources */,
 				7B920C0528AB657800ABFDA6 /* StartScreenController.swift in Sources */,
 				7BFCB2B128AAAD4C00747CC1 /* FolderCellViewModel.swift in Sources */,

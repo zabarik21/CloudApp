@@ -110,12 +110,20 @@ class FilesListViewModel: ViewModel {
       }
   }
   
+  // Проблемы
+  // 1 не добавляет из галереи почему то
+  // 2 создает папку под название новая папка а не название приложения
+  // не сохраняет сетку при выходе из files controller
+  // добавить индикацию загрузки активити индикатором
+  // добавить лого
+  // убрать портретную ориентацию
+  
   private func downloadFile(_ filename: String) {
     storageService.loadDataFromStorage(filename: filename, folderName: foldername) { result in
       switch result {
       case .success:
         let folderString = self.foldername == nil ? "" : "/\(self.foldername!)"
-        let savedToString = "File \(filename) saved to \(folderString) folder in your phone"
+        let savedToString = "File \(filename) saved to CloudApp\(folderString) folder in your phone"
         self.output.send(.showDefaultAlert(title: "Success", message: savedToString))
       case .failure(let error):
         self.output.send(.showErrorAlert(message: error.localizedDescription))
