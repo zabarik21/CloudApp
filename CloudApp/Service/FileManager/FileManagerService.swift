@@ -6,13 +6,10 @@
 //
 
 import Foundation
+import FileProvider
 
 
 class FileManagerService {
-  
-  private enum Constants {
-    static let rootDirTitle = "CloudApp"
-  }
 
   static let shared = FileManagerService()
   
@@ -24,11 +21,9 @@ class FileManagerService {
     attributes: .concurrent
   )
   
-  private var rootDirectory: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(Constants.rootDirTitle, isDirectory: true)
+  private var rootDirectory: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
   
-  private init() {
-    tryCreateRootFolder()
-  }
+  private init() {}
   
   func getData(
     from url: URL,
