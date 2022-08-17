@@ -22,6 +22,7 @@ class FoldersCollectionViewController: UIViewController, ViewModelContainer {
   typealias ViewEvent = FoldersViewEvent
   // UI
   private var foldersCollecetion: FoldersCollectionView!
+  private var activityIndicator: UIActivityIndicatorView!
   private var layoutType: LayoutType
   
   override func viewWillAppear(_ animated: Bool) {
@@ -57,12 +58,35 @@ class FoldersCollectionViewController: UIViewController, ViewModelContainer {
 }
 // MARK: - Setup UI
 extension FoldersCollectionViewController {
+  
+  
   private func setupUI() {
-    foldersCollecetion = FoldersCollectionView(layout: layoutType)
+    setupActivityIndicator()
+    setupFolders()
+    setupConstraints()
+  }
+  
+  private func setupConstraints() {
+    
     view.addSubview(foldersCollecetion)
     foldersCollecetion.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
+    
+    view.addSubview(activityIndicator)
+    activityIndicator.snp.makeConstraints { make in
+      make.centerY.centerX.equalToSuperview()
+    }
+  }
+  
+  private func setupFolders() {
+    foldersCollecetion = FoldersCollectionView(layout: layoutType)
+  }
+  
+  private func setupActivityIndicator() {
+    activityIndicator = UIActivityIndicatorView(style: .medium)
+    activityIndicator.color = .white
+    activityIndicator.hidesWhenStopped = true
   }
 }
 // MARK: - Handle ViewModel events
@@ -81,6 +105,26 @@ extension FoldersCollectionViewController {
       self.openFolderRelay.accept(foldername)
     case .showAlert(title: let title, message: let message):
       self.showAlert(title, message)
+    case .startActivityIndicator:
+      self.turnActivityIndicator(on: true)
+    case .stopActivityIndicator:
+      self.turnActivityIndicator(on: false)
+    case .scrollToFolder(foldername: let foldername):
+      self.scrollToFolder(foldername)
+    }
+  }
+  
+  func scrollToFolder(_ foldername: String) {
+    foldersCollecetion.scrollToFolder(foldername: foldername)
+  }
+  
+  func turnActivityIndicator(on: Bool) {
+    DispatchQueue.main.async {
+      if on {
+        self.activityIndicator.startAnimating()
+      } else {
+        self.activityIndicator.stopAnimating()
+      }
     }
   }
   

@@ -137,7 +137,6 @@ class FirebaseStorageService {
             folders.append(Folder(name: pref.name, items: itemsDict))
           case .failure(let error):
             completion(.failure(error))
-            print(error)
           }
         }
       }

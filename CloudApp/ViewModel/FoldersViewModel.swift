@@ -12,6 +12,9 @@ enum FoldersViewModelEvent {
   case updateFoldersViewModels(viewModels: [FolderCellViewModel])
   case openFolder(foldername: String)
   case showAlert(title: String, message: String)
+  case startActivityIndicator
+  case scrollToFolder(foldername: String)
+  case stopActivityIndicator
 }
 
 enum FoldersViewEvent {
@@ -36,14 +39,16 @@ class FoldersViewModel: ViewModel {
   init() {}
   
   func fetchFolders() {
+    output.send(.startActivityIndicator)
     storageService.fetchFolders { result in
       switch result {
       case .success(let folders):
         self.folders = folders
         self.output.send(.updateFoldersViewModels(viewModels: folders))
       case .failure(let error):
-        print(error)
+        self.output.send(.showAlert(title: "Error", message: error.localizedDescription))
       }
+      self.output.send(.stopActivityIndicator)
     }
   }
   
@@ -66,14 +71,21 @@ class FoldersViewModel: ViewModel {
   }
   
   func createFolder(with foldername: String) {
+    guard !folders.contains(where: { $0.name == foldername }) else {
+      output.send(.showAlert(title: "Error", message: "Folder already exists"))
+      return
+    }
+    output.send(.startActivityIndicator)
     storageService.createFolder(foldername: foldername) { result in
       switch result {
       case .success:
         self.folders.append(FolderCellViewModel(name: foldername, objectsCount: 1))
         self.output.send(.updateFoldersViewModels(viewModels: self.folders))
+        self.output.send(.scrollToFolder(foldername: foldername))
       case .failure(let error):
         self.output.send(.showAlert(title: "Cant create folder", message: error.localizedDescription))
       }
+      self.output.send(.stopActivityIndicator)
     }
   }
   

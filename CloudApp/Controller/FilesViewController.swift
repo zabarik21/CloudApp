@@ -34,6 +34,15 @@ class FilesViewController: UIViewController {
     }
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    let newLayout = UserDefaultsService.shared.getLayoutType()
+    if layoutType != newLayout {
+      layoutType = newLayout
+      filesCollectionController.changeLayout(to: layoutType)
+    }
+  }
+  
   init(foldername: String, layoutType type: LayoutType) {
     self.foldername = foldername
     self.layoutType = type

@@ -56,6 +56,7 @@ class FilesListViewModel: ViewModel {
   }
   
   func fetchFiles() {
+    output.send(.startActivityIndicator)
     storageService.fetchFilesFrom(
       foldername: foldername) { result in
         switch result {
@@ -66,8 +67,9 @@ class FilesListViewModel: ViewModel {
           self.files = viewModels
           self.output.send(.updateFilesViewModels(viewModels: viewModels))
         case .failure(let error):
-          print(error)
+          self.output.send(.showErrorAlert(message: error.localizedDescription))
         }
+        self.output.send(.stopActivityIndicator)
       }
   }
   
@@ -180,7 +182,6 @@ class FilesListViewModel: ViewModel {
     storageService.uploadMediaToStorage(result: results, foldername: self.foldername) { result in
       switch result {
       case .success(let filename):
-        print("Success from \(#function)")
         guard !self.files.contains(where: { $0.filename == filename }) else {
           self.output.send(.showErrorAlert(message: "File already exists"))
           return

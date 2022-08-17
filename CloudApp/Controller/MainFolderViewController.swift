@@ -57,7 +57,7 @@ class MainFolderViewController: UIViewController {
     })
       .disposed(by: bag)
     layoutSwitchView.switchRelay.subscribe(onNext: { [weak self] type in
-      self?.changeLayout(to: type)
+      self?.layoutType = type
     })
       .disposed(by: bag)
   }
@@ -102,7 +102,6 @@ extension MainFolderViewController {
     DispatchQueue.main.async {
       let alertController = AlertFactory.getCreateFolderAlert(createAction: { folderName in
         self.createFolder(foldername: folderName)
-        print("create folder with name \(folderName)")
       })
       self.present(alertController, animated: true)
     }

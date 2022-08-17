@@ -60,7 +60,6 @@ class FileManagerService {
     from url: URL,
     completion: @escaping (Result<Data, Error>) -> Void
   ) {
-    print(url.path)
     tasksQueue.sync {
       var isDir: ObjCBool = false
       // try removing that check and get file from not app directory
@@ -88,10 +87,6 @@ class FileManagerService {
   ) {
     tasksQueue.sync {
       let fileDirectory = self.getDirectory(filename: filename, foldername: foldername)
-      for _ in 0...3 { print() }
-      print(rootDirectory.path)
-      print(fileDirectory.path)
-      for _ in 0...3 { print() }
       let folderDirectory = self.getDirectory(filename: nil, foldername: foldername)
       guard !self.checkExisting(saveDirectory: fileDirectory, isDirectory: false) else {
         completion(.failure(DataError.alreadyExists))
@@ -113,9 +108,7 @@ class FileManagerService {
         try data.write(to: fileDirectory, options: self.getWriteOptions())
         completion(.success(()))
       } catch(let error) {
-        print("error from file manager")
         completion(.failure(error))
-        print(error)
       }
     }
   }

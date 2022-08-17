@@ -48,6 +48,20 @@ class FoldersCollectionView: UICollectionView {
     }
   }
   
+  func scrollToFolder(foldername: String) {
+    DispatchQueue.main.async {
+      var itemIndex: IndexPath!
+      DispatchQueue.global(qos: .userInitiated).sync {
+        if let index = self.viewModels.firstIndex(where: { $0.name == foldername }) {
+          itemIndex = IndexPath(item: index, section: 0)
+        } else {
+          return
+        }
+      }
+      self.scrollToItem(at: itemIndex, at: .left, animated: true)
+    }
+  }
+  
   func applySnapshot() {
     DispatchQueue.main.async {
       var snapshot = Snapshot()
