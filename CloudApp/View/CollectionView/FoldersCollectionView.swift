@@ -106,7 +106,9 @@ extension FoldersCollectionView {
     alwaysBounceVertical = false
     register(FolderListCell.self, forCellWithReuseIdentifier: FolderListCell.reuseId)
     register(FolderColumnCell.self, forCellWithReuseIdentifier: FolderColumnCell.reuseId)
-    collectionViewLayout.invalidateLayout()
+    DispatchQueue.main.async {
+      self.collectionViewLayout.invalidateLayout()
+    }
   }
   
   private func createLayout() -> UICollectionViewLayout {

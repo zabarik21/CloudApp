@@ -13,16 +13,8 @@ extension UTType {
   
   static func allUTITypes() -> [UTType] {
     let types : [UTType] =
-    [.item,
-     .content,
-     .compositeContent,
-     .diskImage,
+    [
      .data,
-     .directory,
-     .resolvable,
-     .symbolicLink,
-     .executable,
-     .mountPoint,
      .aliasFile,
      .urlBookmarkData,
      .url,
@@ -31,8 +23,6 @@ extension UTType {
      .html,
      .xml,
      .yaml,
-     .sourceCode,
-     .assemblyLanguageSource,
      .cSource,
      .objectiveCSource,
      .swiftSource,
@@ -71,15 +61,8 @@ extension UTType {
      .rawImage,
      .svg,
      .heif,
-     .heic,
-     .webP,
-     .threeDContent,
-     .usd,
-     .usdz,
-     .realityFile,
-     .sceneKitScene,
-     .arReferenceObject,
-     .audiovisualContent]
+     .heic
+    ]
     
     let types_2: [UTType] =
     [.movie,

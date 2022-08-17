@@ -436,6 +436,7 @@ class FirebaseStorageService {
   
   func uploadMediaToStorage(
     result: PHPickerResult,
+    foldername: String?,
     completion: @escaping (Result<String, Error>) -> Void
   ) {
     var mediaName = ""
@@ -454,7 +455,7 @@ class FirebaseStorageService {
           mediaName = url.lastPathComponent
           _ = self.uploadDataToStorage(
             url,
-            folderName: nil
+            folderName: foldername
           ) { result in
             switch result {
             case .success:
@@ -469,24 +470,25 @@ class FirebaseStorageService {
         }
       group.wait()
       if added {
-        completion(.success(mediaName))
         return
       }
       result.itemProvider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { url, error in
         if let error = error {
+          completion(.failure(error))
           print(error)
         }
         guard let url = url else { return }
         mediaName = url.lastPathComponent
         _ = self.uploadDataToStorage(
           url,
-          folderName: nil
+          folderName: foldername
         ) { result in
           switch result {
           case .success:
             print("Success load for \(mediaName)")
             completion(.success(mediaName))
           case .failure(let error):
+            completion(.failure(error))
             print(error)
             return
           }

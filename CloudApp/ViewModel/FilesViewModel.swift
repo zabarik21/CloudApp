@@ -10,6 +10,8 @@ import PhotosUI
 
 enum FilesViewModelEvent {
   case updateFilesViewModels(viewModels: [FileCellViewModel])
+  case startActivityIndicator
+  case stopActivityIndicator
   case changeLayout(type: LayoutType)
   case showFileOptionsAlert(filename: String)
   case showRenameFileAlert(filename: String)
@@ -21,6 +23,7 @@ enum FilesViewModelEvent {
 enum FilesViewEvent {
   case reloadFiles
   case viewLoaded
+  case createFolderTouched
   case addFromGallery(result: PHPickerResult)
   case addFromFiles(url: URL)
   case fileTouched(filename: String)
@@ -83,7 +86,7 @@ class FilesListViewModel: ViewModel {
     case .renameFileTouched(filename: let filename):
       output.send(.showRenameFileAlert(filename: filename))
     case .deleteFileTouched(filename: let filename):
-      self.deleteFile(filename)
+      deleteFile(filename)
     case .showRenameFileAlert(filename: let filename):
       output.send(.showRenameFileAlert(filename: filename))
     case .renameFileApproved(oldFilename: let oldFilename, newFilename: let newFilename):
@@ -92,10 +95,13 @@ class FilesListViewModel: ViewModel {
       self.addFromGallery(result)
     case .addFromFiles(url: let url):
       addFromFiles(fileUrl: url)
+    case .createFolderTouched:
+      output.send(.showErrorAlert(message: "Cant create folder inside a folder"))
     }
   }
   
   private func deleteFile(_ filename: String) {
+    output.send(.startActivityIndicator)
     storageService.deleteFile(
       filename: filename,
       foldername: self.foldername) { result in
@@ -107,18 +113,18 @@ class FilesListViewModel: ViewModel {
         case .failure(let error):
           self.output.send(.showErrorAlert(message: error.localizedDescription))
         }
+        self.output.send(.stopActivityIndicator)
       }
   }
   
   // Проблемы
   // 1 не добавляет из галереи почему то
   // 2 создает папку под название новая папка а не название приложения
-  // не сохраняет сетку при выходе из files controller
-  // добавить индикацию загрузки активити индикатором
-  // добавить лого
-  // убрать портретную ориентацию
+  // 3 не сохраняет сетку при выходе из files controller и обратно тоже
+  // 4 добавить индикацию загрузки активити индикатором
   
   private func downloadFile(_ filename: String) {
+    output.send(.startActivityIndicator)
     storageService.loadDataFromStorage(filename: filename, folderName: foldername) { result in
       switch result {
       case .success:
@@ -128,6 +134,7 @@ class FilesListViewModel: ViewModel {
       case .failure(let error):
         self.output.send(.showErrorAlert(message: error.localizedDescription))
       }
+      self.output.send(.stopActivityIndicator)
     }
   }
   
@@ -136,6 +143,7 @@ class FilesListViewModel: ViewModel {
       output.send(.showErrorAlert(message: "File named \(new) doesnt exist"))
       return
     }
+    output.send(.startActivityIndicator)
     storageService.renameFile(new, oldFilename: old, foldername: foldername) { result in
       switch result {
       case .success:
@@ -145,10 +153,12 @@ class FilesListViewModel: ViewModel {
       case .failure(let error):
         self.output.send(.showErrorAlert(message: error.localizedDescription))
       }
+      self.output.send(.stopActivityIndicator)
     }
   }
   
   private func addFromFiles(fileUrl: URL) {
+    output.send(.startActivityIndicator)
     storageService.uploadDataToStorage(fileUrl, folderName: self.foldername) { result in
       switch result {
       case .success(let filename):
@@ -161,13 +171,16 @@ class FilesListViewModel: ViewModel {
       case .failure(let error):
         self.output.send(.showErrorAlert(message: error.localizedDescription))
       }
+      self.output.send(.stopActivityIndicator)
     }
   }
   
   private func addFromGallery(_ results: PHPickerResult) {
-    storageService.uploadMediaToStorage(result: results) { result in
+    output.send(.startActivityIndicator)
+    storageService.uploadMediaToStorage(result: results, foldername: self.foldername) { result in
       switch result {
       case .success(let filename):
+        print("Success from \(#function)")
         guard !self.files.contains(where: { $0.filename == filename }) else {
           self.output.send(.showErrorAlert(message: "File already exists"))
           return
@@ -177,6 +190,7 @@ class FilesListViewModel: ViewModel {
       case .failure(let error):
         self.output.send(.showErrorAlert(message: error.localizedDescription))
       }
+      self.output.send(.stopActivityIndicator)
     }
   }
   

@@ -18,15 +18,16 @@ class FilesCollectionViewController: UIViewController, ViewModelContainer {
   typealias ViewEvent = FilesViewEvent
   var output: Output<FilesViewEvent> = Output()
   public var viewModel: FilesListViewModel
-  
+  // UI
   private var filesCollection: FilesCollectionView!
+  private var layoutType: LayoutType
+  private var activityIndicator: UIActivityIndicatorView!
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     layoutType =  UserDefaultsService.shared.getLayoutType()
   }
   
-  private var layoutType: LayoutType
   
   init(viewModel: FilesListViewModel, layoutType type: LayoutType) {
     self.viewModel = viewModel
@@ -56,11 +57,31 @@ class FilesCollectionViewController: UIViewController, ViewModelContainer {
 }
 // MARK: - Setup UI
 extension FilesCollectionViewController {
+  
   private func setupUI() {
+    setupActivityIndicator()
     filesCollection = FilesCollectionView(layout: layoutType)
+    setupConstraints()
+  }
+  
+  private func setupActivityIndicator() {
+    activityIndicator = UIActivityIndicatorView(style: .large)
+    activityIndicator.hidesWhenStopped = true
+    activityIndicator.color = .white
+  }
+  
+  private func setupConstraints() {
     view.addSubview(filesCollection)
+    
     filesCollection.snp.makeConstraints { make in
       make.edges.equalToSuperview()
+    }
+    
+    view.addSubview(activityIndicator)
+    
+    activityIndicator.snp.makeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.centerY.equalToSuperview()
     }
   }
 }
@@ -89,6 +110,20 @@ extension FilesCollectionViewController {
       self.showErrorAlert(message)
     case .showDefaultAlert(title: let title, message: let message):
       self.showDefaultAlert(title, message)
+    case .startActivityIndicator:
+      self.turnActivityIndicator(on: true)
+    case .stopActivityIndicator:
+      self.turnActivityIndicator(on: false)
+    }
+  }
+  
+  func turnActivityIndicator(on: Bool) {
+    DispatchQueue.main.async {
+      if on {
+        self.activityIndicator.startAnimating()
+      } else {
+        self.activityIndicator.stopAnimating()
+      }
     }
   }
   

@@ -60,11 +60,8 @@ class FilesViewController: UIViewController {
 // MARK: - MyView actions
 extension FilesViewController {
   
-  func showCantCreateFolderAlert() {
-    DispatchQueue.main.async {
-      let alertController = AlertFactory.getErrorAlert(message: "Cant create folder inside a folder")
-      self.present(alertController, animated: true)
-    }
+  func tryCreateFolder() {
+    filesCollectionController.output.send(.createFolderTouched)
   }
   
   func tryAddPhotoResult(_ result: PHPickerResult) {

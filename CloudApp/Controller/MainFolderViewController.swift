@@ -93,7 +93,12 @@ class MainFolderViewController: UIViewController {
 extension MainFolderViewController {
   
   func tryCreateFolder() {
-    guard !self.folderOpened else { return }
+    guard !self.folderOpened else {
+      if let filesViewController = self.navigationController?.topViewController as? FilesViewController {
+        filesViewController.tryCreateFolder()
+      }
+      return
+    }
     DispatchQueue.main.async {
       let alertController = AlertFactory.getCreateFolderAlert(createAction: { folderName in
         self.createFolder(foldername: folderName)

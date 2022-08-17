@@ -34,7 +34,7 @@ extension DataError: LocalizedError {
 
 extension FileManagerService {
   private enum Constants {
-    static let rootDirTitle = "Root Directory"
+    static let rootDirTitle = "CloudApp"
   }
 }
 
@@ -61,7 +61,7 @@ class FileManagerService {
     completion: @escaping (Result<Data, Error>) -> Void
   ) {
     print(url.path)
-    tasksQueue.async {
+    tasksQueue.sync {
       var isDir: ObjCBool = false
       // try removing that check and get file from not app directory
       if self.manager.fileExists(atPath: url.path, isDirectory: &isDir) {
@@ -86,34 +86,38 @@ class FileManagerService {
     foldername: String?,
     completion: @escaping (Result<Void, Error>) -> Void
   ) {
-    //    tasksQueue.async {
-    let fileDirectory = self.getDirectory(filename: filename, foldername: foldername)
-    let folderDirectory = self.getDirectory(filename: nil, foldername: foldername)
-    guard !self.checkExisting(saveDirectory: fileDirectory, isDirectory: false) else {
-      completion(.failure(DataError.alreadyExists))
-      return
-    }
-    
-    if foldername != nil {
-      if !checkExisting(saveDirectory: folderDirectory, isDirectory: true) {
-        do {
-          try manager.createDirectory(at: folderDirectory, withIntermediateDirectories: true)
-        } catch(let error) {
-          completion(.failure(error))
+    tasksQueue.sync {
+      let fileDirectory = self.getDirectory(filename: filename, foldername: foldername)
+      for _ in 0...3 { print() }
+      print(rootDirectory.path)
+      print(fileDirectory.path)
+      for _ in 0...3 { print() }
+      let folderDirectory = self.getDirectory(filename: nil, foldername: foldername)
+      guard !self.checkExisting(saveDirectory: fileDirectory, isDirectory: false) else {
+        completion(.failure(DataError.alreadyExists))
+        return
+      }
+      
+      if foldername != nil {
+        if !checkExisting(saveDirectory: folderDirectory, isDirectory: true) {
+          do {
+            try manager.createDirectory(at: folderDirectory, withIntermediateDirectories: true)
+          } catch(let error) {
+            completion(.failure(error))
+          }
         }
       }
+      
+      
+      do {
+        try data.write(to: fileDirectory, options: self.getWriteOptions())
+        completion(.success(()))
+      } catch(let error) {
+        print("error from file manager")
+        completion(.failure(error))
+        print(error)
+      }
     }
-    
-    
-    do {
-      try data.write(to: fileDirectory, options: self.getWriteOptions())
-      completion(.success(()))
-    } catch(let error) {
-      print("error from file manager")
-      completion(.failure(error))
-      print(error)
-    }
-    //    }
   }
   
 }
@@ -148,13 +152,17 @@ extension FileManagerService {
   private func getDirectory(filename: String?, foldername: String?) -> URL {
     if let folder = foldername {
       if let file = filename {
-        return rootDirectory.appendingPathComponent(folder, isDirectory: true).appendingPathComponent(file, isDirectory: false)
+        return rootDirectory
+          .appendingPathComponent(folder, isDirectory: true)
+          .appendingPathComponent(file, isDirectory: false)
       } else {
-        return rootDirectory.appendingPathComponent(folder, isDirectory: true)
+        return rootDirectory
+          .appendingPathComponent(folder, isDirectory: true)
       }
     } else {
       if let name = filename {
-        return rootDirectory.appendingPathComponent(name, isDirectory: false)
+        return rootDirectory
+          .appendingPathComponent(name, isDirectory: false)
       } else {
         return rootDirectory
       }
