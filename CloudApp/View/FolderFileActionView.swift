@@ -111,6 +111,7 @@ extension FolderFileActionView {
       self.self.hideButtons()
     }
   }
+  
 }
 
 // MARK: - Button Targets
@@ -140,6 +141,7 @@ extension FolderFileActionView {
       hideView()
     }
   }
+  
 }
 
 // MARK: - Setup UI
@@ -324,6 +326,7 @@ extension FolderFileActionView {
       cornerRadius: btnBounds.height / 2)
       .cgPath
   }
+  
 }
 
 // MARK: - Hit behavior

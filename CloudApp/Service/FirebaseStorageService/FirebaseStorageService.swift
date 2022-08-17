@@ -10,35 +10,6 @@ import FirebaseStorage
 import PhotosUI
 import RxSwift
 
-
-enum SnapshotAction {
-  case added
-  case removed
-  case modified(name: String)
-}
-
-enum FirebaseStorageError: Error {
-  case alreadyExists
-  case nilData
-  case stringEncoding
-  case nonEnoughRights
-}
-
-extension FirebaseStorageError: LocalizedError {
-  public var errorDescription: String? {
-    switch self {
-    case .alreadyExists:
-      return NSLocalizedString("File already exists", comment: "Firebase error")
-    case .nilData:
-      return NSLocalizedString("Data for that path is empty", comment: "Firebase error")
-    case .stringEncoding:
-      return NSLocalizedString("Cant decode filename", comment: "Firebase error")
-    case .nonEnoughRights:
-      return NSLocalizedString("Not enuogh rights to load this file", comment: "Firebase error")
-    }
-  }
-}
-
 class FirebaseStorageService {
   
   private enum Constants {
@@ -532,8 +503,10 @@ extension FirebaseStorageService {
         .child(fileName)
     }
   }
-  
-  
-  
 }
 
+enum SnapshotAction {
+  case added
+  case removed
+  case modified(name: String)
+}

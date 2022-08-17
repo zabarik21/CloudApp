@@ -115,6 +115,10 @@ extension SignUpTextField {
     
     textField.layer.cornerRadius = 10
     textField.backgroundColor = .white
+    
+    if type == .confirmPassword || type == .password {
+      textField.isSecureTextEntry = true
+    }
   }
   
   private func setupLabel() {

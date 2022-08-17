@@ -20,6 +20,7 @@ class LoginViewController: UIViewController {
   
   private let bag = DisposeBag()
   
+  private var activityIndicator = UIActivityIndicatorView(style: .large)
   private var welcomeLabel: UILabel!
   private var loginButton: StartScreenButton!
   private var loginTextField: SignUpTextField!
@@ -42,6 +43,7 @@ class LoginViewController: UIViewController {
   }
   
   private func loginUser(_ login: String, _ password: String) {
+    activityIndicator.startAnimating()
     AuthenticationService.shared.loginUser(
       email: login,
       password: password)
@@ -53,6 +55,7 @@ class LoginViewController: UIViewController {
       case .failure(let error):
         AlertService.shared.errorAlertPublisher.accept(error.localizedDescription)
       }
+      self.activityIndicator.stopAnimating()
     }
   }
   
@@ -156,6 +159,12 @@ extension LoginViewController {
       make.bottom
         .equalToSuperview()
         .offset(-50)
+    }
+    
+    view.addSubview(activityIndicator)
+    
+    activityIndicator.snp.makeConstraints { make in
+      make.centerX.centerY.equalToSuperview()
     }
   }
   

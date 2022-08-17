@@ -7,39 +7,13 @@
 
 import Foundation
 
-enum DataError: Error {
-  case nilData
-  case fileDoesntExists
-  case bigSize
-  case alreadyExists
-  case invalidDataURL
-}
-
-extension DataError: LocalizedError {
-  public var errorDescription: String? {
-    switch self {
-    case .nilData:
-      return NSLocalizedString("Data is empty", comment: "Data Errror")
-    case .fileDoesntExists:
-      return NSLocalizedString("File doesnt exists", comment: "Data Errror")
-    case .bigSize:
-      return NSLocalizedString("Maximal allowed size is 20 mb", comment: "Data Errror")
-    case .alreadyExists:
-      return NSLocalizedString("File already exists", comment: "Data Errror")
-    case .invalidDataURL:
-      return NSLocalizedString("Invalud URL", comment: "Data Errror")
-    }
-  }
-}
-
-extension FileManagerService {
-  private enum Constants {
-    static let rootDirTitle = "CloudApp"
-  }
-}
 
 class FileManagerService {
   
+  private enum Constants {
+    static let rootDirTitle = "CloudApp"
+  }
+
   static let shared = FileManagerService()
   
   private let manager = FileManager.default
@@ -62,7 +36,6 @@ class FileManagerService {
   ) {
     tasksQueue.sync {
       var isDir: ObjCBool = false
-      // try removing that check and get file from not app directory
       if self.manager.fileExists(atPath: url.path, isDirectory: &isDir) {
         guard let data = self.manager.contents(atPath: url.path) else {
           completion(.failure(DataError.nilData))
@@ -102,7 +75,6 @@ class FileManagerService {
           }
         }
       }
-      
       
       do {
         try data.write(to: fileDirectory, options: self.getWriteOptions())

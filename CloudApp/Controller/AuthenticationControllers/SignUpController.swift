@@ -10,6 +10,7 @@ import Foundation
 
 import RxCocoa
 import RxSwift
+import UIKit
 
 class SignUpController: UIViewController {
   
@@ -23,6 +24,7 @@ class SignUpController: UIViewController {
   private let bag = DisposeBag()
   private var changeRootViewControllerPublisher = PublishSubject<Void>()
   
+  private var activityIndicator = UIActivityIndicatorView(style: .large)
   private var singUpLabel: UILabel!
   private var signupButton: StartScreenButton!
   private var loginTextField: SignUpTextField!
@@ -46,12 +48,7 @@ class SignUpController: UIViewController {
   }
   
   private func signupUser(_ login: String, _ password: String) {
-    AlertService.shared.alertPublisher.accept(
-      (
-        title: "Wait",
-        message: "You will be registered in a second"
-      )
-    )
+    activityIndicator.startAnimating()
     DispatchQueue.global(qos: .userInteractive).async {
       AuthenticationService.shared.registerUser(
         email: login,
@@ -65,6 +62,7 @@ class SignUpController: UIViewController {
               error.localizedDescription
             )
           }
+          self.activityIndicator.stopAnimating()
         }
     }
   }
@@ -174,6 +172,12 @@ extension SignUpController {
       make.bottom
         .equalToSuperview()
         .offset(-50)
+    }
+    
+    view.addSubview(activityIndicator)
+    
+    activityIndicator.snp.makeConstraints { make in
+      make.centerY.centerX.equalToSuperview()
     }
   }
   

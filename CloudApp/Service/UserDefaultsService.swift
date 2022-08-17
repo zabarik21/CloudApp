@@ -42,4 +42,5 @@ class UserDefaultsService {
   func getUserId() -> String? {
     return st.string(forKey: Constants.idKey)
   }
+  
 }

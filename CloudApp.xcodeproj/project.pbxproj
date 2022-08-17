@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		47E618E7ABD9DB76F0D6F363 /* Pods_CloudApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BFC86CD79AF4C8977EE1C5A /* Pods_CloudApp.framework */; };
+		7B5EE49628AD29A900D50A4E /* FirebaseStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5EE49528AD29A900D50A4E /* FirebaseStorageError.swift */; };
+		7B5EE49828AD2A0100D50A4E /* FileManagerServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5EE49728AD2A0100D50A4E /* FileManagerServiceError.swift */; };
 		7B87928328ACD43C00E83D77 /* FileCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B87928228ACD43C00E83D77 /* FileCellProtocol.swift */; };
 		7B920C0228AB649B00ABFDA6 /* StartScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C0128AB649B00ABFDA6 /* StartScreenButton.swift */; };
 		7B920C0528AB657800ABFDA6 /* StartScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C0428AB657800ABFDA6 /* StartScreenController.swift */; };
@@ -65,6 +67,8 @@
 
 /* Begin PBXFileReference section */
 		5BFC86CD79AF4C8977EE1C5A /* Pods_CloudApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B5EE49528AD29A900D50A4E /* FirebaseStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirebaseStorageError.swift; path = CloudApp/View/Cells/FirebaseStorageError.swift; sourceTree = SOURCE_ROOT; };
+		7B5EE49728AD2A0100D50A4E /* FileManagerServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerServiceError.swift; sourceTree = "<group>"; };
 		7B87928228ACD43C00E83D77 /* FileCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCellProtocol.swift; sourceTree = "<group>"; };
 		7B920C0128AB649B00ABFDA6 /* StartScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenButton.swift; sourceTree = "<group>"; };
 		7B920C0428AB657800ABFDA6 /* StartScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenController.swift; sourceTree = "<group>"; };
@@ -151,6 +155,24 @@
 				7BFCB2D628AAB0F800747CC1 /* FoldersCollectionViewController.swift */,
 			);
 			path = CollectionControllers;
+			sourceTree = "<group>";
+		};
+		7B5EE49428AD299800D50A4E /* FirebaseStorageService */ = {
+			isa = PBXGroup;
+			children = (
+				7B920C2928AB834500ABFDA6 /* FirebaseStorageService.swift */,
+				7B5EE49528AD29A900D50A4E /* FirebaseStorageError.swift */,
+			);
+			path = FirebaseStorageService;
+			sourceTree = "<group>";
+		};
+		7B5EE49928AD2A0600D50A4E /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				7B920C2B28AB835200ABFDA6 /* FileManagerService.swift */,
+				7B5EE49728AD2A0100D50A4E /* FileManagerServiceError.swift */,
+			);
+			path = FileManager;
 			sourceTree = "<group>";
 		};
 		7B920C0328AB655E00ABFDA6 /* AuthenticationControllers */ = {
@@ -314,8 +336,8 @@
 		7BFCB2A628AAAD3500747CC1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				7B920C2B28AB835200ABFDA6 /* FileManagerService.swift */,
-				7B920C2928AB834500ABFDA6 /* FirebaseStorageService.swift */,
+				7B5EE49928AD2A0600D50A4E /* FileManager */,
+				7B5EE49428AD299800D50A4E /* FirebaseStorageService */,
 				7B920C2328AB7A1B00ABFDA6 /* AlertService.swift */,
 				7B920C2128AB782600ABFDA6 /* AuthenticationService.swift */,
 				7BFCB2A828AAAD3500747CC1 /* UserDefaultsService.swift */,
@@ -513,6 +535,7 @@
 			files = (
 				7BDBAD5B28AC13DE00708344 /* UpdateRootVCService.swift in Sources */,
 				7B920C3828ABB27400ABFDA6 /* UTType + AllTypes.swift in Sources */,
+				7B5EE49828AD2A0100D50A4E /* FileManagerServiceError.swift in Sources */,
 				7BFCB2CF28AAAED000747CC1 /* FoldersViewModel.swift in Sources */,
 				7B920C0B28AB6FBC00ABFDA6 /* PaddingTextField.swift in Sources */,
 				7B920C2A28AB834500ABFDA6 /* FirebaseStorageService.swift in Sources */,
@@ -521,6 +544,7 @@
 				7BFCB2CB28AAAE8600747CC1 /* MainFolderNavigationController.swift in Sources */,
 				7BFCB2B828AAAD6600747CC1 /* UIStackView + Init.swift in Sources */,
 				7B920C0228AB649B00ABFDA6 /* StartScreenButton.swift in Sources */,
+				7B5EE49628AD29A900D50A4E /* FirebaseStorageError.swift in Sources */,
 				7BFCB29A28AAAC4A00747CC1 /* LayoutType.swift in Sources */,
 				7BFCB2C228AAADB000747CC1 /* FolderListCell.swift in Sources */,
 				7B920C2E28AB83B000ABFDA6 /* CloudItem.swift in Sources */,
