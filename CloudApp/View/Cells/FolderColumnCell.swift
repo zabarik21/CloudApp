@@ -38,7 +38,7 @@ class FolderColumnCell: UICollectionViewCell, ReuseIdProtocol {
   
   func updateUI(with viewModel: FolderCellViewModel?) {
     DispatchQueue.main.async {
-      self.objectsCountLabel.text = "\(viewModel?.objectsCount ?? 0) Objects"
+      self.objectsCountLabel.text = "Uknown objects count"
       self.folderTitleLabel.text = viewModel?.name
     }
   }

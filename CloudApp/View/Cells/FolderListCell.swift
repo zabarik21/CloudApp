@@ -36,7 +36,7 @@ class FolderListCell: UICollectionViewCell, ReuseIdProtocol {
   func udpateUI(with viewModel: FolderCellViewModel?) {
     DispatchQueue.main.async {
       self.foldernameLabel.text = viewModel?.name
-      self.objectsCountLabel.text = "\(viewModel?.objectsCount ?? 0) Objects"
+      self.objectsCountLabel.text = "Uknown objects count"
     }
   }
   
