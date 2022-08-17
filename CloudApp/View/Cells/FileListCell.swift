@@ -9,21 +9,21 @@ import Foundation
 import UIKit
 
 
-class FileListCell: UICollectionViewCell, ReuseIdProtocol {
+class FileListCell: UICollectionViewCell, ReuseIdProtocol, FileCellProtocol {
   
   private enum Constants {
     static let cellCornerRadius: CGFloat = 20
     static let imageCornerRadius: CGFloat = 10
-    static let fileImageName = "doc.fill"
     static let topMargin: CGFloat = 5
+    static let imagePointSize: CGFloat = 36
   }
   
   static var reuseId: String {
     return String(describing: self)
   }
   
-  private var filenameLabel: UILabel!
-  private var fileextImageView: UIImageView!
+  private var fileTitleLabel: UILabel!
+  var fileImageView: UIImageView!
   
   var viewModel: FileCellViewModel? {
     didSet {
@@ -38,7 +38,11 @@ class FileListCell: UICollectionViewCell, ReuseIdProtocol {
   
   func updateUI(with viewModel: FileCellViewModel?) {
     DispatchQueue.main.async {
-      self.filenameLabel.text = viewModel?.filename
+      guard let viewModel = viewModel else {
+        return
+      }
+      self.fileTitleLabel.text = viewModel.filename
+      self.switchFileImage(viewModel.ext, Constants.imagePointSize)
     }
   }
   
@@ -58,45 +62,45 @@ extension FileListCell {
   }
   
   private func setupLabels() {
-    filenameLabel = UILabel(
+    fileTitleLabel = UILabel(
       text: "Filename",
       fontSize: 16,
       weight: .bold,
       textColor: .white
     )
-    filenameLabel.lineBreakMode = .byTruncatingMiddle
+    fileTitleLabel.lineBreakMode = .byTruncatingMiddle
   }
   
   private func setupImageView() {
-    fileextImageView = UIImageView()
-    fileextImageView.contentMode = .center
+    fileImageView = UIImageView()
+    fileImageView.contentMode = .center
     let config = UIImage.SymbolConfiguration(pointSize: 36, weight: .light, scale: .small)
-    fileextImageView.image = UIImage(
-      systemName: Constants.fileImageName,
+    fileImageView.image = UIImage(
+      systemName: FileCellImageConstants.fileImageName,
       withConfiguration: config
     )
 
-    fileextImageView.tintColor = .fileIconColor
-    fileextImageView.layer.cornerRadius = Constants.imageCornerRadius
-    fileextImageView.layer.backgroundColor = UIColor.cellBackgroundColor.cgColor
+    fileImageView.tintColor = .fileIconColor
+    fileImageView.layer.cornerRadius = Constants.imageCornerRadius
+    fileImageView.layer.backgroundColor = UIColor.cellBackgroundColor.cgColor
   }
   
   private func setupConstraints() {
     let height = self.bounds.height
     
-    addSubview(fileextImageView)
+    addSubview(fileImageView)
     
-    fileextImageView.snp.makeConstraints { make in
+    fileImageView.snp.makeConstraints { make in
       make.leading.equalToSuperview()
       make.centerY.equalToSuperview()
       make.width.height.equalTo(height - Constants.topMargin * 2)
     }
     
-    addSubview(filenameLabel)
+    addSubview(fileTitleLabel)
     
-    filenameLabel.snp.makeConstraints { make in
+    fileTitleLabel.snp.makeConstraints { make in
       make.leading
-        .equalTo(fileextImageView.snp.trailing)
+        .equalTo(fileImageView.snp.trailing)
         .offset(Constants.topMargin * 3)
       make.centerY.equalToSuperview()
     }

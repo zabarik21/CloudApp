@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		47E618E7ABD9DB76F0D6F363 /* Pods_CloudApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BFC86CD79AF4C8977EE1C5A /* Pods_CloudApp.framework */; };
+		7B87928328ACD43C00E83D77 /* FileCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B87928228ACD43C00E83D77 /* FileCellProtocol.swift */; };
 		7B920C0228AB649B00ABFDA6 /* StartScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C0128AB649B00ABFDA6 /* StartScreenButton.swift */; };
 		7B920C0528AB657800ABFDA6 /* StartScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C0428AB657800ABFDA6 /* StartScreenController.swift */; };
 		7B920C0728AB659A00ABFDA6 /* AuthenticationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C0628AB659A00ABFDA6 /* AuthenticationNavigationController.swift */; };
@@ -64,6 +65,7 @@
 
 /* Begin PBXFileReference section */
 		5BFC86CD79AF4C8977EE1C5A /* Pods_CloudApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B87928228ACD43C00E83D77 /* FileCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCellProtocol.swift; sourceTree = "<group>"; };
 		7B920C0128AB649B00ABFDA6 /* StartScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenButton.swift; sourceTree = "<group>"; };
 		7B920C0428AB657800ABFDA6 /* StartScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenController.swift; sourceTree = "<group>"; };
 		7B920C0628AB659A00ABFDA6 /* AuthenticationNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationNavigationController.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				7BFCB2BD28AAADB000747CC1 /* FileListCell.swift */,
 				7BFCB2BF28AAADB000747CC1 /* FolderColumnCell.swift */,
 				7BFCB2BE28AAADB000747CC1 /* FolderListCell.swift */,
+				7B87928228ACD43C00E83D77 /* FileCellProtocol.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				7B920C3228AB83DB00ABFDA6 /* Folder.swift in Sources */,
 				7B920C3528ABB04F00ABFDA6 /* Data + Default.swift in Sources */,
 				7B920C1D28AB75C700ABFDA6 /* String + Uppercase.swift in Sources */,
+				7B87928328ACD43C00E83D77 /* FileCellProtocol.swift in Sources */,
 				7B920C1028AB701A00ABFDA6 /* LoginViewController.swift in Sources */,
 				7B920C2C28AB835200ABFDA6 /* FileManagerService.swift in Sources */,
 				7BFCB2B728AAAD6600747CC1 /* UIColor + Constants.swift in Sources */,

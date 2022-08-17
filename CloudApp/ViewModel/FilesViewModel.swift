@@ -120,10 +120,7 @@ class FilesListViewModel: ViewModel {
   }
   
   // Проблемы
-  // 1 не добавляет из галереи почему то
   // 2 создает папку под название новая папка а не название приложения
-  // 3 не сохраняет сетку при выходе из files controller и обратно тоже
-  // 4 добавить индикацию загрузки активити индикатором
   
   private func downloadFile(_ filename: String) {
     output.send(.startActivityIndicator)

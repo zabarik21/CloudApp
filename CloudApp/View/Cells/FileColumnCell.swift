@@ -7,12 +7,15 @@
 
 import Foundation
 import UIKit
+import UniformTypeIdentifiers
 
 protocol ReuseIdProtocol {
   static var reuseId: String { get }
 }
 
-class FileColumnCell: UICollectionViewCell, ReuseIdProtocol {
+
+
+class FileColumnCell: UICollectionViewCell, ReuseIdProtocol, FileCellProtocol {
   
   static var reuseId: String {
     return String(describing: self)
@@ -22,13 +25,13 @@ class FileColumnCell: UICollectionViewCell, ReuseIdProtocol {
     static let cellCornerRadius: CGFloat = 20
     static let imageCornerRadius: CGFloat = 10
     static let imageViewSideMult: CGFloat = 0.647
-    static let fileImageName = "doc.fill"
     static let horizontalMargin: CGFloat = 30
     static let topMargin: CGFloat = 17
+    static let imagePointSize: CGFloat = 58
   }
   
   private var fileTitleLabel: UILabel!
-  private var folderImageView: UIImageView!
+  var fileImageView: UIImageView!
   
   var viewModel: FileCellViewModel? {
     didSet {
@@ -43,10 +46,13 @@ class FileColumnCell: UICollectionViewCell, ReuseIdProtocol {
   
   func updateUI(with viewModel: FileCellViewModel?) {
     DispatchQueue.main.async {
-      self.fileTitleLabel.text = viewModel?.filename
+      guard let viewModel = viewModel else {
+        return
+      }
+      self.fileTitleLabel.text = viewModel.filename
+      self.switchFileImage(viewModel.ext, Constants.imagePointSize)
     }
   }
-  
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -77,25 +83,26 @@ extension FileColumnCell {
       textColor: .white
     )
     fileTitleLabel.lineBreakMode = .byTruncatingMiddle
+    fileTitleLabel.textAlignment = .center
   }
   
   private func setupImageView() {
-    folderImageView = UIImageView()
-    let config = UIImage.SymbolConfiguration(pointSize: 58, weight: .light, scale: .small)
-    folderImageView.contentMode = .center
-    folderImageView.image = UIImage(systemName: Constants.fileImageName, withConfiguration: config)
-    folderImageView.tintColor = .fileIconColor
-    folderImageView.layer.cornerRadius = Constants.imageCornerRadius
-    folderImageView.layer.backgroundColor = UIColor.mainBg.cgColor
+    fileImageView = UIImageView()
+    let config = UIImage.SymbolConfiguration(pointSize: Constants.imagePointSize, weight: .light, scale: .small)
+    fileImageView.contentMode = .center
+    fileImageView.image = UIImage(systemName: FileCellImageConstants.fileImageName, withConfiguration: config)
+    fileImageView.tintColor = .fileIconColor
+    fileImageView.layer.cornerRadius = Constants.imageCornerRadius
+    fileImageView.layer.backgroundColor = UIColor.mainBg.cgColor
   }
   
   private func setupConstraitns() {
     
     let width = self.bounds.width
     
-    addSubview(folderImageView)
+    addSubview(fileImageView)
     
-    folderImageView.snp.makeConstraints { make in
+    fileImageView.snp.makeConstraints { make in
       make.centerY.centerX.equalToSuperview()
       make.width.height.equalTo(Constants.imageViewSideMult * width)
     }
@@ -107,7 +114,7 @@ extension FileColumnCell {
         .equalToSuperview()
         .inset(Constants.horizontalMargin)
       make.top
-        .equalTo(folderImageView.snp.bottom)
+        .equalTo(fileImageView.snp.bottom)
         .offset(10)
     }
     
