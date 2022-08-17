@@ -91,11 +91,11 @@ class LayoutFactory {
       bottom: 0,
       trailing: 5
     )
-    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(170))
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.5))
+    
     let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
     let section = NSCollectionLayoutSection(group: group)
-    section.interGroupSpacing = 10
+    section.interGroupSpacing = 15
     section.contentInsets = NSDirectionalEdgeInsets(
       top: 20,
       leading: 0,

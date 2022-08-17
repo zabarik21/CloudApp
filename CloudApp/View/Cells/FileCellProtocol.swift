@@ -29,7 +29,6 @@ extension FileCellProtocol {
   func switchFileImage(_ ext: String, _ imagePointSize: CGFloat) {
     DispatchQueue.main.async {
       guard let type = UTType(filenameExtension: ext) else { return }
-      print(type)
       var imageName = FileCellImageConstants.fileImageName
       if type == .epub {
         imageName = FileCellImageConstants.bookImageName
