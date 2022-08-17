@@ -1,8 +1,6 @@
 # CloudApp
 🙎‍♂️🙍‍♀️ A cloud storage application built with Swift 5 and UIKit where the user can register and enjoy cloud storage functionality like uploading or downloading files.
 
-# Примечание: при работе на симуляторе файлы почему то не сохраняются, на реальном устройстве все работает.
-
 # Test user login & password
 testuser@mail.ru 123123
 
