@@ -115,13 +115,16 @@ extension MainFolderViewController {
   }
   
   func tryAddFileFromFilesManager() {
-    let types = UTType.allUTITypes()
-    let pickerViewController = UIDocumentPickerViewController(
-      forOpeningContentTypes: types
-    )
-    pickerViewController.delegate = self
-    pickerViewController.allowsMultipleSelection = false
-    present(pickerViewController, animated: true)
+    DispatchQueue.main.async { [weak self] in
+      let pickerViewController = UIDocumentPickerViewController(
+        forOpeningContentTypes: UTType.allUTITypes()
+      )
+      pickerViewController.delegate = self
+      pickerViewController.allowsMultipleSelection = false
+      self?.present(pickerViewController, animated: true)
+    }
+    
+    
   }
   
   func tryAddFileFromGallery() {
@@ -156,6 +159,10 @@ extension MainFolderViewController: UIDocumentPickerDelegate {
   
   func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
     guard let docUrl = urls.first else { return }
+    guard docUrl.pathExtension != "txt" else {
+      self.showErrorAlert("Forbidden file type")
+      return
+    }
     guard docUrl.startAccessingSecurityScopedResource() else { return }
     DispatchQueue.main.async { [weak self] in
       if let topViewController = self?.navigationController?.topViewController as? FilesViewController {
@@ -165,6 +172,7 @@ extension MainFolderViewController: UIDocumentPickerDelegate {
       }
     }
   }
+  
 }
 // MARK: - Search bar delegate
 extension MainFolderViewController: UISearchBarDelegate {

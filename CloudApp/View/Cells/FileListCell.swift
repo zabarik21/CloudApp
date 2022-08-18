@@ -102,6 +102,9 @@ extension FileListCell {
       make.leading
         .equalTo(fileImageView.snp.trailing)
         .offset(Constants.topMargin * 3)
+      make.trailing
+        .equalToSuperview()
+        .offset(-Constants.topMargin * 3)
       make.centerY.equalToSuperview()
     }
   }

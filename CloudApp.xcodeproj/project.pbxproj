@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		47E618E7ABD9DB76F0D6F363 /* Pods_CloudApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BFC86CD79AF4C8977EE1C5A /* Pods_CloudApp.framework */; };
+		7B369E5C28ADF4ED00EEB218 /* UIViewController + UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B369E5B28ADF4ED00EEB218 /* UIViewController + UIAlertController.swift */; };
 		7B5EE49628AD29A900D50A4E /* FirebaseStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5EE49528AD29A900D50A4E /* FirebaseStorageError.swift */; };
 		7B5EE49828AD2A0100D50A4E /* FileManagerServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5EE49728AD2A0100D50A4E /* FileManagerServiceError.swift */; };
 		7B87928328ACD43C00E83D77 /* FileCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B87928228ACD43C00E83D77 /* FileCellProtocol.swift */; };
@@ -67,6 +68,7 @@
 
 /* Begin PBXFileReference section */
 		5BFC86CD79AF4C8977EE1C5A /* Pods_CloudApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B369E5B28ADF4ED00EEB218 /* UIViewController + UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + UIAlertController.swift"; sourceTree = "<group>"; };
 		7B5EE49528AD29A900D50A4E /* FirebaseStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirebaseStorageError.swift; path = CloudApp/View/Cells/FirebaseStorageError.swift; sourceTree = SOURCE_ROOT; };
 		7B5EE49728AD2A0100D50A4E /* FileManagerServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerServiceError.swift; sourceTree = "<group>"; };
 		7B87928228ACD43C00E83D77 /* FileCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCellProtocol.swift; sourceTree = "<group>"; };
@@ -146,6 +148,14 @@
 				5BFC86CD79AF4C8977EE1C5A /* Pods_CloudApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7B369E5A28ADF49800EEB218 /* UIViewController + Alert */ = {
+			isa = PBXGroup;
+			children = (
+				7B369E5B28ADF4ED00EEB218 /* UIViewController + UIAlertController.swift */,
+			);
+			path = "UIViewController + Alert";
 			sourceTree = "<group>";
 		};
 		7B36C53228AB57E000671B29 /* CollectionControllers */ = {
@@ -351,6 +361,7 @@
 		7BFCB2B228AAAD6600747CC1 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				7B369E5A28ADF49800EEB218 /* UIViewController + Alert */,
 				7B920C3628ABB25C00ABFDA6 /* UTType + AllTypes */,
 				7B920C3328ABB04000ABFDA6 /* Data + default date */,
 				7B920C1A28AB75C700ABFDA6 /* String */,
@@ -578,6 +589,7 @@
 				7B920C1028AB701A00ABFDA6 /* LoginViewController.swift in Sources */,
 				7B920C2C28AB835200ABFDA6 /* FileManagerService.swift in Sources */,
 				7BFCB2B728AAAD6600747CC1 /* UIColor + Constants.swift in Sources */,
+				7B369E5C28ADF4ED00EEB218 /* UIViewController + UIAlertController.swift in Sources */,
 				7BFCB2B628AAAD6600747CC1 /* UILabel + Init.swift in Sources */,
 				7B920C1628AB73C400ABFDA6 /* UIView + twitch.swift in Sources */,
 				7B920C2028AB768E00ABFDA6 /* SignUpController.swift in Sources */,

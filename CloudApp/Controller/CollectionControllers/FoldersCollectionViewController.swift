@@ -59,7 +59,6 @@ class FoldersCollectionViewController: UIViewController, ViewModelContainer {
 // MARK: - Setup UI
 extension FoldersCollectionViewController {
   
-  
   private func setupUI() {
     setupActivityIndicator()
     setupFolders()
@@ -88,6 +87,7 @@ extension FoldersCollectionViewController {
     activityIndicator.color = .white
     activityIndicator.hidesWhenStopped = true
   }
+  
 }
 // MARK: - Handle ViewModel events
 extension FoldersCollectionViewController {
@@ -104,7 +104,7 @@ extension FoldersCollectionViewController {
     case .openFolder(let foldername):
       self.openFolderRelay.accept(foldername)
     case .showAlert(title: let title, message: let message):
-      self.showAlert(title, message)
+      self.showDefaultAlert(title, message)
     case .startActivityIndicator:
       self.turnActivityIndicator(on: true)
     case .stopActivityIndicator:
@@ -125,13 +125,6 @@ extension FoldersCollectionViewController {
       } else {
         self.activityIndicator.stopAnimating()
       }
-    }
-  }
-  
-  func showAlert(_ title: String, _ message: String) {
-    DispatchQueue.main.async {
-      let alert = AlertFactory.getErrorAlert(title: title, message: message)
-      self.present(alert, animated: true)
     }
   }
   

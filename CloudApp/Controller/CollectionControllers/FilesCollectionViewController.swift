@@ -127,20 +127,6 @@ extension FilesCollectionViewController {
     }
   }
   
-  func showDefaultAlert(_ title: String, _ message: String) {
-    DispatchQueue.main.async {
-      let alert = AlertFactory.getMessageAlert(title: title, message: message)
-      self.present(alert, animated: true)
-    }
-  }
-  
-  func showErrorAlert(_ message: String) {
-    DispatchQueue.main.async {
-      let alert = AlertFactory.getErrorAlert(message: message)
-      self.present(alert, animated: true)
-    }
-  }
-  
   private func showRenameFileAlert(filename: String) {
     DispatchQueue.main.async { [weak self] in
       let alert = AlertFactory.getRenameFileAlert { newFilename in
