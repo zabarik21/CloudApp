@@ -332,16 +332,17 @@ extension FolderFileActionView {
 // MARK: - Hit behavior
 extension FolderFileActionView {
   
-  override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-    
-    guard buttonsHidden else { return true }
-    if point.x >= mainBtn.frame.minX && point.x <= mainBtn.frame.maxX {
-      if point.y >= mainBtn.frame.minY && point.y <= mainBtn.frame.maxY {
-        return true
+  override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+    if buttonsHidden {
+      if mainBtn.frame.contains(point) {
+        print("Contains")
+        return mainBtn
+      } else {
+        return nil
       }
-      return false
+    } else {
+      return super.hitTest(point, with: event)
     }
-    return false
   }
 
 }

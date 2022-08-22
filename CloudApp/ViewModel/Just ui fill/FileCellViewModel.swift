@@ -9,7 +9,7 @@ import Foundation
 
 struct FileCellViewModel: Equatable, Hashable {
   var filename: String
-  var ext: String {
+  var ext: String { 
     return getFileExtension(filename: filename)
   }
   

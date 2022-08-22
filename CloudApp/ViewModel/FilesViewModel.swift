@@ -119,9 +119,6 @@ class FilesListViewModel: ViewModel {
       }
   }
   
-  // Проблемы
-  // 2 создает папку под название новая папка а не название приложения
-  
   private func downloadFile(_ filename: String) {
     output.send(.startActivityIndicator)
     storageService.loadDataFromStorage(filename: filename, folderName: foldername) { result in

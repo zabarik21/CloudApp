@@ -45,6 +45,7 @@ class FilesCollectionViewController: UIViewController, ViewModelContainer {
   
   private func setupObserver() {
     filesCollection.fileTapRelay.subscribe(onNext: { [weak self] filename in
+      
       self?.output.send(.fileTouched(filename: filename))
     })
       .disposed(by: bag)
