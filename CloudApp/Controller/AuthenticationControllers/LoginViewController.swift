@@ -26,6 +26,8 @@ class LoginViewController: UIViewController {
   private var loginTextField: SignUpTextField!
   private var passwordTextField: SignUpTextField!
   
+  weak var coordinator: AuthenticationCoordinatorProtocol?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
@@ -47,15 +49,15 @@ class LoginViewController: UIViewController {
     AuthenticationService.shared.loginUser(
       email: login,
       password: password)
-    { result in
+    { [weak self] result in
       switch result {
       case .success(let user):
         UserDefaultsService.shared.saveUserId(user.uid)
-        UpdateRootVCService.changeViewControllerPublisher.onNext(())
+        self?.coordinator?.loginUser()
       case .failure(let error):
         AlertService.shared.errorAlertPublisher.accept(error.localizedDescription)
       }
-      self.activityIndicator.stopAnimating()
+      self?.activityIndicator.stopAnimating()
     }
   }
   

@@ -19,8 +19,9 @@ class StartScreenController: UIViewController {
     static let buttonHeight: CGFloat = 60
   }
   
-  private let bag = DisposeBag()
+  weak var coordinator: AuthenticationCoordinatorProtocol?
   
+  private let bag = DisposeBag()
   private var logoImageView: UIImageView!
   private var loginButton: StartScreenButton!
   private var registerButton: StartScreenButton!
@@ -36,7 +37,7 @@ class StartScreenController: UIViewController {
       .rx
       .tap
       .subscribe(onNext: { [weak self] _ in
-        self?.navigationController?.pushViewController(LoginViewController(), animated: true)
+        self?.coordinator?.openLogin()
       })
       .disposed(by: bag)
     
@@ -44,7 +45,7 @@ class StartScreenController: UIViewController {
       .rx
       .tap
       .subscribe(onNext: { [weak self] _ in
-        self?.navigationController?.pushViewController(SignUpController(), animated: true)
+        self?.coordinator?.openSignUp()
       })
       .disposed(by: bag)
   }

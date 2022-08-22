@@ -12,6 +12,10 @@
 		7B5EE49628AD29A900D50A4E /* FirebaseStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5EE49528AD29A900D50A4E /* FirebaseStorageError.swift */; };
 		7B5EE49828AD2A0100D50A4E /* FileManagerServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5EE49728AD2A0100D50A4E /* FileManagerServiceError.swift */; };
 		7B87928328ACD43C00E83D77 /* FileCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B87928228ACD43C00E83D77 /* FileCellProtocol.swift */; };
+		7B8A11AF28B3B63C0080D92B /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8A11AE28B3B63C0080D92B /* CoordinatorProtocol.swift */; };
+		7B8A11B128B3B6690080D92B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8A11B028B3B6690080D92B /* MainCoordinator.swift */; };
+		7B8A11B328B3C1170080D92B /* AuthenticationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8A11B228B3C1170080D92B /* AuthenticationCoordinator.swift */; };
+		7B8A11B528B3C1200080D92B /* RootFolderCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8A11B428B3C1200080D92B /* RootFolderCoordinator.swift */; };
 		7B920C0228AB649B00ABFDA6 /* StartScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C0128AB649B00ABFDA6 /* StartScreenButton.swift */; };
 		7B920C0528AB657800ABFDA6 /* StartScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C0428AB657800ABFDA6 /* StartScreenController.swift */; };
 		7B920C0728AB659A00ABFDA6 /* AuthenticationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C0628AB659A00ABFDA6 /* AuthenticationNavigationController.swift */; };
@@ -34,7 +38,6 @@
 		7B920C3228AB83DB00ABFDA6 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C3128AB83DB00ABFDA6 /* Folder.swift */; };
 		7B920C3528ABB04F00ABFDA6 /* Data + Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C3428ABB04F00ABFDA6 /* Data + Default.swift */; };
 		7B920C3828ABB27400ABFDA6 /* UTType + AllTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C3728ABB27400ABFDA6 /* UTType + AllTypes.swift */; };
-		7BDBAD5B28AC13DE00708344 /* UpdateRootVCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDBAD5A28AC13DE00708344 /* UpdateRootVCService.swift */; };
 		7BFCB26128AAAB8D00747CC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB26028AAAB8D00747CC1 /* AppDelegate.swift */; };
 		7BFCB26328AAAB8D00747CC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB26228AAAB8D00747CC1 /* SceneDelegate.swift */; };
 		7BFCB26A28AAAB8E00747CC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BFCB26928AAAB8E00747CC1 /* Assets.xcassets */; };
@@ -58,7 +61,7 @@
 		7BFCB2C328AAADB000747CC1 /* FolderColumnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2BF28AAADB000747CC1 /* FolderColumnCell.swift */; };
 		7BFCB2C728AAADF900747CC1 /* FoldersCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2C628AAADF900747CC1 /* FoldersCollectionView.swift */; };
 		7BFCB2C928AAAE5B00747CC1 /* FilesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2C828AAAE5B00747CC1 /* FilesCollectionView.swift */; };
-		7BFCB2CB28AAAE8600747CC1 /* MainFolderNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2CA28AAAE8600747CC1 /* MainFolderNavigationController.swift */; };
+		7BFCB2CB28AAAE8600747CC1 /* RootFolderNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2CA28AAAE8600747CC1 /* RootFolderNavigationController.swift */; };
 		7BFCB2CD28AAAE9600747CC1 /* MainFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2CC28AAAE9600747CC1 /* MainFolderViewController.swift */; };
 		7BFCB2CF28AAAED000747CC1 /* FoldersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2CE28AAAED000747CC1 /* FoldersViewModel.swift */; };
 		7BFCB2D328AAAFFB00747CC1 /* FilesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCB2D228AAAFFB00747CC1 /* FilesCollectionViewController.swift */; };
@@ -72,6 +75,10 @@
 		7B5EE49528AD29A900D50A4E /* FirebaseStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirebaseStorageError.swift; path = CloudApp/View/Cells/FirebaseStorageError.swift; sourceTree = SOURCE_ROOT; };
 		7B5EE49728AD2A0100D50A4E /* FileManagerServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerServiceError.swift; sourceTree = "<group>"; };
 		7B87928228ACD43C00E83D77 /* FileCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCellProtocol.swift; sourceTree = "<group>"; };
+		7B8A11AE28B3B63C0080D92B /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
+		7B8A11B028B3B6690080D92B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		7B8A11B228B3C1170080D92B /* AuthenticationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationCoordinator.swift; sourceTree = "<group>"; };
+		7B8A11B428B3C1200080D92B /* RootFolderCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootFolderCoordinator.swift; sourceTree = "<group>"; };
 		7B920C0128AB649B00ABFDA6 /* StartScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenButton.swift; sourceTree = "<group>"; };
 		7B920C0428AB657800ABFDA6 /* StartScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenController.swift; sourceTree = "<group>"; };
 		7B920C0628AB659A00ABFDA6 /* AuthenticationNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationNavigationController.swift; sourceTree = "<group>"; };
@@ -94,7 +101,6 @@
 		7B920C3128AB83DB00ABFDA6 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		7B920C3428ABB04F00ABFDA6 /* Data + Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data + Default.swift"; sourceTree = "<group>"; };
 		7B920C3728ABB27400ABFDA6 /* UTType + AllTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UTType + AllTypes.swift"; sourceTree = "<group>"; };
-		7BDBAD5A28AC13DE00708344 /* UpdateRootVCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRootVCService.swift; sourceTree = "<group>"; };
 		7BFCB25D28AAAB8D00747CC1 /* CloudApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BFCB26028AAAB8D00747CC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BFCB26228AAAB8D00747CC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,7 +126,7 @@
 		7BFCB2BF28AAADB000747CC1 /* FolderColumnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderColumnCell.swift; sourceTree = "<group>"; };
 		7BFCB2C628AAADF900747CC1 /* FoldersCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldersCollectionView.swift; sourceTree = "<group>"; };
 		7BFCB2C828AAAE5B00747CC1 /* FilesCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesCollectionView.swift; sourceTree = "<group>"; };
-		7BFCB2CA28AAAE8600747CC1 /* MainFolderNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFolderNavigationController.swift; sourceTree = "<group>"; };
+		7BFCB2CA28AAAE8600747CC1 /* RootFolderNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootFolderNavigationController.swift; sourceTree = "<group>"; };
 		7BFCB2CC28AAAE9600747CC1 /* MainFolderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFolderViewController.swift; sourceTree = "<group>"; };
 		7BFCB2CE28AAAED000747CC1 /* FoldersViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldersViewModel.swift; sourceTree = "<group>"; };
 		7BFCB2D228AAAFFB00747CC1 /* FilesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesCollectionViewController.swift; sourceTree = "<group>"; };
@@ -185,11 +191,30 @@
 			path = FileManager;
 			sourceTree = "<group>";
 		};
+		7B8A11AD28B3B6320080D92B /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				7B8A11AE28B3B63C0080D92B /* CoordinatorProtocol.swift */,
+				7B8A11B028B3B6690080D92B /* MainCoordinator.swift */,
+				7B8A11B228B3C1170080D92B /* AuthenticationCoordinator.swift */,
+				7B8A11B428B3C1200080D92B /* RootFolderCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		7B8A11B628B3C2120080D92B /* NavigationControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB2CA28AAAE8600747CC1 /* RootFolderNavigationController.swift */,
+				7B920C0628AB659A00ABFDA6 /* AuthenticationNavigationController.swift */,
+			);
+			path = NavigationControllers;
+			sourceTree = "<group>";
+		};
 		7B920C0328AB655E00ABFDA6 /* AuthenticationControllers */ = {
 			isa = PBXGroup;
 			children = (
 				7B920C0428AB657800ABFDA6 /* StartScreenController.swift */,
-				7B920C0628AB659A00ABFDA6 /* AuthenticationNavigationController.swift */,
 				7B920C0F28AB701A00ABFDA6 /* LoginViewController.swift */,
 				7B920C1F28AB768E00ABFDA6 /* SignUpController.swift */,
 			);
@@ -290,6 +315,7 @@
 		7BFCB25F28AAAB8D00747CC1 /* CloudApp */ = {
 			isa = PBXGroup;
 			children = (
+				7B8A11AD28B3B6320080D92B /* Coordinator */,
 				7B920C2528AB7F7100ABFDA6 /* GoogleService-Info.plist */,
 				7B920C1728AB750500ABFDA6 /* Helpers */,
 				7BFCB2C428AAADE800747CC1 /* Controller */,
@@ -353,7 +379,6 @@
 				7BFCB2A828AAAD3500747CC1 /* UserDefaultsService.swift */,
 				7BFCB2A928AAAD3500747CC1 /* AlertFactory.swift */,
 				7BFCB2AB28AAAD3500747CC1 /* LayoutFactory.swift */,
-				7BDBAD5A28AC13DE00708344 /* UpdateRootVCService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -389,10 +414,10 @@
 		7BFCB2C428AAADE800747CC1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7B8A11B628B3C2120080D92B /* NavigationControllers */,
 				7B920C0328AB655E00ABFDA6 /* AuthenticationControllers */,
 				7B36C53228AB57E000671B29 /* CollectionControllers */,
 				7BFCB2CC28AAAE9600747CC1 /* MainFolderViewController.swift */,
-				7BFCB2CA28AAAE8600747CC1 /* MainFolderNavigationController.swift */,
 				7BFCB2D428AAB02E00747CC1 /* FilesViewController.swift */,
 			);
 			path = Controller;
@@ -544,7 +569,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BDBAD5B28AC13DE00708344 /* UpdateRootVCService.swift in Sources */,
 				7B920C3828ABB27400ABFDA6 /* UTType + AllTypes.swift in Sources */,
 				7B5EE49828AD2A0100D50A4E /* FileManagerServiceError.swift in Sources */,
 				7BFCB2CF28AAAED000747CC1 /* FoldersViewModel.swift in Sources */,
@@ -552,12 +576,13 @@
 				7B920C2A28AB834500ABFDA6 /* FirebaseStorageService.swift in Sources */,
 				7BFCB2AF28AAAD3500747CC1 /* LayoutFactory.swift in Sources */,
 				7BFCB2D528AAB02E00747CC1 /* FilesViewController.swift in Sources */,
-				7BFCB2CB28AAAE8600747CC1 /* MainFolderNavigationController.swift in Sources */,
+				7BFCB2CB28AAAE8600747CC1 /* RootFolderNavigationController.swift in Sources */,
 				7BFCB2B828AAAD6600747CC1 /* UIStackView + Init.swift in Sources */,
 				7B920C0228AB649B00ABFDA6 /* StartScreenButton.swift in Sources */,
 				7B5EE49628AD29A900D50A4E /* FirebaseStorageError.swift in Sources */,
 				7BFCB29A28AAAC4A00747CC1 /* LayoutType.swift in Sources */,
 				7BFCB2C228AAADB000747CC1 /* FolderListCell.swift in Sources */,
+				7B8A11AF28B3B63C0080D92B /* CoordinatorProtocol.swift in Sources */,
 				7B920C2E28AB83B000ABFDA6 /* CloudItem.swift in Sources */,
 				7BFCB2CD28AAAE9600747CC1 /* MainFolderViewController.swift in Sources */,
 				7BFCB2D728AAB0F800747CC1 /* FoldersCollectionViewController.swift in Sources */,
@@ -565,6 +590,7 @@
 				7B920C2228AB782600ABFDA6 /* AuthenticationService.swift in Sources */,
 				7BFCB2C128AAADB000747CC1 /* FileListCell.swift in Sources */,
 				7BFCB2C928AAAE5B00747CC1 /* FilesCollectionView.swift in Sources */,
+				7B8A11B328B3C1170080D92B /* AuthenticationCoordinator.swift in Sources */,
 				7BFCB29428AAAC1500747CC1 /* ViewModelProtocol.swift in Sources */,
 				7B920C2428AB7A1B00ABFDA6 /* AlertService.swift in Sources */,
 				7B920C1928AB751200ABFDA6 /* Validator.swift in Sources */,
@@ -581,6 +607,7 @@
 				7BFCB2AE28AAAD3500747CC1 /* AlertFactory.swift in Sources */,
 				7B920C1E28AB75C700ABFDA6 /* String + NilOrEmpty.swift in Sources */,
 				7BFCB26328AAAB8D00747CC1 /* SceneDelegate.swift in Sources */,
+				7B8A11B128B3B6690080D92B /* MainCoordinator.swift in Sources */,
 				7BFCB2C328AAADB000747CC1 /* FolderColumnCell.swift in Sources */,
 				7B920C3228AB83DB00ABFDA6 /* Folder.swift in Sources */,
 				7B920C3528ABB04F00ABFDA6 /* Data + Default.swift in Sources */,
@@ -591,6 +618,7 @@
 				7BFCB2B728AAAD6600747CC1 /* UIColor + Constants.swift in Sources */,
 				7B369E5C28ADF4ED00EEB218 /* UIViewController + UIAlertController.swift in Sources */,
 				7BFCB2B628AAAD6600747CC1 /* UILabel + Init.swift in Sources */,
+				7B8A11B528B3C1200080D92B /* RootFolderCoordinator.swift in Sources */,
 				7B920C1628AB73C400ABFDA6 /* UIView + twitch.swift in Sources */,
 				7B920C2028AB768E00ABFDA6 /* SignUpController.swift in Sources */,
 				7B920C0728AB659A00ABFDA6 /* AuthenticationNavigationController.swift in Sources */,

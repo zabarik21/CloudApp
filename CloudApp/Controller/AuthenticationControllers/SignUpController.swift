@@ -21,6 +21,8 @@ class SignUpController: UIViewController {
     static let buttonHeight: CGFloat = 60
   }
   
+  weak var coordinator: AuthenticationCoordinatorProtocol?
+  
   private let bag = DisposeBag()
   private var changeRootViewControllerPublisher = PublishSubject<Void>()
   
@@ -52,17 +54,17 @@ class SignUpController: UIViewController {
     DispatchQueue.global(qos: .userInteractive).async {
       AuthenticationService.shared.registerUser(
         email: login,
-        password: password) { result in
+        password: password) { [weak self] result in
           switch result {
           case .success(let user):
             UserDefaultsService.shared.saveUserId(user.uid)
-            UpdateRootVCService.changeViewControllerPublisher.onNext(())
+            self?.coordinator?.loginUser()
           case .failure(let error):
             AlertService.shared.errorAlertPublisher.accept(
               error.localizedDescription
             )
           }
-          self.activityIndicator.stopAnimating()
+          self?.activityIndicator.stopAnimating()
         }
     }
   }

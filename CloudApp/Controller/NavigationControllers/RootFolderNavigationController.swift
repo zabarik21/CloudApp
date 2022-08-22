@@ -10,13 +10,13 @@ import UIKit
 
 
  
-class MainFolderNavigationController: UINavigationController {
+class RootFolderNavigationController: UINavigationController {
   
   private var myView: FolderFileActionView = FolderFileActionView()
   private var searchController: UISearchController!
   
   init() {
-    super.init(rootViewController: MainFolderViewController())
+    super.init(nibName: nil, bundle: nil)
   }
   
   override func viewDidLoad() {
@@ -32,7 +32,7 @@ class MainFolderNavigationController: UINavigationController {
 
 
 // MARK: - Setup UI
-extension MainFolderNavigationController {
+extension RootFolderNavigationController {
   private func setupUI() {
     setupNavigationBar()
     setupConstraints()
@@ -48,6 +48,10 @@ extension MainFolderNavigationController {
   
   private func setupNavigationBar() {
     navigationBar.tintColor = .lightTextColor
+    navigationBar.setBackgroundImage(UIImage(), for: .default)
+    navigationBar.shadowImage = UIImage()
+    navigationBar.isTranslucent = true
+    view.backgroundColor = .mainBg
   }
   
 }

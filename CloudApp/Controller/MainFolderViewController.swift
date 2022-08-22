@@ -25,9 +25,20 @@ class MainFolderViewController: UIViewController {
   private var foldersLabel: UILabel!
   private var filesLabel: UILabel!
   
+  var coordinator: RootFolderCoordinatorProtocol?
+  
   private let bag = DisposeBag()
   
   private var folderOpened = false
+  
+  
+  init() {
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -78,13 +89,7 @@ class MainFolderViewController: UIViewController {
   
   func openFolder(foldername: String) {
     folderOpened = true
-    DispatchQueue.main.async {
-      let filesVC = FilesViewController(
-        foldername: foldername,
-        layoutType: self.layoutType
-      )
-      self.navigationController?.pushViewController(filesVC, animated: true)
-    }
+    coordinator?.openFiles(with: foldername, layoutType: self.layoutType)
   }
   
 }

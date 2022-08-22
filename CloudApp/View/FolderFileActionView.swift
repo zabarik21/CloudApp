@@ -335,7 +335,6 @@ extension FolderFileActionView {
   override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
     if buttonsHidden {
       if mainBtn.frame.contains(point) {
-        print("Contains")
         return mainBtn
       } else {
         return nil

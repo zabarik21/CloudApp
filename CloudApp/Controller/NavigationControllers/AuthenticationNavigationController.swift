@@ -14,29 +14,20 @@ class AuthenticationNavigationController: UINavigationController {
   
   private let bag = DisposeBag()
   
-  init() {
-    super.init(rootViewController: StartScreenController())
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupNavigationBar()
     setupAlerts()
-    setupSwitchViewControllerObservable()
   }
   
-  private func setupSwitchViewControllerObservable() {
-    UpdateRootVCService.chagneViewControllerObservable
-      .subscribe(onNext: { [weak self] _ in
-        self?.switchToRootFolderViewController()
-      })
-      .disposed(by: bag)
+   init() {
+    super.init(nibName: nil, bundle: nil)
   }
   
   func switchToRootFolderViewController() {
     DispatchQueue.main.async {
       if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-        let rootFolderViewControlelr = MainFolderNavigationController()
+        let rootFolderViewControlelr = RootFolderNavigationController()
         sceneDelegate.changeRootViewController(rootFolderViewControlelr, animated: true)
       }
     }
