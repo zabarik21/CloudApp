@@ -10,15 +10,15 @@ import FirebaseStorage
 import PhotosUI
 import RxSwift
 
-class FirebaseStorageService {
+final class FirebaseStorageService: FolderServiceProtocol, FilesServiceProtocol {
   
   private enum Constants {
     static let usersPath = "users"
-    static let rootFolderTitle = "Root"
     static let hiddenFileName = "12c8f301-50ea-4a38-b2ca-1f4b424da6cd.txt"
   }
   
   static let shared = FirebaseStorageService()
+  private init() {}
   
   private let filesService = FileManagerService.shared
   private let authService = AuthenticationService.shared
@@ -28,24 +28,8 @@ class FirebaseStorageService {
     qos: .utility,
     attributes: .concurrent
   )
-  
-  private let fetchFilesQuque = DispatchQueue.global(qos: .userInitiated)
-  private let fetchFolderQueue = DispatchQueue.global(qos: .userInitiated)
-  
-  private let storage: CloudFolder? = nil
-  
-  private var snapshotSubject = PublishSubject<CloudFolder>()
-  public var snapshotListener: Observable<CloudFolder> {
-    return snapshotSubject.asObservable()
-  }
-  
-  private var snapShot = CloudFolder(name: Constants.rootFolderTitle) {
-    didSet {
-      snapshotSubject.onNext(snapShot)
-    }
-  }
-  
-  private init() {}
+  private let fetchFilesQuque = DispatchQueue.global(qos: .utility)
+  private let fetchFolderQueue = DispatchQueue.global(qos: .utility)
   
   private var currentUserID: String {
     return AuthenticationService.shared.getCurrentUserId() ?? "default"
@@ -58,65 +42,21 @@ class FirebaseStorageService {
     foldername: String?,
     completion: @escaping (Result<Void, Error>) -> Void
   ) {
-    guard filename != Constants.hiddenFileName else {
-      completion(.failure(FirebaseStorageError.nonEnoughRights))
-      return
-    }
-    let ref = getReference(fileName: filename, folderName: foldername)
-    ref.delete { error in
-      if let error = error {
-        completion(.failure(error))
-      } else {
-        self.updateSnapshot(action: .removed, folderName: foldername, fileName: filename)
-        completion(.success(()))
+    loadTasksQueue.async { [weak self] in
+      guard let self = self else { return }
+      guard filename != Constants.hiddenFileName else {
+        completion(.failure(FirebaseStorageError.nonEnoughRights))
+        return
       }
-    }
-  }
-  
-  func fetchFoldersWithFiles(completion: @escaping (Result<[Folder], Error>) -> Void) {
-    let group = DispatchGroup()
-    var refs = [StorageReference]()
-    let rootRef = getReference(fileName: nil, folderName: nil)
-    fetchFilesQuque.async {
-      group.enter()
-      rootRef.listAll { result in
-        defer { group.leave() }
-        switch result {
-        case .success(let storageListResult):
-          refs = storageListResult.prefixes
-        case .failure(let error):
+      let ref = self.getReference(fileName: filename, folderName: foldername)
+      ref.delete { error in
+        if let error = error {
           completion(.failure(error))
+        } else {
+          completion(.success(()))
         }
       }
     }
-    let successGroupt = DispatchGroup()
-    var folders = [Folder]()
-    successGroupt.enter()
-    DispatchQueue.global().async {
-      group.wait()
-      for pref in refs {
-        successGroupt.enter()
-        self.fetchFilesFrom(pref) { result in
-          defer { successGroupt.leave() }
-          switch result {
-          case .success(let items):
-            var itemsDict = [String: CloudItem]()
-            for item in items {
-              if item.name == Constants.hiddenFileName { continue }
-              itemsDict[item.name] = item
-            }
-            folders.append(Folder(name: pref.name, items: itemsDict))
-          case .failure(let error):
-            completion(.failure(error))
-          }
-        }
-      }
-    }
-    DispatchQueue.global().async {
-      successGroupt.wait()
-      completion(.success(folders))
-    }
-    
   }
   
   func renameFile(
@@ -129,7 +69,8 @@ class FirebaseStorageService {
       completion(.failure(FirebaseStorageError.nonEnoughRights))
       return
     }
-    self.loadTasksQueue.async {
+    loadTasksQueue.async { [weak self] in
+      guard let self = self else { return }
       let ref = self.getReference(fileName: oldFilename, folderName: foldername)
       let newRef = self.getReference(fileName: newName, folderName: foldername)
       ref.getData(maxSize: 20000000) { data, error in
@@ -144,7 +85,6 @@ class FirebaseStorageService {
             self.deleteFile(filename: oldFilename, foldername: foldername) { result in
               switch result {
               case .success:
-                self.updateSnapshot(action: .modified(name: newName), folderName: foldername, fileName: oldFilename)
                 completion(.success(()))
               case .failure(let error):
                 print(error)
@@ -163,29 +103,31 @@ class FirebaseStorageService {
     filename: String,
     folderName: String?,
     completion: @escaping (Result<Void, Error>) -> Void
-  ) -> StorageDownloadTask? {
+  ) {
     let ref = getReference(fileName: filename, folderName: folderName)
-    let task = ref.getData(maxSize: 20000000) { data, error in
-      if let error = error {
-        completion(.failure(error))
-      }
-      guard let data = data else {
-        completion(.failure(FirebaseStorageError.nilData))
-        return
-      }
-      self.filesService.saveToFiles(
-        data: data,
-        filename: filename,
-        foldername: folderName) { result in
-          switch result {
-          case .success:
-            completion(.success(()))
-          case .failure(let error):
-            completion(.failure(error))
-          }
+    loadTasksQueue.async { [weak self] in
+      guard let self = self else { return }
+      ref.getData(maxSize: 20000000) { data, error in
+        if let error = error {
+          completion(.failure(error))
         }
+        guard let data = data else {
+          completion(.failure(FirebaseStorageError.nilData))
+          return
+        }
+        self.filesService.saveToFiles(
+          data: data,
+          filename: filename,
+          foldername: folderName) { result in
+            switch result {
+            case .success:
+              completion(.success(()))
+            case .failure(let error):
+              completion(.failure(error))
+            }
+          }
+      }
     }
-    return task
   }
   
   func fetchFolders(
@@ -212,15 +154,12 @@ class FirebaseStorageService {
     completion: @escaping (Result<[CloudItem], Error>) -> Void
   ) {
     let ref = getReference(fileName: nil, folderName: foldername)
-    fetchFilesQuque.async {
-      self.fetchFilesFrom(ref) { result in
+    fetchFilesQuque.async { [weak self] in
+      self?.fetchFilesFrom(ref) { result in
         switch result {
         case .success(let items):
           let hidedFileItems = items.filter { $0.name != Constants.hiddenFileName }
           completion(.success(hidedFileItems))
-          for item in items {
-            self.updateSnapshot(action: .added, folderName: foldername, fileName: item.name)
-          }
         case .failure(let error):
           completion(.failure(error))
         }
@@ -242,12 +181,7 @@ class FirebaseStorageService {
         case .success(let storageListResult):
           for item in storageListResult.items {
             guard item.name != Constants.hiddenFileName else { continue }
-            items.append(
-              CloudItem(
-                name: item.name,
-                path: item.fullPath
-              )
-            )
+            items.append(CloudItem(name: item.name, path: item.fullPath))
           }
           completion(.success(items))
         case .failure(let error):
@@ -264,27 +198,24 @@ class FirebaseStorageService {
     _ url: URL?,
     folderName: String?,
     completion: @escaping (Result<String, Error>) -> Void
-  ) -> StorageUploadTask? {
+  ) {
     guard let url = url else {
       completion(.failure(DataError.invalidDataURL))
-      return nil
+      return
     }
     
     let name = url.lastPathComponent
-    
     let ref = getReference(fileName: name, folderName: folderName)
     let metadata = StorageMetadata()
-    var uploadTask: StorageUploadTask?
     
-    DispatchQueue.global(qos: .utility).sync {
-      filesService.getData(from: url) { result in
+    fetchFilesQuque.async { [weak self] in
+      self?.filesService.getData(from: url) { result in
         switch result {
         case .success(let data):
-          uploadTask = ref.putData(data, metadata: metadata) { result in
+          ref.putData(data, metadata: metadata) { result in
             switch result {
             case .success(let metadata):
               print(metadata)
-              self.updateSnapshot(action: .added, folderName: folderName, fileName: name)
               completion(.success(name))
             case .failure(let error):
               print(error)
@@ -296,7 +227,6 @@ class FirebaseStorageService {
         }
       }
     }
-    return uploadTask
   }
   
   func createFolder(
@@ -304,13 +234,14 @@ class FirebaseStorageService {
     completion: @escaping (Result<Void, Error>) -> Void
   ) {
     let ref = getReference(fileName: Constants.hiddenFileName, folderName: foldername)
-    
-    ref.putData(.hiddenFileData, metadata: nil) { result in
-      switch result {
-      case .success:
-        completion(.success(()))
-      case .failure(let error):
-        completion(.failure(error))
+    fetchFolderQueue.async {
+      ref.putData(.hiddenFileData, metadata: nil) { result in
+        switch result {
+        case .success:
+          completion(.success(()))
+        case .failure(let error):
+          completion(.failure(error))
+        }
       }
     }
   }
@@ -320,87 +251,26 @@ class FirebaseStorageService {
     folderName: String?,
     fileName: String,
     completion: @escaping (Result<Void, Error>) -> Void
-  ) -> StorageUploadTask? {
+  ) {
     guard let data = data else {
       completion(.failure(DataError.nilData))
-      return nil
+      return
     }
     
     let ref = getReference(fileName: fileName, folderName: folderName)
     let metadata = StorageMetadata()
     
-    let uploadTask = ref.putData(data, metadata: metadata) { result in
-      switch result {
-      case .success(let metadata):
-        print(metadata)
-        self.updateSnapshot(action: .added, folderName: folderName, fileName: fileName)
-        completion(.success(()))
-      case .failure(let error):
-        print(error)
-        completion(.failure(error))
+    fetchFilesQuque.async {
+      ref.putData(data, metadata: metadata) { result in
+        switch result {
+        case .success(let metadata):
+          print(metadata)
+          completion(.success(()))
+        case .failure(let error):
+          print(error)
+          completion(.failure(error))
+        }
       }
-    }
-    return uploadTask
-  }
-  
-  func updateSnapshot(
-    action: SnapshotAction,
-    folderName: String?,
-    fileName: String
-  ) {
-    switch action {
-    case .added:
-      appendToSnapshot(folderName: folderName, fileName: fileName)
-    case .removed:
-      removeFromSnapshot(folderName: folderName, fileName: fileName)
-    case .modified(let newName):
-      renameInSnapshot(newName, folderName: folderName, fileName: fileName)
-    }
-  }
-  
-  private func renameInSnapshot(
-    _ newname: String,
-    folderName: String?,
-    fileName: String
-  ) {
-    if let folder = folderName {
-      guard let oldItem = snapShot.folders[folder]?.items[fileName] else { return }
-      removeFromSnapshot(folderName: folderName, fileName: fileName)
-      snapShot.folders[folder]?.items[fileName] = CloudItem(
-        name: newname,
-        path: oldItem.path
-      )
-    } else {
-      guard let oldItem = snapShot.items[fileName] else { return }
-      removeFromSnapshot(folderName: folderName, fileName: fileName)
-      snapShot.items[fileName] = CloudItem(
-        name: newname,
-        path: oldItem.path
-      )
-    }
-  }
-  
-  private func removeFromSnapshot(
-    folderName: String?,
-    fileName: String
-  ) {
-    if let folder = folderName {
-      self.snapShot.folders[folder]?.items.removeValue(forKey: fileName)
-    } else {
-      self.snapShot.items.removeValue(forKey: fileName)
-    }
-  }
-  
-  private func appendToSnapshot(
-    folderName: String?,
-    fileName: String
-  ) {
-    let path = getReference(fileName: fileName, folderName: folderName).fullPath
-    let newItem =  CloudItem(name: fileName, path: path)
-    if let folder = folderName {
-      snapShot.folders[folder, default: Folder(name: folder, items: [:])].items[fileName] = newItem
-    } else {
-      self.snapShot.items[fileName] = newItem
     }
   }
   
@@ -410,7 +280,8 @@ class FirebaseStorageService {
     completion: @escaping (Result<String, Error>) -> Void
   ) {
     var mediaName = ""
-    loadTasksQueue.async {
+    loadTasksQueue.async { [weak self] in
+      guard let self = self else { return }
       let group = DispatchGroup()
       var added = false
       group.enter()
@@ -423,7 +294,7 @@ class FirebaseStorageService {
           }
           guard let url = url else { return }
           mediaName = url.lastPathComponent
-          _ = self.uploadDataToStorage(
+          self.uploadDataToStorage(
             url,
             folderName: foldername
           ) { result in
@@ -449,13 +320,12 @@ class FirebaseStorageService {
         }
         guard let url = url else { return }
         mediaName = url.lastPathComponent
-        _ = self.uploadDataToStorage(
+        self.uploadDataToStorage(
           url,
           folderName: foldername
         ) { result in
           switch result {
           case .success:
-            print("Success load for \(mediaName)")
             completion(.success(mediaName))
           case .failure(let error):
             completion(.failure(error))
@@ -503,10 +373,5 @@ extension FirebaseStorageService {
         .child(fileName)
     }
   }
-}
-
-enum SnapshotAction {
-  case added
-  case removed
-  case modified(name: String)
+  
 }

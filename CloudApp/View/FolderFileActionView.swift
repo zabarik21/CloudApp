@@ -116,6 +116,7 @@ extension FolderFileActionView {
 
 // MARK: - Button Targets
 extension FolderFileActionView {
+  
   func setupButtonTargets() {
     mainBtn.addTarget(self, action: #selector(mainBtnTouch), for: .touchUpInside)
     addFolderBtn.addTarget(self, action: #selector(handleButtons), for: .touchUpInside)

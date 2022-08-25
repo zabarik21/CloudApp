@@ -74,7 +74,9 @@ class MainFolderViewController: UIViewController {
   }
   
   private func setupfolderFileActionViewObserver() {
-    FolderFileActionView.eventRelay.subscribe(onNext: { [weak self] eventType in
+    FolderFileActionView.eventRelay
+      .observe(on: MainScheduler.instance)
+      .subscribe(onNext: { [weak self] eventType in
       switch eventType {
       case .createFolder:
         self?.tryCreateFolder()
@@ -97,42 +99,36 @@ class MainFolderViewController: UIViewController {
 // MARK: - FolderFileActions
 extension MainFolderViewController {
   
-  func tryCreateFolder() {
+  private func tryCreateFolder() {
     guard !self.folderOpened else {
       if let filesViewController = self.navigationController?.topViewController as? FilesViewController {
         filesViewController.tryCreateFolder()
       }
       return
     }
-    DispatchQueue.main.async {
-      let alertController = AlertFactory.getCreateFolderAlert(createAction: { folderName in
-        self.createFolder(foldername: folderName)
-      })
-      self.present(alertController, animated: true)
-    }
+    let alertController = AlertFactory.getCreateFolderAlert(createAction: { [weak self] folderName in
+      self?.createFolder(foldername: folderName)
+    })
+    self.present(alertController, animated: true)
   }
   
-  func createFolder(foldername: String) {
+  private func createFolder(foldername: String) {
     guard !self.folderOpened else {
       return
     }
     foldersCollectionViewController.output.send(.createFolder(foldername: foldername))
   }
   
-  func tryAddFileFromFilesManager() {
-    DispatchQueue.main.async { [weak self] in
-      let pickerViewController = UIDocumentPickerViewController(
-        forOpeningContentTypes: UTType.allUTITypes()
-      )
-      pickerViewController.delegate = self
-      pickerViewController.allowsMultipleSelection = false
-      self?.present(pickerViewController, animated: true)
-    }
-    
-    
+  private func tryAddFileFromFilesManager() {
+    let pickerViewController = UIDocumentPickerViewController(
+      forOpeningContentTypes: UTType.allUTITypes()
+    )
+    pickerViewController.delegate = self
+    pickerViewController.allowsMultipleSelection = false
+    present(pickerViewController, animated: true)
   }
   
-  func tryAddFileFromGallery() {
+  private func tryAddFileFromGallery() {
     var config = PHPickerConfiguration(photoLibrary: .shared())
     config.selectionLimit = 1
     config.filter = .any(of: [.images, .videos])

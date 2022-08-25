@@ -17,7 +17,6 @@ enum FilesViewModelEvent {
   case showRenameFileAlert(filename: String)
   case showErrorAlert(message: String)
   case showDefaultAlert(title: String, message: String)
-  case renameFileTouched(filename: String)
 }
 
 enum FilesViewEvent {
@@ -26,13 +25,12 @@ enum FilesViewEvent {
   case createFolderTouched
   case addFromGallery(result: PHPickerResult)
   case addFromFiles(url: URL)
-  case fileTouched(filename: String)
   case filterFiles(text: String)
-  case downloadFileTouched(filename: String)
-  case renameFileTouched(filename: String)
-  case deleteFileTouched(filename: String)
-  case showRenameFileAlert(filename: String)
-  case renameFileApproved(oldFilename: String, newFilename: String)
+  case fileTouchedAt(indexPath: IndexPath)
+  case downloadFileTouchedAt
+  case deleteFileTouchedForItemAt
+  case renameFileTouched
+  case renameFileApprovedForItemAt(newFilename: String)
 }
 
 class FilesListViewModel: ViewModel {
@@ -40,12 +38,18 @@ class FilesListViewModel: ViewModel {
   typealias ViewEvent = FilesViewEvent
   typealias ViewModelEvent = FilesViewModelEvent
   
-  private var storageService = FirebaseStorageService.shared
+  private var storageService: FilesServiceProtocol = FirebaseStorageService.shared
+  private var selectedIndexPath = IndexPath()
   
   var output: Output<FilesViewModelEvent> = Output()
   
   private var foldername: String?
-  private var files: [FileCellViewModel] = []
+  private var files: [FileCellViewModel] = [] {
+    didSet {
+      self.filteredFiles = files
+    }
+  }
+  private var filteredFiles: [FileCellViewModel] = []
   
   init(foldername: String? = nil) {
     self.foldername = foldername
@@ -73,45 +77,53 @@ class FilesListViewModel: ViewModel {
       }
   }
   
+  private func handleFileTouchAt(_ indexPath: IndexPath) {
+    guard let filename = getFileName(for: indexPath) else { return }
+    selectedIndexPath = indexPath
+    output.send(.showFileOptionsAlert(filename: filename))
+  }
+  
+  private func handleRenameFileTouch() {
+    guard let filename = getFileName(for: selectedIndexPath) else { return }
+    output.send(.showRenameFileAlert(filename: filename))
+  }
+  
   func handle(event: FilesViewEvent) {
     switch event {
     case .reloadFiles:
       fetchFiles()
-    case .fileTouched(let filename):
-      output.send(.showFileOptionsAlert(filename: filename))
+    case .fileTouchedAt(let indexPath):
+      handleFileTouchAt(indexPath)
     case .viewLoaded:
       fetchFiles()
-    case .filterFiles(text: let text):
+    case .filterFiles(let text):
       filterFiles(with: text)
-    case .downloadFileTouched(filename: let filename):
-      downloadFile(filename)
-    case .renameFileTouched(filename: let filename):
-      output.send(.showRenameFileAlert(filename: filename))
-    case .deleteFileTouched(filename: let filename):
-      deleteFile(filename)
-    case .showRenameFileAlert(filename: let filename):
-      output.send(.showRenameFileAlert(filename: filename))
-    case .renameFileApproved(oldFilename: let oldFilename, newFilename: let newFilename):
-      renameFile(old: oldFilename, new: newFilename)
-    case .addFromGallery(result: let result):
-      self.addFromGallery(result)
-    case .addFromFiles(url: let url):
-      addFromFiles(fileUrl: url)
+    case .downloadFileTouchedAt:
+      tryDownloadFileAtIndexPath()
+    case .renameFileTouched:
+      handleRenameFileTouch()
+    case .deleteFileTouchedForItemAt:
+      tryDeleteFile()
+    case .renameFileApprovedForItemAt(let newFilename):
+      tryRenameFile(newName: newFilename)
+    case .addFromGallery(let result):
+      self.tryAddFromPhotos(result)
+    case .addFromFiles(let url):
+      tryAddFromFiles(fileUrl: url)
     case .createFolderTouched:
       output.send(.showErrorAlert(message: "Cant create folder inside a folder"))
     }
   }
   
-  private func deleteFile(_ filename: String) {
+  private func tryDeleteFile() {
+    guard let filename = getFileName(for: selectedIndexPath) else { return }
     output.send(.startActivityIndicator)
     storageService.deleteFile(
       filename: filename,
       foldername: self.foldername) { result in
         switch result {
         case .success:
-          self.files.removeAll(where: { $0.filename == filename })
-          self.output.send(.updateFilesViewModels(viewModels: self.files))
-          self.output.send(.showDefaultAlert(title: "Success", message: "Deleted file \(filename)"))
+          self.deleteFileSucceed(with: filename)
         case .failure(let error):
           self.output.send(.showErrorAlert(message: error.localizedDescription))
         }
@@ -119,14 +131,19 @@ class FilesListViewModel: ViewModel {
       }
   }
   
-  private func downloadFile(_ filename: String) {
+  private func deleteFileSucceed(with filename: String) {
+    files.removeAll(where: { $0.filename == filename })
+    output.send(.updateFilesViewModels(viewModels: self.files))
+    output.send(.showDefaultAlert(title: "Success", message: "Deleted file \(filename)"))
+  }
+  
+  private func tryDownloadFileAtIndexPath() {
     output.send(.startActivityIndicator)
+    guard let filename = getFileName(for: selectedIndexPath) else { return }
     storageService.loadDataFromStorage(filename: filename, folderName: foldername) { result in
       switch result {
       case .success:
-        let folderString = self.foldername == nil ? "" : "/\(self.foldername!)"
-        let savedToString = "File \(filename) saved to CloudApp\(folderString) folder in your phone"
-        self.output.send(.showDefaultAlert(title: "Success", message: savedToString))
+        self.showSuccessDownloadAlert(filename: filename)
       case .failure(let error):
         self.output.send(.showErrorAlert(message: error.localizedDescription))
       }
@@ -134,18 +151,21 @@ class FilesListViewModel: ViewModel {
     }
   }
   
-  private func renameFile(old: String, new: String) {
-    guard let index = files.firstIndex(where: { $0.filename == old }) else {
-      output.send(.showErrorAlert(message: "File named \(new) doesnt exist"))
+  private func showSuccessDownloadAlert(filename: String) {
+    let folderString = self.foldername == nil ? "" : "/\(self.foldername!)"
+    let savedToString = "File \(filename) saved to CloudApp\(folderString) folder in your Files app"
+    self.output.send(.showDefaultAlert(title: "Success", message: savedToString))
+  }
+  
+  private func tryRenameFile(newName: String) {
+    guard let oldFilename = getFileName(for: selectedIndexPath) else {
       return
     }
     output.send(.startActivityIndicator)
-    storageService.renameFile(new, oldFilename: old, foldername: foldername) { result in
+    storageService.renameFile(newName, oldFilename: oldFilename, foldername: foldername) { result in
       switch result {
       case .success:
-        self.files[index].filename = new
-        self.output.send(.updateFilesViewModels(viewModels: self.files))
-        self.output.send(.showDefaultAlert(title: "Success", message: "File \(old) renamed to \(new)"))
+        self.renameFile(oldFilename: oldFilename, newFilename: newName)
       case .failure(let error):
         self.output.send(.showErrorAlert(message: error.localizedDescription))
       }
@@ -153,17 +173,20 @@ class FilesListViewModel: ViewModel {
     }
   }
   
-  private func addFromFiles(fileUrl: URL) {
+  private func renameFile(oldFilename: String, newFilename: String) {
+    guard let filesIndex = files.firstIndex(where: { $0.filename == oldFilename }) else { return }
+    files[filesIndex].filename = newFilename
+    filteredFiles[selectedIndexPath.row].filename = newFilename
+    output.send(.updateFilesViewModels(viewModels: self.files))
+    output.send(.showDefaultAlert(title: "Success", message: "File \(oldFilename) renamed to \(newFilename)"))
+  }
+  
+  private func tryAddFromFiles(fileUrl: URL) {
     output.send(.startActivityIndicator)
     storageService.uploadDataToStorage(fileUrl, folderName: self.foldername) { result in
       switch result {
       case .success(let filename):
-        guard !self.files.contains(where: {  $0.filename == filename }) else {
-          self.output.send(.showErrorAlert(message: "File already exists"))
-          return
-        }
-        self.files.append(FileCellViewModel(filename: filename))
-        self.output.send(.updateFilesViewModels(viewModels: self.files))
+        self.addNewFile(filename: filename)
       case .failure(let error):
         self.output.send(.showErrorAlert(message: error.localizedDescription))
       }
@@ -171,22 +194,35 @@ class FilesListViewModel: ViewModel {
     }
   }
   
-  private func addFromGallery(_ results: PHPickerResult) {
+  private func tryAddFromPhotos(_ results: PHPickerResult) {
     output.send(.startActivityIndicator)
     storageService.uploadMediaToStorage(result: results, foldername: self.foldername) { result in
       switch result {
       case .success(let filename):
-        guard !self.files.contains(where: { $0.filename == filename }) else {
-          self.output.send(.showErrorAlert(message: "File already exists"))
-          return
-        }
-        self.files.append(FileCellViewModel(filename: filename))
-        self.output.send(.updateFilesViewModels(viewModels: self.files))
+        self.addFromPhotos(filename: filename)
       case .failure(let error):
         self.output.send(.showErrorAlert(message: error.localizedDescription))
       }
       self.output.send(.stopActivityIndicator)
     }
+  }
+  
+  private func addFromPhotos(filename: String) {
+    guard !files.contains(where: { $0.filename == filename }) else {
+      self.output.send(.showErrorAlert(message: "File already exists"))
+      return
+    }
+    files.append(FileCellViewModel(filename: filename))
+    output.send(.updateFilesViewModels(viewModels: self.files))
+  }
+  
+  private func addNewFile(filename: String) {
+    guard !files.contains(where: {  $0.filename == filename }) else {
+      self.output.send(.showErrorAlert(message: "File already exists"))
+      return
+    }
+    files.append(FileCellViewModel(filename: filename))
+    output.send(.updateFilesViewModels(viewModels: self.files))
   }
   
   func filterFiles(with text: String) {
@@ -194,8 +230,14 @@ class FilesListViewModel: ViewModel {
       output.send(.updateFilesViewModels(viewModels: files))
       return
     }
-    let filtered = files.filter { $0.filename.contains(text) }
-    output.send(.updateFilesViewModels(viewModels: filtered))
+    filteredFiles = files.filter { $0.filename.contains(text) }
+    output.send(.updateFilesViewModels(viewModels: filteredFiles))
+  }
+  
+  private func getFileName(for indexPath: IndexPath) -> String? {
+    let index = indexPath.row
+    guard filteredFiles.count > index else { return nil }
+    return filteredFiles[index].filename
   }
   
 }

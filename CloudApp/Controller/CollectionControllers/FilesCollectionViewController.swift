@@ -19,7 +19,7 @@ class FilesCollectionViewController: UIViewController, ViewModelContainer {
   var output: Output<FilesViewEvent> = Output()
   public var viewModel: FilesListViewModel
   // UI
-  private var filesCollection: FilesCollectionView!
+  private var filesCollection: FilesCollectionViewProtocol!
   private var layoutType: LayoutType
   private var activityIndicator: UIActivityIndicatorView!
   
@@ -27,7 +27,6 @@ class FilesCollectionViewController: UIViewController, ViewModelContainer {
     super.viewWillAppear(animated)
     layoutType =  UserDefaultsService.shared.getLayoutType()
   }
-  
   
   init(viewModel: FilesListViewModel, layoutType type: LayoutType) {
     self.viewModel = viewModel
@@ -44,9 +43,8 @@ class FilesCollectionViewController: UIViewController, ViewModelContainer {
   }
   
   private func setupObserver() {
-    filesCollection.fileTapRelay.subscribe(onNext: { [weak self] filename in
-      
-      self?.output.send(.fileTouched(filename: filename))
+    filesCollection.fileTapObservable.subscribe(onNext: { [unowned self] indexPath in
+      self.output.send(.fileTouchedAt(indexPath: indexPath))
     })
       .disposed(by: bag)
   }
@@ -103,8 +101,6 @@ extension FilesCollectionViewController {
       self.showFileOptionsAlert(filename: filename)
     case .showRenameFileAlert(filename: let filename):
       self.showRenameFileAlert(filename: filename)
-    case .renameFileTouched(filename: let filename):
-      self.showRenameFileAlert(filename: filename)
     case .changeLayout(type: let type):
       self.changeLayout(to: type)
     case .showErrorAlert(message: let message):
@@ -129,26 +125,22 @@ extension FilesCollectionViewController {
   }
   
   private func showRenameFileAlert(filename: String) {
-    DispatchQueue.main.async { [weak self] in
-      let alert = AlertFactory.getRenameFileAlert { newFilename in
-        self?.output.send(.renameFileApproved(oldFilename: filename, newFilename: newFilename))
-      }
-      self?.present(alert, animated: true)
+    let alert = AlertFactory.getRenameFileAlert { newFilename in
+      self.output.send(.renameFileApprovedForItemAt(newFilename: newFilename))
     }
+    present(alert, animated: true)
   }
   
   private func showFileOptionsAlert(filename: String) {
-    DispatchQueue.main.async { [weak self] in
-      let alert = AlertFactory.getFilesActionAlert(
-        filename: filename) {
-          self?.output.send(.downloadFileTouched(filename: filename))
-        } renameAction: {
-          self?.output.send(.renameFileTouched(filename: filename))
-        } deleteAction: {
-          self?.output.send(.deleteFileTouched(filename: filename))
-        }
-      self?.present(alert, animated: true)
-    }
+    let alert = AlertFactory.getFilesActionAlert(
+      filename: filename) {
+        self.output.send(.downloadFileTouchedAt)
+      } renameAction: {
+        self.output.send(.renameFileTouched)
+      } deleteAction: {
+        self.output.send(.deleteFileTouchedForItemAt)
+      }
+    present(alert, animated: true)
   }
   
   func changeLayout(to type: LayoutType) {

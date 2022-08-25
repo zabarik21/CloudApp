@@ -46,8 +46,8 @@ class FoldersCollectionViewController: UIViewController, ViewModelContainer {
   }
   
   private func setupObserver() {
-    foldersCollecetion.folderTapRelay.subscribe(onNext: { [weak self] foldername in
-      self?.output.send(.folderTouched(foldername: foldername))
+    foldersCollecetion.folderTapObservable.subscribe(onNext: { [unowned self] indexPath in
+      self.output.send(.folderTouchedAt(indexPath: indexPath))
     })
       .disposed(by: bag)
   }
@@ -93,7 +93,7 @@ extension FoldersCollectionViewController {
 extension FoldersCollectionViewController {
   
   func setupBindings() {
-    self.output.handlers.append(viewModel.handle)
+    output.handlers.append(viewModel.handle)
     viewModel.output.handlers.append(handle)
   }
   

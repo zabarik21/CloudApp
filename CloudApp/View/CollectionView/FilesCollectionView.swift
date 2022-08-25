@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import RxRelay
+import RxSwift
 
 enum FoldersSection: Int {
   case Folders
@@ -17,7 +18,16 @@ enum FilesSection: Int {
   case files
 }
 
-class FilesCollectionView: UICollectionView {
+
+protocol FilesCollectionViewProtocol: UICollectionView {
+  var viewModels: [FileCellViewModel] { get set }
+  var fileTapObservable: Observable<IndexPath> { get }
+  
+  func changeLayout(to type: LayoutType)
+}
+
+
+class FilesCollectionView: UICollectionView, FilesCollectionViewProtocol {
   
   typealias Snapshot = NSDiffableDataSourceSnapshot<FilesSection, FileCellViewModel>
 
@@ -27,7 +37,11 @@ class FilesCollectionView: UICollectionView {
       self.applySnapshot()
     }
   }
-  public var fileTapRelay = PublishRelay<String>()
+  
+  private var fileTapRelay = PublishRelay<IndexPath>()
+  var fileTapObservable: Observable<IndexPath> {
+    return fileTapRelay.asObservable()
+  }
   // Datasource properties
   private var diffableDataSource: UICollectionViewDiffableDataSource<FilesSection, FileCellViewModel>!
   // State properties
@@ -50,8 +64,7 @@ class FilesCollectionView: UICollectionView {
 // MARK: - CollectionViewDelegate
 extension FilesCollectionView: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let fileName = viewModels[indexPath.row].filename
-    fileTapRelay.accept(fileName)
+    fileTapRelay.accept(indexPath)
   }
 }
 
@@ -85,7 +98,7 @@ extension FilesCollectionView {
     })
   }
   
-  func applySnapshot() {
+  private func applySnapshot() {
     DispatchQueue.main.async {
       var snapshot = Snapshot()
       snapshot.appendSections([.files])

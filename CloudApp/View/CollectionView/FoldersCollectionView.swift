@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import RxRelay
-
+import RxSwift
 
 enum FolderSection: Int {
   case folders
@@ -24,7 +24,10 @@ class FoldersCollectionView: UICollectionView {
     }
   }
   
-  public var folderTapRelay = PublishRelay<String>()
+  private var folderTapRelay = PublishRelay<IndexPath>()
+  var folderTapObservable: Observable<IndexPath> {
+    return folderTapRelay.asObservable()
+  }
   
   // Datasource properties
   private var diffableDataSource: UICollectionViewDiffableDataSource<FolderSection, FolderCellViewModel>!
@@ -103,8 +106,7 @@ extension FoldersCollectionView {
 // MARK: - Delegate
 extension FoldersCollectionView: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let filename = viewModels[indexPath.row].name
-    folderTapRelay.accept(filename)
+    folderTapRelay.accept(indexPath)
   }
 }
 // MARK: - Setup Layout

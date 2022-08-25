@@ -19,7 +19,7 @@ enum FoldersViewModelEvent {
 
 enum FoldersViewEvent {
   case reloadFolders
-  case folderTouched(foldername: String)
+  case folderTouchedAt(indexPath: IndexPath)
   case createFolder(foldername: String)
   case filterFolders(text: String)
   case viewLoaded
@@ -33,9 +33,15 @@ class FoldersViewModel: ViewModel {
   
   var output: Output<FoldersViewModelEvent> = Output()
   
-  private var storageService = FirebaseStorageService.shared
-  private var folders: [FolderCellViewModel] = []
+  private var selectedIndexPath = IndexPath()
   
+  private var storageService: FolderServiceProtocol = FirebaseStorageService.shared
+  private var folders = [FolderCellViewModel]() {
+    didSet {
+      filteredFolders = folders
+    }
+  }
+  private var filteredFolders = [FolderCellViewModel]()
   init() {}
   
   func fetchFolders() {
@@ -52,25 +58,28 @@ class FoldersViewModel: ViewModel {
     }
   }
   
+  
   func handle(event: ViewEvent) {
     switch event {
     case .reloadFolders:
       fetchFolders()
-    case .folderTouched(foldername: let foldername):
-      output.send(.openFolder(foldername: foldername))
+    case .folderTouchedAt(let indexPath):
+      handleFolderTouch(with: indexPath)
     case .viewLoaded:
       fetchFolders()
     case .filterFolders(text: let text):
       filterFolders(with: text)
     case .createFolder(foldername: let foldername):
-      createFolder(with: foldername)
+      tryCreateFolder(with: foldername)
+    }
+  }
+ 
+  private func handleFolderTouch(with indexPath: IndexPath) {
+    guard let foldername = getFoldername(indexPath: indexPath) else { return }
+    output.send(.openFolder(foldername: foldername))
   }
   
-
-  
-  }
-  
-  func createFolder(with foldername: String) {
+  private func tryCreateFolder(with foldername: String) {
     guard !folders.contains(where: { $0.name == foldername }) else {
       output.send(.showAlert(title: "Error", message: "Folder already exists"))
       return
@@ -79,9 +88,7 @@ class FoldersViewModel: ViewModel {
     storageService.createFolder(foldername: foldername) { result in
       switch result {
       case .success:
-        self.folders.append(FolderCellViewModel(name: foldername, objectsCount: 1))
-        self.output.send(.updateFoldersViewModels(viewModels: self.folders))
-        self.output.send(.scrollToFolder(foldername: foldername))
+        self.createFolder(with: foldername)
       case .failure(let error):
         self.output.send(.showAlert(title: "Cant create folder", message: error.localizedDescription))
       }
@@ -89,19 +96,27 @@ class FoldersViewModel: ViewModel {
     }
   }
   
+  private func createFolder(with foldername: String) {
+    folders.append(FolderCellViewModel(name: foldername, objectsCount: 1))
+    output.send(.updateFoldersViewModels(viewModels: self.folders))
+    output.send(.scrollToFolder(foldername: foldername))
+  }
+  
   func filterFolders(with text: String) {
     guard !text.isEmpty else {
       output.send(.updateFoldersViewModels(viewModels: folders))
       return
     }
-    let filtered = folders.filter { $0.name.contains(text) }
-    output.send(.updateFoldersViewModels(viewModels: filtered))
+    filteredFolders = folders.filter { $0.name.contains(text) }
+    output.send(.updateFoldersViewModels(viewModels: filteredFolders))
   }
   
-  func start() {
-//    storageService.foldersDelegate = self
-//    storageService.fetchFiles(foldername: "")
-//    storageService.fetchFolders()
+  private func getFoldername(indexPath: IndexPath) -> String? {
+    guard indexPath.row < filteredFolders.count else { return nil }
+    return filteredFolders[indexPath.row].name
   }
+  
+  func start() {}
   
 }
+

@@ -56,8 +56,8 @@ class FilesViewController: UIViewController {
   }
   
   private func setupObserver() {
-    layoutSlider.switchRelay.subscribe(onNext: { [weak self] type in
-      self?.filesCollectionController.viewModel.output.send(.changeLayout(type: type))
+    layoutSlider.switchRelay.subscribe(onNext: { [unowned self] type in
+      self.filesCollectionController.viewModel.output.send(.changeLayout(type: type))
     })
       .disposed(by: bag)
   }
@@ -65,6 +65,7 @@ class FilesViewController: UIViewController {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
 }
 // MARK: - MyView actions
 extension FilesViewController {
