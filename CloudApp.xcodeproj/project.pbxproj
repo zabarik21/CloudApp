@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		47E618E7ABD9DB76F0D6F363 /* Pods_CloudApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BFC86CD79AF4C8977EE1C5A /* Pods_CloudApp.framework */; };
+		7B34660028B7BD55001CB30A /* FirebaseStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3465FF28B7BD55001CB30A /* FirebaseStorageError.swift */; };
+		7B34660228B7C01E001CB30A /* MainFolderRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B34660128B7C01E001CB30A /* MainFolderRouter.swift */; };
 		7B369E5C28ADF4ED00EEB218 /* UIViewController + UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B369E5B28ADF4ED00EEB218 /* UIViewController + UIAlertController.swift */; };
-		7B5EE49628AD29A900D50A4E /* FirebaseStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5EE49528AD29A900D50A4E /* FirebaseStorageError.swift */; };
 		7B5EE49828AD2A0100D50A4E /* FileManagerServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5EE49728AD2A0100D50A4E /* FileManagerServiceError.swift */; };
 		7B87928328ACD43C00E83D77 /* FileCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B87928228ACD43C00E83D77 /* FileCellProtocol.swift */; };
 		7B8A11AF28B3B63C0080D92B /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8A11AE28B3B63C0080D92B /* CoordinatorProtocol.swift */; };
@@ -17,7 +18,7 @@
 		7B8A11B328B3C1170080D92B /* AuthenticationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8A11B228B3C1170080D92B /* AuthenticationCoordinator.swift */; };
 		7B8A11B528B3C1200080D92B /* RootFolderCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8A11B428B3C1200080D92B /* RootFolderCoordinator.swift */; };
 		7B920C0228AB649B00ABFDA6 /* StartScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C0128AB649B00ABFDA6 /* StartScreenButton.swift */; };
-		7B920C0528AB657800ABFDA6 /* StartScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C0428AB657800ABFDA6 /* StartScreenController.swift */; };
+		7B920C0528AB657800ABFDA6 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C0428AB657800ABFDA6 /* AuthenticationController.swift */; };
 		7B920C0728AB659A00ABFDA6 /* AuthenticationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C0628AB659A00ABFDA6 /* AuthenticationNavigationController.swift */; };
 		7B920C0928AB6E3F00ABFDA6 /* SignUpTextFIeld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C0828AB6E3F00ABFDA6 /* SignUpTextFIeld.swift */; };
 		7B920C0B28AB6FBC00ABFDA6 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B920C0A28AB6FBC00ABFDA6 /* PaddingTextField.swift */; };
@@ -73,8 +74,9 @@
 
 /* Begin PBXFileReference section */
 		5BFC86CD79AF4C8977EE1C5A /* Pods_CloudApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B3465FF28B7BD55001CB30A /* FirebaseStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageError.swift; sourceTree = "<group>"; };
+		7B34660128B7C01E001CB30A /* MainFolderRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFolderRouter.swift; sourceTree = "<group>"; };
 		7B369E5B28ADF4ED00EEB218 /* UIViewController + UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + UIAlertController.swift"; sourceTree = "<group>"; };
-		7B5EE49528AD29A900D50A4E /* FirebaseStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirebaseStorageError.swift; path = CloudApp/View/Cells/FirebaseStorageError.swift; sourceTree = SOURCE_ROOT; };
 		7B5EE49728AD2A0100D50A4E /* FileManagerServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerServiceError.swift; sourceTree = "<group>"; };
 		7B87928228ACD43C00E83D77 /* FileCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCellProtocol.swift; sourceTree = "<group>"; };
 		7B8A11AE28B3B63C0080D92B /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
@@ -82,7 +84,7 @@
 		7B8A11B228B3C1170080D92B /* AuthenticationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationCoordinator.swift; sourceTree = "<group>"; };
 		7B8A11B428B3C1200080D92B /* RootFolderCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootFolderCoordinator.swift; sourceTree = "<group>"; };
 		7B920C0128AB649B00ABFDA6 /* StartScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenButton.swift; sourceTree = "<group>"; };
-		7B920C0428AB657800ABFDA6 /* StartScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenController.swift; sourceTree = "<group>"; };
+		7B920C0428AB657800ABFDA6 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		7B920C0628AB659A00ABFDA6 /* AuthenticationNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationNavigationController.swift; sourceTree = "<group>"; };
 		7B920C0828AB6E3F00ABFDA6 /* SignUpTextFIeld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextFIeld.swift; sourceTree = "<group>"; };
 		7B920C0A28AB6FBC00ABFDA6 /* PaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
@@ -168,22 +170,12 @@
 			path = "UIViewController + Alert";
 			sourceTree = "<group>";
 		};
-		7B36C53228AB57E000671B29 /* CollectionControllers */ = {
-			isa = PBXGroup;
-			children = (
-				7BFCB2D228AAAFFB00747CC1 /* FilesCollectionViewController.swift */,
-				7BFCB2D628AAB0F800747CC1 /* FoldersCollectionViewController.swift */,
-			);
-			path = CollectionControllers;
-			sourceTree = "<group>";
-		};
 		7B5EE49428AD299800D50A4E /* FirebaseStorageService */ = {
 			isa = PBXGroup;
 			children = (
 				7B920C2928AB834500ABFDA6 /* FirebaseStorageService.swift */,
-				7B5EE49528AD29A900D50A4E /* FirebaseStorageError.swift */,
 				7BB033CA28B60DD800640442 /* FolderServiceProtocol.swift */,
-				7BB033CC28B60DE800640442 /* FilesServiceProtocol.swift */,
+				7B3465FF28B7BD55001CB30A /* FirebaseStorageError.swift */,
 			);
 			path = FirebaseStorageService;
 			sourceTree = "<group>";
@@ -193,6 +185,7 @@
 			children = (
 				7B920C2B28AB835200ABFDA6 /* FileManagerService.swift */,
 				7B5EE49728AD2A0100D50A4E /* FileManagerServiceError.swift */,
+				7BB033CC28B60DE800640442 /* FilesServiceProtocol.swift */,
 			);
 			path = FileManager;
 			sourceTree = "<group>";
@@ -206,25 +199,6 @@
 				7B8A11B428B3C1200080D92B /* RootFolderCoordinator.swift */,
 			);
 			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		7B8A11B628B3C2120080D92B /* NavigationControllers */ = {
-			isa = PBXGroup;
-			children = (
-				7BFCB2CA28AAAE8600747CC1 /* RootFolderNavigationController.swift */,
-				7B920C0628AB659A00ABFDA6 /* AuthenticationNavigationController.swift */,
-			);
-			path = NavigationControllers;
-			sourceTree = "<group>";
-		};
-		7B920C0328AB655E00ABFDA6 /* AuthenticationControllers */ = {
-			isa = PBXGroup;
-			children = (
-				7B920C0428AB657800ABFDA6 /* StartScreenController.swift */,
-				7B920C0F28AB701A00ABFDA6 /* LoginViewController.swift */,
-				7B920C1F28AB768E00ABFDA6 /* SignUpController.swift */,
-			);
-			path = AuthenticationControllers;
 			sourceTree = "<group>";
 		};
 		7B920C0C28AB6FD600ABFDA6 /* RxSwift  */ = {
@@ -300,6 +274,159 @@
 			path = "UTType + AllTypes";
 			sourceTree = "<group>";
 		};
+		7BAC02FD28B7A87400A4E2D8 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				7BAC030128B7A8C400A4E2D8 /* MainFolder */,
+				7BAC030028B7A8C000A4E2D8 /* Folders */,
+				7BAC02FF28B7A8BB00A4E2D8 /* Files */,
+				7BAC02FE28B7A87A00A4E2D8 /* Auth */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		7BAC02FE28B7A87A00A4E2D8 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				7B920C0628AB659A00ABFDA6 /* AuthenticationNavigationController.swift */,
+				7B920C1F28AB768E00ABFDA6 /* SignUpController.swift */,
+				7B920C0F28AB701A00ABFDA6 /* LoginViewController.swift */,
+				7B920C0428AB657800ABFDA6 /* AuthenticationController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		7BAC02FF28B7A8BB00A4E2D8 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				7BAC030328B7A91200A4E2D8 /* ViewModel */,
+				7BFCB2D228AAAFFB00747CC1 /* FilesCollectionViewController.swift */,
+				7BFCB2D428AAB02E00747CC1 /* FilesViewController.swift */,
+			);
+			path = Files;
+			sourceTree = "<group>";
+		};
+		7BAC030028B7A8C000A4E2D8 /* Folders */ = {
+			isa = PBXGroup;
+			children = (
+				7BAC030228B7A90700A4E2D8 /* ViewModel */,
+				7BFCB2D628AAB0F800747CC1 /* FoldersCollectionViewController.swift */,
+			);
+			path = Folders;
+			sourceTree = "<group>";
+		};
+		7BAC030128B7A8C400A4E2D8 /* MainFolder */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB2CC28AAAE9600747CC1 /* MainFolderViewController.swift */,
+				7BFCB2CA28AAAE8600747CC1 /* RootFolderNavigationController.swift */,
+				7B34660128B7C01E001CB30A /* MainFolderRouter.swift */,
+			);
+			path = MainFolder;
+			sourceTree = "<group>";
+		};
+		7BAC030228B7A90700A4E2D8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB2CE28AAAED000747CC1 /* FoldersViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7BAC030328B7A91200A4E2D8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB29128AAABF200747CC1 /* FilesViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7BAC030428B7AA5000A4E2D8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB29B28AAACA400747CC1 /* Elements */,
+				7BAC02FD28B7A87400A4E2D8 /* Modules */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		7BAC030528B7AAE300A4E2D8 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				7BAC030B28B7ACF600A4E2D8 /* Protocols */,
+				7BAC030C28B7AD2300A4E2D8 /* Configuration */,
+				7BAC030628B7AAEF00A4E2D8 /* Domain */,
+				7B8A11AD28B3B6320080D92B /* Coordinator */,
+				7BAC030428B7AA5000A4E2D8 /* UI */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		7BAC030628B7AAEF00A4E2D8 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				7BAC030828B7AB7200A4E2D8 /* Entity */,
+				7BFCB2A628AAAD3500747CC1 /* Service */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		7BAC030728B7AAFC00A4E2D8 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				7B920C1728AB750500ABFDA6 /* Helpers */,
+				7BFCB2B228AAAD6600747CC1 /* Extension */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		7BAC030828B7AB7200A4E2D8 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				7BAC030928B7AB8900A4E2D8 /* Files and Folders */,
+				7BFCB2D828AAB20B00747CC1 /* Just ui fill */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		7BAC030928B7AB8900A4E2D8 /* Files and Folders */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB29928AAAC4A00747CC1 /* LayoutType.swift */,
+				7B920C2D28AB83B000ABFDA6 /* CloudItem.swift */,
+				7B920C2F28AB83D000ABFDA6 /* CloudFolder.swift */,
+				7B920C3128AB83DB00ABFDA6 /* Folder.swift */,
+			);
+			path = "Files and Folders";
+			sourceTree = "<group>";
+		};
+		7BAC030A28B7ABC500A4E2D8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB26928AAAB8E00747CC1 /* Assets.xcassets */,
+				7BFCB26B28AAAB8E00747CC1 /* LaunchScreen.storyboard */,
+				7BFCB26E28AAAB8E00747CC1 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7BAC030B28B7ACF600A4E2D8 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB29328AAAC1500747CC1 /* ViewModelProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		7BAC030C28B7AD2300A4E2D8 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				7BFCB26028AAAB8D00747CC1 /* AppDelegate.swift */,
+				7BFCB26228AAAB8D00747CC1 /* SceneDelegate.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		7BFCB25428AAAB8D00747CC1 = {
 			isa = PBXGroup;
 			children = (
@@ -321,47 +448,15 @@
 		7BFCB25F28AAAB8D00747CC1 /* CloudApp */ = {
 			isa = PBXGroup;
 			children = (
-				7B8A11AD28B3B6320080D92B /* Coordinator */,
+				7BAC030A28B7ABC500A4E2D8 /* Resources */,
+				7BAC030528B7AAE300A4E2D8 /* Application */,
+				7BAC030728B7AAFC00A4E2D8 /* Library */,
 				7B920C2528AB7F7100ABFDA6 /* GoogleService-Info.plist */,
-				7B920C1728AB750500ABFDA6 /* Helpers */,
-				7BFCB2C428AAADE800747CC1 /* Controller */,
-				7BFCB2B228AAAD6600747CC1 /* Extension */,
-				7BFCB2A628AAAD3500747CC1 /* Service */,
-				7BFCB29B28AAACA400747CC1 /* View */,
-				7BFCB29828AAAC4300747CC1 /* Model */,
-				7BFCB29028AAABE800747CC1 /* ViewModel */,
-				7BFCB26028AAAB8D00747CC1 /* AppDelegate.swift */,
-				7BFCB26228AAAB8D00747CC1 /* SceneDelegate.swift */,
-				7BFCB26928AAAB8E00747CC1 /* Assets.xcassets */,
-				7BFCB26B28AAAB8E00747CC1 /* LaunchScreen.storyboard */,
-				7BFCB26E28AAAB8E00747CC1 /* Info.plist */,
 			);
 			path = CloudApp;
 			sourceTree = "<group>";
 		};
-		7BFCB29028AAABE800747CC1 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				7BFCB2D828AAB20B00747CC1 /* Just ui fill */,
-				7BFCB2CE28AAAED000747CC1 /* FoldersViewModel.swift */,
-				7BFCB29128AAABF200747CC1 /* FilesViewModel.swift */,
-				7BFCB29328AAAC1500747CC1 /* ViewModelProtocol.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		7BFCB29828AAAC4300747CC1 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				7BFCB29928AAAC4A00747CC1 /* LayoutType.swift */,
-				7B920C2D28AB83B000ABFDA6 /* CloudItem.swift */,
-				7B920C2F28AB83D000ABFDA6 /* CloudFolder.swift */,
-				7B920C3128AB83DB00ABFDA6 /* Folder.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		7BFCB29B28AAACA400747CC1 /* View */ = {
+		7BFCB29B28AAACA400747CC1 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
 				7BFCB2C528AAADEF00747CC1 /* CollectionView */,
@@ -372,7 +467,7 @@
 				7B920C0828AB6E3F00ABFDA6 /* SignUpTextFIeld.swift */,
 				7B920C0A28AB6FBC00ABFDA6 /* PaddingTextField.swift */,
 			);
-			path = View;
+			path = Elements;
 			sourceTree = "<group>";
 		};
 		7BFCB2A628AAAD3500747CC1 /* Service */ = {
@@ -415,18 +510,6 @@
 				7B87928228ACD43C00E83D77 /* FileCellProtocol.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		7BFCB2C428AAADE800747CC1 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				7B8A11B628B3C2120080D92B /* NavigationControllers */,
-				7B920C0328AB655E00ABFDA6 /* AuthenticationControllers */,
-				7B36C53228AB57E000671B29 /* CollectionControllers */,
-				7BFCB2CC28AAAE9600747CC1 /* MainFolderViewController.swift */,
-				7BFCB2D428AAB02E00747CC1 /* FilesViewController.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		7BFCB2C528AAADEF00747CC1 /* CollectionView */ = {
@@ -580,12 +663,12 @@
 				7BFCB2CF28AAAED000747CC1 /* FoldersViewModel.swift in Sources */,
 				7B920C0B28AB6FBC00ABFDA6 /* PaddingTextField.swift in Sources */,
 				7B920C2A28AB834500ABFDA6 /* FirebaseStorageService.swift in Sources */,
+				7B34660028B7BD55001CB30A /* FirebaseStorageError.swift in Sources */,
 				7BFCB2AF28AAAD3500747CC1 /* LayoutFactory.swift in Sources */,
 				7BFCB2D528AAB02E00747CC1 /* FilesViewController.swift in Sources */,
 				7BFCB2CB28AAAE8600747CC1 /* RootFolderNavigationController.swift in Sources */,
 				7BFCB2B828AAAD6600747CC1 /* UIStackView + Init.swift in Sources */,
 				7B920C0228AB649B00ABFDA6 /* StartScreenButton.swift in Sources */,
-				7B5EE49628AD29A900D50A4E /* FirebaseStorageError.swift in Sources */,
 				7BFCB29A28AAAC4A00747CC1 /* LayoutType.swift in Sources */,
 				7BFCB2C228AAADB000747CC1 /* FolderListCell.swift in Sources */,
 				7B8A11AF28B3B63C0080D92B /* CoordinatorProtocol.swift in Sources */,
@@ -598,6 +681,7 @@
 				7BFCB2C928AAAE5B00747CC1 /* FilesCollectionView.swift in Sources */,
 				7B8A11B328B3C1170080D92B /* AuthenticationCoordinator.swift in Sources */,
 				7BFCB29428AAAC1500747CC1 /* ViewModelProtocol.swift in Sources */,
+				7B34660228B7C01E001CB30A /* MainFolderRouter.swift in Sources */,
 				7B920C2428AB7A1B00ABFDA6 /* AlertService.swift in Sources */,
 				7B920C1928AB751200ABFDA6 /* Validator.swift in Sources */,
 				7BFCB29628AAAC2400747CC1 /* FileCellViewModel.swift in Sources */,
@@ -631,7 +715,7 @@
 				7B920C2028AB768E00ABFDA6 /* SignUpController.swift in Sources */,
 				7B920C0728AB659A00ABFDA6 /* AuthenticationNavigationController.swift in Sources */,
 				7BFCB2C728AAADF900747CC1 /* FoldersCollectionView.swift in Sources */,
-				7B920C0528AB657800ABFDA6 /* StartScreenController.swift in Sources */,
+				7B920C0528AB657800ABFDA6 /* AuthenticationController.swift in Sources */,
 				7BFCB2B128AAAD4C00747CC1 /* FolderCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -776,7 +860,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KLZTQ9HHAP;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CloudApp/Info.plist;
+				INFOPLIST_FILE = CloudApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -805,7 +889,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KLZTQ9HHAP;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CloudApp/Info.plist;
+				INFOPLIST_FILE = CloudApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

@@ -27,6 +27,8 @@ class RootFolderCoordinator: RootFolderCoordinatorProtocol {
     DispatchQueue.main.async {
       let vc = MainFolderViewController()
       vc.coordinator = self
+      let router = MainFolderRouter(vc)
+      vc.router = router
       self.nav.pushViewController(vc, animated: false)
     }
   }

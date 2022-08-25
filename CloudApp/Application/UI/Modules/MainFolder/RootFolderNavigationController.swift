@@ -12,7 +12,7 @@ import UIKit
  
 class RootFolderNavigationController: UINavigationController {
   
-  private var myView: FolderFileActionView = FolderFileActionView()
+  private lazy var myView: FolderFileActionView = FolderFileActionView()
   private var searchController: UISearchController!
   
   init() {

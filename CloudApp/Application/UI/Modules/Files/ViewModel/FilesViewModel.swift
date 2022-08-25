@@ -38,7 +38,7 @@ class FilesListViewModel: ViewModel {
   typealias ViewEvent = FilesViewEvent
   typealias ViewModelEvent = FilesViewModelEvent
   
-  private var storageService: FilesServiceProtocol = FirebaseStorageService.shared
+  private var storageService: FilesServiceProtocol
   private var selectedIndexPath = IndexPath()
   
   var output: Output<FilesViewModelEvent> = Output()
@@ -51,7 +51,11 @@ class FilesListViewModel: ViewModel {
   }
   private var filteredFiles: [FileCellViewModel] = []
   
-  init(foldername: String? = nil) {
+  init(
+    storageService: FilesServiceProtocol,
+    foldername: String? = nil
+  ) {
+    self.storageService = storageService
     self.foldername = foldername
   }
   

@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxRelay
 
+
 class FoldersCollectionViewController: UIViewController, ViewModelContainer {
   
   // rx
@@ -17,7 +18,7 @@ class FoldersCollectionViewController: UIViewController, ViewModelContainer {
   public var openFolderRelay = PublishRelay<String>()
   // ViewModel
   public var viewModel: FoldersViewModel
-  var output: Output<FoldersViewEvent> = Output()
+  public var output: Output<FoldersViewEvent> = Output()
   typealias ViewModelEvent = FoldersViewModelEvent
   typealias ViewEvent = FoldersViewEvent
   // UI

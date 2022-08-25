@@ -26,7 +26,7 @@ class AuthenticationCoordinator: AuthenticationCoordinatorProtocol {
   
   func start() {
     DispatchQueue.main.async {
-      let vc = StartScreenController()
+      let vc = AuthenticationController()
       vc.coordinator = self
       self.nav.pushViewController(vc, animated: false)
     }

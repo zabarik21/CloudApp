@@ -11,7 +11,13 @@ import RxSwift
 import Photos
 import PhotosUI
 
-class MainFolderViewController: UIViewController {
+
+protocol MainFolderViewProtocol: UIViewController, PHPickerViewControllerDelegate, UIDocumentPickerDelegate {
+  var router: MainFolderRouter? { get set }
+  var coordinator: RootFolderCoordinatorProtocol? { get set }
+}
+
+class MainFolderViewController: UIViewController, MainFolderViewProtocol {
   
   enum Constants {
     static let horizontalMarginMult: CGFloat = 0.05
@@ -25,19 +31,18 @@ class MainFolderViewController: UIViewController {
   private var foldersLabel: UILabel!
   private var filesLabel: UILabel!
   
+  var router: MainFolderRouter?
   var coordinator: RootFolderCoordinatorProtocol?
   
   private let bag = DisposeBag()
   
   private var folderOpened = false
   
-  
-  init() {
-    super.init(nibName: nil, bundle: nil)
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+  private var layoutType: LayoutType = UserDefaultsService.shared.getLayoutType() {
+    didSet {
+      UserDefaultsService.shared.setLayout(to: layoutType)
+      changeLayout(to: layoutType)
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -47,11 +52,12 @@ class MainFolderViewController: UIViewController {
     layoutSwitchView.switchTo(layoutType: layoutType)
   }
   
-  private var layoutType: LayoutType = UserDefaultsService.shared.getLayoutType() {
-    didSet {
-      UserDefaultsService.shared.setLayout(to: layoutType)
-      changeLayout(to: layoutType)
-    }
+  init() {
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
   
   override func viewDidLoad() {
@@ -63,12 +69,12 @@ class MainFolderViewController: UIViewController {
   
   private func setupObservers() {
     setupfolderFileActionViewObserver()
-    foldersCollectionViewController.openFolderRelay.subscribe(onNext: { [weak self] foldername in
-      self?.openFolder(foldername: foldername)
+    foldersCollectionViewController.openFolderRelay.subscribe(onNext: { [unowned self] foldername in
+      self.openFolder(foldername: foldername)
     })
       .disposed(by: bag)
-    layoutSwitchView.switchRelay.subscribe(onNext: { [weak self] type in
-      self?.layoutType = type
+    layoutSwitchView.switchRelay.subscribe(onNext: { [unowned self] type in
+      self.layoutType = type
     })
       .disposed(by: bag)
   }
@@ -76,14 +82,14 @@ class MainFolderViewController: UIViewController {
   private func setupfolderFileActionViewObserver() {
     FolderFileActionView.eventRelay
       .observe(on: MainScheduler.instance)
-      .subscribe(onNext: { [weak self] eventType in
+      .subscribe(onNext: { [unowned self] eventType in
       switch eventType {
       case .createFolder:
-        self?.tryCreateFolder()
+        self.tryCreateFolder()
       case .addFile:
-        self?.tryAddFileFromFilesManager()
+        self.tryAddFileFromFilesManager()
       case .addMedia:
-        self?.tryAddFileFromGallery()
+        self.tryAddFileFromGallery()
       }
     })
       .disposed(by: bag)
@@ -120,42 +126,33 @@ extension MainFolderViewController {
   }
   
   private func tryAddFileFromFilesManager() {
-    let pickerViewController = UIDocumentPickerViewController(
-      forOpeningContentTypes: UTType.allUTITypes()
-    )
-    pickerViewController.delegate = self
-    pickerViewController.allowsMultipleSelection = false
-    present(pickerViewController, animated: true)
+    router?.presentFiles()
   }
   
   private func tryAddFileFromGallery() {
-    var config = PHPickerConfiguration(photoLibrary: .shared())
-    config.selectionLimit = 1
-    config.filter = .any(of: [.images, .videos])
-    let picker = PHPickerViewController(configuration: config)
-    picker.delegate = self
-    present(picker, animated: true)
+    router?.presentPhotos()
   }
   
 }
-// MARK: - PHPickerViewControllerDelegate
+
+// MARK: - Photos picker delegate
 extension MainFolderViewController: PHPickerViewControllerDelegate {
   
   func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
     picker.dismiss(animated: true)
-    DispatchQueue.main.async { [weak self] in
+    DispatchQueue.main.async {
       for result in results {
-        if let topViewController = self?.navigationController?.topViewController as? FilesViewController {
+        if let topViewController = self.navigationController?.topViewController as? FilesViewController {
           topViewController.tryAddPhotoResult(result)
         } else {
-          self?.filesCollectionViewController.output.send(.addFromGallery(result: result))
+          self.filesCollectionViewController.output.send(.addFromGallery(result: result))
         }
       }
     }
   }
   
 }
-// MARK: - UIDocumentPickerDelegate
+// MARK: - Dockument picker delegate
 extension MainFolderViewController: UIDocumentPickerDelegate {
   
   func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
@@ -165,11 +162,11 @@ extension MainFolderViewController: UIDocumentPickerDelegate {
       return
     }
     guard docUrl.startAccessingSecurityScopedResource() else { return }
-    DispatchQueue.main.async { [weak self] in
-      if let topViewController = self?.navigationController?.topViewController as? FilesViewController {
+    DispatchQueue.main.async {
+      if let topViewController = self.navigationController?.topViewController as? FilesViewController {
         topViewController.tryAddFile(docUrl)
       } else {
-        self?.filesCollectionViewController.output.send(.addFromFiles(url: docUrl))
+        self.filesCollectionViewController.output.send(.addFromFiles(url: docUrl))
       }
     }
   }
@@ -197,8 +194,10 @@ extension MainFolderViewController {
   }
   
   fileprivate func setupCollections() {
-    foldersCollectionViewController = FoldersCollectionViewController(viewModel: FoldersViewModel(), layoutType: layoutType)
-    filesCollectionViewController = FilesCollectionViewController(viewModel: FilesListViewModel(), layoutType: layoutType)
+    let folderViewModels = FoldersViewModel(foldersStorage: FirebaseStorageService.shared)
+    foldersCollectionViewController = FoldersCollectionViewController(viewModel: folderViewModels, layoutType: layoutType)
+    let filesViewModel = FilesListViewModel(storageService: FirebaseStorageService.shared)
+    filesCollectionViewController = FilesCollectionViewController(viewModel: filesViewModel, layoutType: layoutType)
   }
   
   fileprivate func setupLayoutView() {

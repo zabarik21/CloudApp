@@ -107,7 +107,10 @@ extension FilesViewController {
   }
   
   private func setupCollectionView() {
-    let viewModel = FilesListViewModel(foldername: foldername)
+    let viewModel = FilesListViewModel(
+      storageService: FirebaseStorageService.shared,
+      foldername: foldername
+    )
     filesCollectionController = FilesCollectionViewController(
       viewModel: viewModel,
       layoutType: layoutType

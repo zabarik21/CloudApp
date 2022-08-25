@@ -10,7 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class StartScreenController: UIViewController {
+class AuthenticationController: UIViewController {
   
   private enum Constants {
     static let topMarginMult: CGFloat = 0.246
@@ -53,7 +53,7 @@ class StartScreenController: UIViewController {
 }
 
 // MARK: - SetupUI
-extension StartScreenController {
+extension AuthenticationController {
   
   private func setupUI() {
     view.backgroundColor = .mainBg

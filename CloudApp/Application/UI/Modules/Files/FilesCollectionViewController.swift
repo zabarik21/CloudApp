@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import RxSwift
 
+
 class FilesCollectionViewController: UIViewController, ViewModelContainer {
   
   // rx
@@ -16,7 +17,7 @@ class FilesCollectionViewController: UIViewController, ViewModelContainer {
   // ViewModel
   typealias ViewModelEvent = FilesViewModelEvent
   typealias ViewEvent = FilesViewEvent
-  var output: Output<FilesViewEvent> = Output()
+  public var output: Output<FilesViewEvent> = Output()
   public var viewModel: FilesListViewModel
   // UI
   private var filesCollection: FilesCollectionViewProtocol!
@@ -25,7 +26,7 @@ class FilesCollectionViewController: UIViewController, ViewModelContainer {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    layoutType =  UserDefaultsService.shared.getLayoutType()
+    layoutType = UserDefaultsService.shared.getLayoutType()
   }
   
   init(viewModel: FilesListViewModel, layoutType type: LayoutType) {

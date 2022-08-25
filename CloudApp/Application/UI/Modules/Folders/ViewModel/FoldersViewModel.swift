@@ -26,7 +26,7 @@ enum FoldersViewEvent {
 }
 
 
-class FoldersViewModel: ViewModel {
+class FoldersViewModel {
   
   typealias ViewEvent = FoldersViewEvent
   typealias ViewModelEvent = FoldersViewModelEvent
@@ -35,16 +35,19 @@ class FoldersViewModel: ViewModel {
   
   private var selectedIndexPath = IndexPath()
   
-  private var storageService: FolderServiceProtocol = FirebaseStorageService.shared
+  private var storageService: FolderServiceProtocol
   private var folders = [FolderCellViewModel]() {
     didSet {
       filteredFolders = folders
     }
   }
   private var filteredFolders = [FolderCellViewModel]()
-  init() {}
   
-  func fetchFolders() {
+  init(foldersStorage:  FolderServiceProtocol) {
+    self.storageService = foldersStorage
+  }
+  
+  private func fetchFolders() {
     output.send(.startActivityIndicator)
     storageService.fetchFolders { result in
       switch result {
@@ -57,7 +60,6 @@ class FoldersViewModel: ViewModel {
       self.output.send(.stopActivityIndicator)
     }
   }
-  
   
   func handle(event: ViewEvent) {
     switch event {
@@ -102,7 +104,7 @@ class FoldersViewModel: ViewModel {
     output.send(.scrollToFolder(foldername: foldername))
   }
   
-  func filterFolders(with text: String) {
+  private func filterFolders(with text: String) {
     guard !text.isEmpty else {
       output.send(.updateFoldersViewModels(viewModels: folders))
       return
