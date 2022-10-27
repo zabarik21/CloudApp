@@ -1,4 +1,4 @@
-# CloudApp
+# CloudApp - тестовое задание для НаПоправку
 🙎‍♂️🙍‍♀️ A cloud storage application built with Swift 5 and UIKit where the user can register and enjoy cloud storage functionality like uploading or downloading files.
 
 # Test user login & password
